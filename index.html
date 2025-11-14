@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Village Feller - Professional Tree Felling Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset and Base Styles */
         * {
@@ -12,10 +13,21 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --secondary: #4caf50;
+            --light: #f9f9f9;
+            --dark: #333;
+            --gray: #666;
+            --white: #fff;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--dark);
+            overflow-x: hidden;
         }
         
         .container {
@@ -41,29 +53,31 @@
         .btn {
             display: inline-block;
             padding: 12px 24px;
-            background-color: #2e7d32;
-            color: white;
+            background-color: var(--primary);
+            color: var(--white);
             text-decoration: none;
             border-radius: 4px;
             font-weight: 600;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
         }
         
         .btn:hover {
-            background-color: #1b5e20;
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
         .btn-outline {
             background-color: transparent;
-            border: 2px solid #2e7d32;
-            color: #2e7d32;
+            border: 2px solid var(--primary);
+            color: var(--primary);
         }
         
         .btn-outline:hover {
-            background-color: #2e7d32;
-            color: white;
+            background-color: var(--primary);
+            color: var(--white);
         }
         
         section {
@@ -81,18 +95,19 @@
             display: block;
             width: 80px;
             height: 3px;
-            background-color: #2e7d32;
+            background-color: var(--primary);
             margin: 10px auto 0;
         }
         
         /* Header Styles */
         header {
-            background-color: white;
+            background-color: var(--white);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s;
         }
         
         .header-container {
@@ -102,20 +117,26 @@
             padding: 15px 0;
         }
         
-        .logo {
+        .logo-container {
             display: flex;
             align-items: center;
         }
         
-        .logo h1 {
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+        
+        .logo-text {
             font-size: 1.8rem;
-            margin: 0;
-            color: #2e7d32;
+            margin-left: 10px;
+            color: var(--primary);
+            font-weight: 700;
         }
         
         .professional-label {
-            background-color: #2e7d32;
-            color: white;
+            background-color: var(--primary);
+            color: var(--white);
             font-size: 0.7rem;
             padding: 3px 8px;
             border-radius: 4px;
@@ -133,13 +154,29 @@
         
         nav a {
             text-decoration: none;
-            color: #333;
+            color: var(--dark);
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
         }
         
         nav a:hover {
-            color: #2e7d32;
+            color: var(--primary);
+        }
+        
+        nav a:hover:after {
+            width: 100%;
         }
         
         .header-cta {
@@ -150,6 +187,7 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--primary);
         }
         
         /* Hero Section */
@@ -157,7 +195,7 @@
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
-            color: white;
+            color: var(--white);
             text-align: center;
             padding: 180px 0 100px;
             margin-top: 70px;
@@ -166,12 +204,14 @@
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
         .hero p {
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
         
         .hero-buttons {
@@ -182,7 +222,7 @@
         
         /* About Section */
         .about {
-            background-color: #f9f9f9;
+            background-color: var(--light);
         }
         
         .about-content {
@@ -200,6 +240,11 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .about-image:hover {
+            transform: scale(1.02);
         }
         
         /* Services Section */
@@ -210,7 +255,7 @@
         }
         
         .service-card {
-            background-color: white;
+            background-color: var(--white);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -232,18 +277,18 @@
         }
         
         .service-content h3 {
-            color: #2e7d32;
+            color: var(--primary);
             margin-bottom: 10px;
         }
         
         .service-content p {
             margin-bottom: 15px;
-            color: #666;
+            color: var(--gray);
         }
         
         /* Why Choose Us Section */
         .why-choose-us {
-            background-color: #f9f9f9;
+            background-color: var(--light);
         }
         
         .why-content {
@@ -256,7 +301,7 @@
         }
         
         .why-column h3 {
-            color: #2e7d32;
+            color: var(--primary);
             margin-bottom: 20px;
         }
         
@@ -275,7 +320,7 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: #2e7d32;
+            color: var(--primary);
             font-weight: bold;
         }
         
@@ -293,6 +338,7 @@
             background-size: cover;
             background-position: center;
             position: relative;
+            cursor: pointer;
         }
         
         .portfolio-overlay {
@@ -303,20 +349,29 @@
             height: 100%;
             background-color: rgba(46, 125, 50, 0.8);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             opacity: 0;
             transition: opacity 0.3s;
+            padding: 15px;
+            text-align: center;
+            color: var(--white);
         }
         
         .portfolio-item:hover .portfolio-overlay {
             opacity: 1;
         }
         
+        .portfolio-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
         /* Achievements Section */
         .achievements {
-            background-color: #2e7d32;
-            color: white;
+            background-color: var(--primary);
+            color: var(--white);
             text-align: center;
         }
         
@@ -331,18 +386,48 @@
             margin-bottom: 10px;
         }
         
+        .counter {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
         /* Testimonials Section */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .testimonials {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 0 15px;
+            box-sizing: border-box;
         }
         
         .testimonial-card {
-            background-color: white;
+            background-color: var(--white);
             border-radius: 8px;
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
         }
         
         .testimonial-header {
@@ -369,9 +454,59 @@
             color: #ffc107;
         }
         
+        .testimonial-text {
+            flex-grow: 1;
+            margin-bottom: 0;
+        }
+        
+        /* Testimonial Navigation */
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .testimonial-dots {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .testimonial-dot.active {
+            background-color: var(--primary);
+        }
+        
+        .testimonial-arrow {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: 0 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .testimonial-arrow:hover {
+            background-color: var(--primary-dark);
+        }
+        
         /* Contact Section */
         .contact {
-            background-color: #f9f9f9;
+            background-color: var(--light);
         }
         
         .contact-container {
@@ -399,6 +534,12 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-family: inherit;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
         }
         
         .contact-info {
@@ -418,8 +559,8 @@
         .contact-icon {
             width: 40px;
             height: 40px;
-            background-color: #2e7d32;
-            color: white;
+            background-color: var(--primary);
+            color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -427,10 +568,36 @@
             margin-right: 15px;
         }
         
+        /* Admin Panel */
+        .admin-panel {
+            background-color: #f5f5f5;
+            padding: 40px 0;
+            border-top: 1px solid #ddd;
+        }
+        
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .admin-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .admin-form .form-group {
+            margin-bottom: 20px;
+        }
+        
         /* Footer */
         footer {
-            background-color: #333;
-            color: white;
+            background-color: var(--dark);
+            color: var(--white);
             padding: 60px 0 30px;
         }
         
@@ -442,7 +609,7 @@
         }
         
         .footer-column h3 {
-            color: #2e7d32;
+            color: var(--secondary);
             margin-bottom: 20px;
             font-size: 1.2rem;
         }
@@ -462,7 +629,7 @@
         }
         
         .footer-links a:hover {
-            color: #2e7d32;
+            color: var(--secondary);
         }
         
         .footer-bottom {
@@ -524,6 +691,32 @@
             .hero h1 {
                 font-size: 2rem;
             }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .testimonial-arrow {
+                width: 35px;
+                height: 35px;
+                margin: 0 10px;
+            }
+        }
+        
+        /* Animation for counters */
+        @keyframes countUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .counting {
+            animation: countUp 1s ease-out;
         }
     </style>
 </head>
@@ -531,8 +724,12 @@
     <!-- Header & Navigation -->
     <header>
         <div class="container header-container">
-            <div class="logo">
-                <h1>Village Feller</h1>
+            <div class="logo-container">
+                <!-- Logo placeholder - replace with actual logo -->
+                <div class="logo" style="background-color: #2e7d32; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 5px;">
+                    VF LOGO
+                </div>
+                <div class="logo-text">Village Feller</div>
                 <span class="professional-label">Professional</span>
             </div>
             
@@ -685,27 +882,8 @@
     <section class="portfolio" id="portfolio">
         <div class="container">
             <h2 class="section-title">Recently Projects</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item" style="background-image: url('https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-                    <div class="portfolio-overlay">
-                        <span style="color: white; font-weight: bold;">Tree Removal Project</span>
-                    </div>
-                </div>
-                <div class="portfolio-item" style="background-image: url('https://images.unsplash.com/photo-1594819047050-99defca82535?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-                    <div class="portfolio-overlay">
-                        <span style="color: white; font-weight: bold;">Stump Grinding</span>
-                    </div>
-                </div>
-                <div class="portfolio-item" style="background-image: url('https://images.unsplash.com/photo-1594818378440-1c9f0b6c2034?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-                    <div class="portfolio-overlay">
-                        <span style="color: white; font-weight: bold;">Tree Trimming</span>
-                    </div>
-                </div>
-                <div class="portfolio-item" style="background-image: url('https://images.unsplash.com/photo-1589923186257-2d89576d8b16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-                    <div class="portfolio-overlay">
-                        <span style="color: white; font-weight: bold;">Site Clearing</span>
-                    </div>
-                </div>
+            <div class="portfolio-grid" id="portfolio-container">
+                <!-- Portfolio items will be dynamically added here -->
             </div>
         </div>
     </section>
@@ -716,15 +894,15 @@
             <h2 class="section-title" style="color: white;">Setting the Standards in Tree Felling Industry</h2>
             <div class="achievements-grid">
                 <div class="achievement-item">
-                    <h3>0</h3>
+                    <div class="counter" id="projects-counter">0</div>
                     <p>Projects Completed</p>
                 </div>
                 <div class="achievement-item">
-                    <h3>0</h3>
+                    <div class="counter" id="clients-counter">0</div>
                     <p>Satisfied Happy Clients</p>
                 </div>
                 <div class="achievement-item">
-                    <h3>0</h3>
+                    <div class="counter" id="experience-counter">0</div>
                     <p>Years of Experience</p>
                 </div>
             </div>
@@ -735,38 +913,23 @@
     <section class="testimonials">
         <div class="container">
             <h2 class="section-title">What Our Clients Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
-                        <div class="testimonial-info">
-                            <h4>Mike T.</h4>
-                            <div class="testimonial-rating">★★★★★</div>
-                        </div>
-                    </div>
-                    <p>"The Village Fellers team did an excellent job removing a large tree from my backyard. They were professional, safe, and cleaned up perfectly afterwards. Highly recommended!"</p>
+            <div class="testimonial-slider">
+                <div class="testimonial-track" id="testimonial-track">
+                    <!-- Testimonial slides will be dynamically added here -->
                 </div>
                 
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
-                        <div class="testimonial-info">
-                            <h4>Amanda K.</h4>
-                            <div class="testimonial-rating">★★★★☆</div>
-                        </div>
+                <div class="testimonial-nav">
+                    <button class="testimonial-arrow" id="prev-testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="testimonial-dots" id="testimonial-dots">
+                        <!-- Dots will be dynamically added here -->
                     </div>
-                    <p>"I needed stump removal after a storm damaged my property. The team was punctual, careful with my garden, and did a fantastic job. Will definitely use them again!"</p>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/67.jpg');"></div>
-                        <div class="testimonial-info">
-                            <h4>James T.</h4>
-                            <div class="testimonial-rating">★★★★★</div>
-                        </div>
-                    </div>
-                    <p>"Professional tree trimming service that transformed my overgrown yard. The team was skilled, efficient, and the final result looks amazing. Very happy with their work!"</p>
+                    
+                    <button class="testimonial-arrow" id="next-testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -846,6 +1009,28 @@
         </div>
     </section>
 
+    <!-- Admin Panel (Hidden by default) -->
+    <section class="admin-panel" id="admin" style="display: none;">
+        <div class="container admin-container">
+            <h2 class="admin-title">Add New Project</h2>
+            <form class="admin-form" id="project-form">
+                <div class="form-group">
+                    <label for="project-title">Project Title</label>
+                    <input type="text" id="project-title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="project-description">Project Description</label>
+                    <textarea id="project-description" class="form-control" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="project-image">Image URL</label>
+                    <input type="url" id="project-image" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">Add Project</button>
+            </form>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -896,6 +1081,136 @@
     </footer>
 
     <script>
+        // Sample project data - in a real implementation, this would come from a backend
+        let projects = [
+            {
+                title: "Tree Removal Project",
+                description: "Safe removal of a large oak tree in a residential area",
+                image: "https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            {
+                title: "Stump Grinding",
+                description: "Complete stump removal and site cleanup",
+                image: "https://images.unsplash.com/photo-1594819047050-99defca82535?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            {
+                title: "Tree Trimming",
+                description: "Professional pruning for health and aesthetics",
+                image: "https://images.unsplash.com/photo-1594818378440-1c9f0b6c2034?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            {
+                title: "Site Clearing",
+                description: "Vegetation removal for new construction",
+                image: "https://images.unsplash.com/photo-1589923186257-2d89576d8b16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            }
+        ];
+
+        // Testimonial data
+        const testimonials = [
+            {
+                name: "Mike T.",
+                rating: "★★★★★",
+                text: "The Village Fellers team did an excellent job removing a large tree from my backyard. They were professional, safe, and cleaned up perfectly afterwards. Highly recommended!",
+                avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+            },
+            {
+                name: "Amanda K.",
+                rating: "★★★★☆",
+                text: "I needed stump removal after a storm damaged my property. The team was punctual, careful with my garden, and did a fantastic job. Will definitely use them again!",
+                avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+            },
+            {
+                name: "James T.",
+                rating: "★★★★★",
+                text: "Professional tree trimming service that transformed my overgrown yard. The team was skilled, efficient, and the final result looks amazing. Very happy with their work!",
+                avatar: "https://randomuser.me/api/portraits/men/67.jpg"
+            },
+            {
+                name: "Sarah L.",
+                rating: "★★★★★",
+                text: "The palm shaving service was excellent! My palm trees look so much better and healthier now. The team was knowledgeable and did a fantastic job cleaning up afterwards.",
+                avatar: "https://randomuser.me/api/portraits/women/68.jpg"
+            }
+        ];
+
+        // Testimonial slider functionality
+        let currentTestimonial = 0;
+
+        function initializeTestimonialSlider() {
+            const track = document.getElementById('testimonial-track');
+            const dotsContainer = document.getElementById('testimonial-dots');
+            
+            // Create testimonial slides
+            testimonials.forEach((testimonial, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'testimonial-slide';
+                
+                slide.innerHTML = `
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar" style="background-image: url('${testimonial.avatar}');"></div>
+                            <div class="testimonial-info">
+                                <h4>${testimonial.name}</h4>
+                                <div class="testimonial-rating">${testimonial.rating}</div>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">${testimonial.text}</p>
+                    </div>
+                `;
+                
+                track.appendChild(slide);
+                
+                // Create dots
+                const dot = document.createElement('div');
+                dot.className = 'testimonial-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToTestimonial(index));
+                dotsContainer.appendChild(dot);
+            });
+            
+            // Set up navigation
+            document.getElementById('prev-testimonial').addEventListener('click', () => {
+                goToTestimonial(currentTestimonial - 1);
+            });
+            
+            document.getElementById('next-testimonial').addEventListener('click', () => {
+                goToTestimonial(currentTestimonial + 1);
+            });
+            
+            // Auto-advance testimonials
+            setInterval(() => {
+                goToTestimonial(currentTestimonial + 1);
+            }, 5000);
+        }
+
+        function goToTestimonial(index) {
+            const track = document.getElementById('testimonial-track');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            const totalTestimonials = testimonials.length;
+            
+            // Handle wrap-around
+            if (index >= totalTestimonials) {
+                index = 0;
+            } else if (index < 0) {
+                index = totalTestimonials - 1;
+            }
+            
+            // Update current testimonial
+            currentTestimonial = index;
+            
+            // Move track
+            track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                if (i === currentTestimonial) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
         // Mobile menu toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             document.querySelector('nav').classList.toggle('active');
@@ -927,6 +1242,109 @@
             e.preventDefault();
             alert('Thank you for your request! We will contact you shortly.');
             this.reset();
+        });
+
+        // Initialize portfolio
+        function initializePortfolio() {
+            const portfolioContainer = document.getElementById('portfolio-container');
+            
+            projects.forEach(project => {
+                const portfolioItem = document.createElement('div');
+                portfolioItem.className = 'portfolio-item';
+                portfolioItem.style.backgroundImage = `url('${project.image}')`;
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'portfolio-overlay';
+                
+                const title = document.createElement('div');
+                title.className = 'portfolio-title';
+                title.textContent = project.title;
+                
+                const description = document.createElement('div');
+                description.className = 'portfolio-description';
+                description.textContent = project.description;
+                
+                overlay.appendChild(title);
+                overlay.appendChild(description);
+                portfolioItem.appendChild(overlay);
+                portfolioContainer.appendChild(portfolioItem);
+            });
+        }
+
+        // Counter animation
+        function animateCounter(element, target, duration) {
+            let start = 0;
+            const increment = target / (duration / 16); // 60fps
+            
+            const updateCounter = () => {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                    element.classList.add('counting');
+                }
+            };
+            
+            updateCounter();
+        }
+
+        // Initialize counters when section is in view
+        function initializeCounters() {
+            const projectsCounter = document.getElementById('projects-counter');
+            const clientsCounter = document.getElementById('clients-counter');
+            const experienceCounter = document.getElementById('experience-counter');
+            
+            // Set realistic values
+            animateCounter(projectsCounter, 247, 2000);
+            animateCounter(clientsCounter, 189, 2000);
+            animateCounter(experienceCounter, 12, 2000);
+        }
+
+        // Admin functionality to add new projects
+        document.getElementById('project-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('project-title').value;
+            const description = document.getElementById('project-description').value;
+            const image = document.getElementById('project-image').value;
+            
+            // Add new project
+            projects.push({ title, description, image });
+            
+            // Refresh portfolio
+            document.getElementById('portfolio-container').innerHTML = '';
+            initializePortfolio();
+            
+            // Reset form
+            this.reset();
+            
+            alert('Project added successfully!');
+        });
+
+        // Show admin panel (for demonstration - in production this would be protected)
+        // Add ?admin=true to URL to show admin panel
+        if (window.location.search.includes('admin=true')) {
+            document.getElementById('admin').style.display = 'block';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePortfolio();
+            initializeTestimonialSlider();
+            
+            // Initialize counters when achievements section is in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        initializeCounters();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            observer.observe(document.querySelector('.achievements'));
         });
     </script>
 </body>
