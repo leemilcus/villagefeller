@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Village Feller - Professional Tree Felling Services</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #2e7d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #1b5e20;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #2e7d32;
+            color: #2e7d32;
+        }
+        
+        .btn-outline:hover {
+            background-color: #2e7d32;
+            color: white;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #2e7d32;
+            margin: 10px auto 0;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: #2e7d32;
+        }
+        
+        .professional-label {
+            background-color: #2e7d32;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #2e7d32;
+        }
+        
+        .header-cta {
+            margin-left: 20px;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 180px 0 100px;
+            margin-top: 70px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: #f9f9f9;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-content h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        
+        .service-content p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        /* Why Choose Us Section */
+        .why-choose-us {
+            background-color: #f9f9f9;
+        }
+        
+        .why-content {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .why-column {
+            flex: 1;
+        }
+        
+        .why-column h3 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        
+        .why-column ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .why-column li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .why-column li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .portfolio-item {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(46, 125, 50, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        /* Achievements Section */
+        .achievements {
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+        }
+        
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .achievement-item h3 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .testimonial-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .testimonial-rating {
+            color: #ffc107;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: #f9f9f9;
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #2e7d32;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #2e7d32;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content, .why-content, .contact-container {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                width: 100%;
+                order: 3;
+                margin-top: 15px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .header-cta {
+                margin-left: auto;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>Village Feller</h1>
+                <span class="professional-label">Professional</span>
+            </div>
+            
+            <div class="mobile-menu">☰</div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Recently Work</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <a href="#contact" class="btn header-cta">Request A Quote</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Tree Fellers for Safe and Efficient Tree Removal</h1>
+            <p>Welcome to The Village Fellers, your trusted destination for top-notch tree felling services. Our team of skilled professionals are dedicated to providing safe and efficient tree removal solutions to ensure the beauty and safety of your surroundings.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn">Request A Quote</a>
+                <a href="#about" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Committed to Excellence in Tree Felling and Landscaping</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>We are a dedicated team of professionals with years of experience in the tree felling industry. Our mission is to enhance the beauty and safety of landscapes through our expert services.</p>
+                    <p>At Village Feller, we combine traditional techniques with modern equipment to deliver exceptional results for every project, big or small.</p>
+                    <a href="#contact" class="btn">Contact Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1599002925849-2167e4e8c4e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tree felling professional at work">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <!-- Tree Felling -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Tree Felling / Removal</h3>
+                        <p>Safe and efficient removal of trees of all sizes, using industry best practices to ensure safety and minimal disruption.</p>
+                        <a href="#contact" class="btn">Request A Quote</a>
+                    </div>
+                </div>
+                
+                <!-- Stump Removal -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1594819047050-99defca82535?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Stump Removal</h3>
+                        <p>Complete stump extraction and grinding services to remove unsightly stumps and prevent regrowth.</p>
+                        <a href="#contact" class="btn">Request A Quote</a>
+                    </div>
+                </div>
+                
+                <!-- Tree Trimming -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1594818378440-1c9f0b6c2034?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Tree Trimming / Pruning</h3>
+                        <p>Expert trimming and pruning to maintain tree health, improve appearance, and ensure safety.</p>
+                        <a href="#contact" class="btn">Request A Quote</a>
+                    </div>
+                </div>
+                
+                <!-- Palm Shaving -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1578321272177-6958c51b5c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Palm Shaving</h3>
+                        <p>Specialized palm tree maintenance to keep your palms healthy, safe, and looking their best.</p>
+                        <a href="#contact" class="btn">Request A Quote</a>
+                    </div>
+                </div>
+                
+                <!-- Plot Clearing -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1589923186257-2d89576d8b16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Plot & Site Clearing</h3>
+                        <p>Complete vegetation removal services for land development, construction sites, or property maintenance.</p>
+                        <a href="#contact" class="btn">Request A Quote</a>
+                    </div>
+                </div>
+                
+                <!-- Garden Clean-ups -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1578321272177-6958c51b5c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Garden Clean-ups</h3>
+                        <p>Comprehensive garden maintenance including weed removal, debris clearing, and general upkeep.</p>
+                        <a href="#contact" class="btn">Request A Quote</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us – Exceptional Tree Felling and Landscaping Services</h2>
+            <div class="why-content">
+                <div class="why-column">
+                    <h3>Professional Expertise</h3>
+                    <p>Our team consists of highly skilled professionals with extensive knowledge in tree felling and landscaping. We stay updated with the latest industry practices and safety standards.</p>
+                    <ul>
+                        <li>Highly trained and certified arborists</li>
+                        <li>State-of-the-art equipment and techniques</li>
+                        <li>Comprehensive safety protocols</li>
+                        <li>Industry best practices</li>
+                    </ul>
+                </div>
+                <div class="why-column">
+                    <h3>Customer Satisfaction</h3>
+                    <p>We prioritize our clients' needs and work closely with them to deliver personalized solutions that exceed expectations.</p>
+                    <ul>
+                        <li>Transparent communication throughout the process</li>
+                        <li>Tailored solutions for your specific needs</li>
+                        <li>Attention to detail in every project</li>
+                        <li>Follow-up services and support</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#contact" class="btn">Request A Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Recently Projects</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" style="background-image: url('https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="portfolio-overlay">
+                        <span style="color: white; font-weight: bold;">Tree Removal Project</span>
+                    </div>
+                </div>
+                <div class="portfolio-item" style="background-image: url('https://images.unsplash.com/photo-1594819047050-99defca82535?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="portfolio-overlay">
+                        <span style="color: white; font-weight: bold;">Stump Grinding</span>
+                    </div>
+                </div>
+                <div class="portfolio-item" style="background-image: url('https://images.unsplash.com/photo-1594818378440-1c9f0b6c2034?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="portfolio-overlay">
+                        <span style="color: white; font-weight: bold;">Tree Trimming</span>
+                    </div>
+                </div>
+                <div class="portfolio-item" style="background-image: url('https://images.unsplash.com/photo-1589923186257-2d89576d8b16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="portfolio-overlay">
+                        <span style="color: white; font-weight: bold;">Site Clearing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="achievements">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Setting the Standards in Tree Felling Industry</h2>
+            <div class="achievements-grid">
+                <div class="achievement-item">
+                    <h3>0</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="achievement-item">
+                    <h3>0</h3>
+                    <p>Satisfied Happy Clients</p>
+                </div>
+                <div class="achievement-item">
+                    <h3>0</h3>
+                    <p>Years of Experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                        <div class="testimonial-info">
+                            <h4>Mike T.</h4>
+                            <div class="testimonial-rating">★★★★★</div>
+                        </div>
+                    </div>
+                    <p>"The Village Fellers team did an excellent job removing a large tree from my backyard. They were professional, safe, and cleaned up perfectly afterwards. Highly recommended!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                        <div class="testimonial-info">
+                            <h4>Amanda K.</h4>
+                            <div class="testimonial-rating">★★★★☆</div>
+                        </div>
+                    </div>
+                    <p>"I needed stump removal after a storm damaged my property. The team was punctual, careful with my garden, and did a fantastic job. Will definitely use them again!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/67.jpg');"></div>
+                        <div class="testimonial-info">
+                            <h4>James T.</h4>
+                            <div class="testimonial-rating">★★★★★</div>
+                        </div>
+                    </div>
+                    <p>"Professional tree trimming service that transformed my overgrown yard. The team was skilled, efficient, and the final result looks amazing. Very happy with their work!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Request A Quote</h2>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <form id="quote-form">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service</label>
+                            <select id="service" class="form-control" required>
+                                <option value="">Select a service</option>
+                                <option value="tree-felling">Tree Felling / Removal</option>
+                                <option value="stump-removal">Stump Removal</option>
+                                <option value="tree-trimming">Tree Trimming / Pruning</option>
+                                <option value="palm-shaving">Palm Shaving</option>
+                                <option value="site-clearing">Plot & Site Clearing</option>
+                                <option value="garden-cleanup">Garden Clean-ups</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Submit Request</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-details">
+                        <h3>Contact Details</h3>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <p>+27 21 123 4567</p>
+                                <p>+27 82 123 4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <p>info@villagefeller.co.za</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <p>5 Victoria Road, Grassy Park, Cape Town</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="map-placeholder" style="background-color: #ddd; height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <p>Map would be embedded here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Village Feller</h3>
+                    <p>Professional tree felling and landscaping services in Cape Town and surrounding areas.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Recently Work</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Tree Felling</a></li>
+                        <li><a href="#services">Stump Removal</a></li>
+                        <li><a href="#services">Trimming</a></li>
+                        <li><a href="#services">Palm Shaving</a></li>
+                        <li><a href="#services">Clearing</a></li>
+                        <li><a href="#services">Garden Clean-ups</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li>📞 +27 21 123 4567</li>
+                        <li>📱 +27 82 123 4567</li>
+                        <li>✉️ info@villagefeller.co.za</li>
+                        <li>📍 5 Victoria Road, Grassy Park, Cape Town</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Village Feller. All rights reserved. | Website Designed By allanuxweb.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('nav').classList.remove('active');
+                }
+            });
+        });
+        
+        // Form submission
+        document.getElementById('quote-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your request! We will contact you shortly.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
