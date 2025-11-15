@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -192,7 +192,7 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./img/hero.jpeg');
             background-size: cover;
             background-position: center;
             color: var(--white);
@@ -241,6 +241,12 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         
         .about-image:hover {
@@ -498,6 +504,7 @@
             cursor: pointer;
             margin: 0 15px;
             transition: background-color 0.3s;
+            font-size: 16px;
         }
         
         .testimonial-arrow:hover {
@@ -568,11 +575,12 @@
             margin-right: 15px;
         }
         
-        /* Admin Panel */
+        /* Admin Panel Styles */
         .admin-panel {
             background-color: #f5f5f5;
             padding: 40px 0;
             border-top: 1px solid #ddd;
+            display: none;
         }
         
         .admin-container {
@@ -594,9 +602,254 @@
             margin-bottom: 20px;
         }
         
+        .admin-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        /* Image Upload Styles */
+        .image-upload-container {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-upload-container:hover {
+            border-color: var(--primary);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+        
+        .image-upload-container i {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .upload-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .upload-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .upload-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .upload-progress {
+            width: 100%;
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .upload-progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-modal.active {
+            display: flex;
+        }
+        
+        .login-container {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .login-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .login-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .admin-login-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .admin-login-btn:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.1);
+        }
+        
+        .admin-login-btn i {
+            font-size: 24px;
+        }
+        
+        /* Edit Project Modal */
+        .edit-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .edit-modal.active {
+            display: flex;
+        }
+        
+        .edit-container {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+        }
+        
+        .edit-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .edit-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        /* Portfolio List in Admin */
+        .portfolio-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+        
+        .portfolio-list-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .portfolio-list-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        
+        .portfolio-list-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .portfolio-list-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .portfolio-list-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .portfolio-list-thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+        
+        /* Portfolio Item Delete Button */
+        .portfolio-item .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            display: none;
+            z-index: 10;
+        }
+        
+        .portfolio-item:hover .delete-btn {
+            display: block;
+        }
+        
         /* Footer */
         footer {
-            background-color: var(--dark);
+            background-color: var(--primary-dark);
             color: var(--white);
             padding: 60px 0 30px;
         }
@@ -635,9 +888,15 @@
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid #444;
-            color: #aaa;
+            border-top: 1px solid #ffffff;
+            color: #dad8d8;
             font-size: 0.9rem;
+        }
+        
+        .footer-logo {
+            height: 100px;
+            width: auto;
+            margin-bottom: 15px;
         }
         
         /* Responsive Styles */
@@ -718,6 +977,15 @@
         .counting {
             animation: countUp 1s ease-out;
         }
+
+        .footer-bottom .brand-name {
+            color: rgb(9, 255, 0);
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom .brand-name:hover {
+            color: rgb(255, 255, 255);
+        }
     </style>
 </head>
 <body>
@@ -725,12 +993,9 @@
     <header>
         <div class="container header-container">
             <div class="logo-container">
-                <!-- Logo placeholder - replace with actual logo -->
-                <div class="logo" style="background-color: #2e7d32; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 5px;">
-                    VF LOGO
+                <div class="logo">
+                    <img src="img/logoo.png" alt="Village Feller Logo" style="height: 70px;">
                 </div>
-                <div class="logo-text">Village Feller</div>
-                <span class="professional-label">Professional</span>
             </div>
             
             <div class="mobile-menu">☰</div>
@@ -772,7 +1037,7 @@
                     <a href="#contact" class="btn">Contact Us</a>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1599002925849-2167e4e8c4e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tree felling professional at work">
+                    <img src="./img/30.jpeg" alt="Tree felling professional at work">
                 </div>
             </div>
         </div>
@@ -785,7 +1050,7 @@
             <div class="services-grid">
                 <!-- Tree Felling -->
                 <div class="service-card">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-image" style="background-image: url('./img/Tree\ Felling\ \ Removal.jpeg ');"></div>
                     <div class="service-content">
                         <h3>Tree Felling / Removal</h3>
                         <p>Safe and efficient removal of trees of all sizes, using industry best practices to ensure safety and minimal disruption.</p>
@@ -795,7 +1060,7 @@
                 
                 <!-- Stump Removal -->
                 <div class="service-card">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1594819047050-99defca82535?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-image" style="background-image: url('./img/Stump\ Removal.jpeg');"></div>
                     <div class="service-content">
                         <h3>Stump Removal</h3>
                         <p>Complete stump extraction and grinding services to remove unsightly stumps and prevent regrowth.</p>
@@ -805,7 +1070,7 @@
                 
                 <!-- Tree Trimming -->
                 <div class="service-card">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1594818378440-1c9f0b6c2034?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-image" style="background-image: url('./img/Tree\ Trimming\ \ Pruning.jpeg');"></div>
                     <div class="service-content">
                         <h3>Tree Trimming / Pruning</h3>
                         <p>Expert trimming and pruning to maintain tree health, improve appearance, and ensure safety.</p>
@@ -815,7 +1080,7 @@
                 
                 <!-- Palm Shaving -->
                 <div class="service-card">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1578321272177-6958c51b5c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-image" style="background-image: url('./img/palm\ tree\ shaving.jpeg');"></div>
                     <div class="service-content">
                         <h3>Palm Shaving</h3>
                         <p>Specialized palm tree maintenance to keep your palms healthy, safe, and looking their best.</p>
@@ -825,7 +1090,7 @@
                 
                 <!-- Plot Clearing -->
                 <div class="service-card">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1589923186257-2d89576d8b16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-image" style="background-image: url('./img/cleanup.jpeg');"></div>
                     <div class="service-content">
                         <h3>Plot & Site Clearing</h3>
                         <p>Complete vegetation removal services for land development, construction sites, or property maintenance.</p>
@@ -835,7 +1100,7 @@
                 
                 <!-- Garden Clean-ups -->
                 <div class="service-card">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1578321272177-6958c51b5c0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-image" style="background-image: url('./img/garden\ clean-ups.jpeg');"></div>
                     <div class="service-content">
                         <h3>Garden Clean-ups</h3>
                         <p>Comprehensive garden maintenance including weed removal, debris clearing, and general upkeep.</p>
@@ -983,14 +1248,15 @@
                         <div class="contact-item">
                             <div class="contact-icon">📞</div>
                             <div>
-                                <p>+27 21 123 4567</p>
-                                <p>+27 82 123 4567</p>
+                                <p><a href="tel:+27789366509">+27 78 936 6509</a></p>
+                                <p><a href="tel:+27660387779">+27 66 038 7779</a></p>
+
                             </div>
                         </div>
                         <div class="contact-item">
                             <div class="contact-icon">✉️</div>
                             <div>
-                                <p>info@villagefeller.co.za</p>
+                                <p><a href="mailto:info@villagefeller.co.za">info@villagefeller.co.za</a></p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1000,20 +1266,40 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="map-placeholder" style="background-color: #ddd; height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                        <p>Map would be embedded here</p>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Admin Panel (Hidden by default) -->
-    <section class="admin-panel" id="admin" style="display: none;">
-        <div class="container admin-container">
-            <h2 class="admin-title">Add New Project</h2>
-            <form class="admin-form" id="project-form">
+   <!-- Admin Panel (Hidden by default) -->
+<section class="admin-panel" id="admin">
+    <div class="container admin-container">
+        <h2 class="admin-title">Admin Dashboard</h2>
+        
+        <!-- Statistics Section -->
+        <div style="margin-bottom: 40px;">
+            <h3>Update Business Statistics</h3>
+            <form class="admin-form" id="stats-form">
+                <div class="form-group">
+                    <label for="projects-count">Projects Completed</label>
+                    <input type="number" id="projects-count" class="form-control" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="clients-count">Satisfied Clients</label>
+                    <input type="number" id="clients-count" class="form-control" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="experience-count">Years of Experience</label>
+                    <input type="number" id="experience-count" class="form-control" min="0" required>
+                </div>
+                <button type="submit" class="btn">Update Statistics</button>
+            </form>
+        </div>
+        
+        <!-- Portfolio Management Section -->
+        <div style="margin-bottom: 40px;">
+            <h3>Add New Project</h3>
+            <form class="admin-form" id="project-form" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="project-title">Project Title</label>
                     <input type="text" id="project-title" class="form-control" required>
@@ -1023,22 +1309,124 @@
                     <textarea id="project-description" class="form-control" rows="4" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="project-image">Image URL</label>
-                    <input type="url" id="project-image" class="form-control" required>
+                    <label>Upload Image</label>
+                    <div class="image-upload-container" id="image-upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload an image or drag and drop</p>
+                        <p class="small-text">PNG, JPG, GIF up to 5MB</p>
+                        <img id="image-preview" class="image-preview" alt="Image preview">
+                    </div>
+                    <input type="file" id="image-upload" name="project-image" accept="image/*" style="display: none;" required>
+                    <div class="upload-progress" id="upload-progress">
+                        <div class="upload-progress-bar" id="upload-progress-bar"></div>
+                    </div>
+                    <div id="upload-status" class="upload-status"></div>
                 </div>
-                <button type="submit" class="btn">Add Project</button>
+                <div class="admin-actions">
+                    <button type="submit" class="btn" id="submit-btn">Add Project</button>
+                    <button type="button" class="btn btn-outline" id="logout-btn">Logout</button>
+                </div>
             </form>
         </div>
-    </section>
+        
+        <!-- Current Projects List -->
+        <div>
+            <h3>Current Portfolio Items</h3>
+            <div id="portfolio-list" style="margin-top: 20px;">
+                <!-- Portfolio items will be listed here -->
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="login-modal">
+        <div class="login-container">
+            <h2 class="login-title">Admin Login</h2>
+            <form class="login-form" id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+                <div class="login-actions">
+                    <button type="button" class="btn btn-outline" id="cancel-login">Cancel</button>
+                    <button type="submit" class="btn">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Project Modal -->
+    <div class="edit-modal" id="edit-modal">
+        <div class="edit-container">
+            <h2 class="edit-title">Edit Project</h2>
+            <form class="admin-form" id="edit-form" enctype="multipart/form-data">
+                <input type="hidden" id="edit-index">
+                <input type="hidden" id="edit-current-image" name="current-image">
+                <div class="form-group">
+                    <label for="edit-title">Project Title</label>
+                    <input type="text" id="edit-title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="edit-description">Project Description</label>
+                    <textarea id="edit-description" class="form-control" rows="4" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Current Image</label>
+                    <img id="edit-current-image-preview" class="image-preview" style="display: block; max-height: 150px;">
+                </div>
+                <div class="form-group">
+                    <label>Change Image (Optional)</label>
+                    <div class="image-upload-container" id="edit-image-upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload a new image</p>
+                        <p class="small-text">PNG, JPG, GIF up to 5MB</p>
+                        <img id="edit-image-preview" class="image-preview" alt="Image preview">
+                    </div>
+                    <input type="file" id="edit-image-upload" name="edit-project-image" accept="image/*" style="display: none;">
+                    <div class="upload-progress" id="edit-upload-progress">
+                        <div class="upload-progress-bar" id="edit-upload-progress-bar"></div>
+                    </div>
+                    <div id="edit-upload-status" class="upload-status"></div>
+                </div>
+                <div class="edit-actions">
+                    <button type="button" class="btn btn-outline" id="cancel-edit">Cancel</button>
+                    <button type="submit" class="btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Login Button -->
+    <button class="admin-login-btn" id="admin-login-btn">
+        <i class="fas fa-user-cog"></i>
+    </button>
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-container">
                 <div class="footer-column">
-                    <h3>Village Feller</h3>
+                    <img src="./img/footer logo.png" alt="Village Feller Logo" class="footer-logo">
                     <p>Professional tree felling and landscaping services in Cape Town and surrounding areas.</p>
+                    <div class="social-icons" style="margin-top: 20px;">
+                    <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
                 </div>
+                </div>
+
+                
                 
                 <div class="footer-column">
                     <h3>Navigation</h3>
@@ -1066,8 +1454,8 @@
                 <div class="footer-column">
                     <h3>Contact</h3>
                     <ul class="footer-links">
-                        <li>📞 +27 21 123 4567</li>
-                        <li>📱 +27 82 123 4567</li>
+                        <li>📞 +27 78 936 6509</li>
+                        <li>📱 +27 66 038 7779</li>
                         <li>✉️ info@villagefeller.co.za</li>
                         <li>📍 5 Victoria Road, Grassy Park, Cape Town</li>
                     </ul>
@@ -1075,36 +1463,22 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2023 Village Feller. All rights reserved. | Website Designed By allanuxweb.com</p>
+                <p>Copyright © 2022 - 2025 Village Feller. All rights reserved | Crafted by 
+                    <a href="https://www.shailendralm.co.za">
+                        <strong><span class="brand-name">Shailendra Visuals.</span> </strong>
+                    </a>
+                </p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Sample project data - in a real implementation, this would come from a backend
-        let projects = [
-            {
-                title: "Tree Removal Project",
-                description: "Safe removal of a large oak tree in a residential area",
-                image: "https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            },
-            {
-                title: "Stump Grinding",
-                description: "Complete stump removal and site cleanup",
-                image: "https://images.unsplash.com/photo-1594819047050-99defca82535?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            },
-            {
-                title: "Tree Trimming",
-                description: "Professional pruning for health and aesthetics",
-                image: "https://images.unsplash.com/photo-1594818378440-1c9f0b6c2034?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            },
-            {
-                title: "Site Clearing",
-                description: "Vegetation removal for new construction",
-                image: "https://images.unsplash.com/photo-1589923186257-2d89576d8b16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            }
-        ];
-
+        // Server configuration - UPDATE THIS TO YOUR SERVER ENDPOINT
+        const SERVER_URL = 'https://villagefeller.co.za/api'; // Change to your actual server URL
+        
+        // Sample project data
+        let projects = [];
+        
         // Testimonial data
         const testimonials = [
             {
@@ -1132,6 +1506,217 @@
                 avatar: "https://randomuser.me/api/portraits/women/68.jpg"
             }
         ];
+
+        // Admin credentials
+        const adminCredentials = {
+            username: "admin",
+            password: "villagefeller2024"
+        };
+
+        // Check if user is logged in
+        let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+        // Server API functions
+        async function loadProjectsFromServer() {
+            try {
+                const response = await fetch(`${SERVER_URL}/projects`);
+                if (response.ok) {
+                    projects = await response.json();
+                } else {
+                    console.error('Failed to load projects from server');
+                    // Fallback to localStorage
+                    loadProjectsFromLocalStorage();
+                }
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                loadProjectsFromLocalStorage();
+            }
+        }
+
+        async function saveProjectToServer(projectData) {
+            try {
+                const formData = new FormData();
+                formData.append('title', projectData.title);
+                formData.append('description', projectData.description);
+                
+                if (projectData.imageFile) {
+                    formData.append('image', projectData.imageFile);
+                }
+
+                const response = await fetch(`${SERVER_URL}/projects`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const savedProject = await response.json();
+                    return savedProject;
+                } else {
+                    throw new Error('Failed to save project to server');
+                }
+            } catch (error) {
+                console.error('Error saving project:', error);
+                throw error;
+            }
+        }
+
+        async function updateProjectOnServer(projectId, projectData) {
+            try {
+                const formData = new FormData();
+                formData.append('title', projectData.title);
+                formData.append('description', projectData.description);
+                formData.append('id', projectId);
+                
+                if (projectData.imageFile) {
+                    formData.append('image', projectData.imageFile);
+                }
+
+                const response = await fetch(`${SERVER_URL}/projects/${projectId}`, {
+                    method: 'PUT',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const updatedProject = await response.json();
+                    return updatedProject;
+                } else {
+                    throw new Error('Failed to update project on server');
+                }
+            } catch (error) {
+                console.error('Error updating project:', error);
+                throw error;
+            }
+        }
+
+        async function deleteProjectFromServer(projectId) {
+            try {
+                const response = await fetch(`${SERVER_URL}/projects/${projectId}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to delete project from server');
+                }
+            } catch (error) {
+                console.error('Error deleting project:', error);
+                throw error;
+            }
+        }
+
+        // Fallback to localStorage
+        function loadProjectsFromLocalStorage() {
+            const savedProjects = localStorage.getItem('villageFellerProjects');
+            if (savedProjects) {
+                projects = JSON.parse(savedProjects);
+            } else {
+                // Load default projects if none exist
+                projects = [
+                    {
+                        id: '1',
+                        title: "Tree Removal Project",
+                        description: "Safe removal of a large oak tree in a residential area",
+                        image: "./img/Stump Removal.jpeg "
+                    },
+                    {
+                        id: '2',
+                        title: "Stump Grinding",
+                        description: "Complete stump removal and site cleanup",
+                        image: "./img/PLOT AND SITE CLEARING.jpeg "
+                    }
+                    
+                ];
+            }
+        }
+
+        function saveProjectsToLocalStorage() {
+            localStorage.setItem('villageFellerProjects', JSON.stringify(projects));
+        }
+
+        // Modified project management functions
+        async function addProject(projectData) {
+            try {
+                const savedProject = await saveProjectToServer(projectData);
+                projects.push(savedProject);
+                initializePortfolio();
+                updatePortfolioList();
+                return true;
+            } catch (error) {
+                // Fallback to localStorage
+                console.log('Server save failed, using localStorage fallback');
+                if (projectData.imageFile) {
+                    // Convert file to data URL for localStorage
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        projectData.image = e.target.result;
+                        projectData.id = Date.now().toString();
+                        projects.push(projectData);
+                        saveProjectsToLocalStorage();
+                        initializePortfolio();
+                        updatePortfolioList();
+                    };
+                    reader.readAsDataURL(projectData.imageFile);
+                } else {
+                    projectData.id = Date.now().toString();
+                    projects.push(projectData);
+                    saveProjectsToLocalStorage();
+                    initializePortfolio();
+                    updatePortfolioList();
+                }
+                return true;
+            }
+        }
+
+        async function updateProject(index, projectData) {
+            const projectId = projects[index].id || index;
+            
+            try {
+                const updatedProject = await updateProjectOnServer(projectId, projectData);
+                projects[index] = updatedProject;
+                initializePortfolio();
+                updatePortfolioList();
+                return true;
+            } catch (error) {
+                // Fallback to localStorage
+                console.log('Server update failed, using localStorage fallback');
+                if (projectData.imageFile) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        projects[index].title = projectData.title;
+                        projects[index].description = projectData.description;
+                        projects[index].image = e.target.result;
+                        saveProjectsToLocalStorage();
+                        initializePortfolio();
+                        updatePortfolioList();
+                    };
+                    reader.readAsDataURL(projectData.imageFile);
+                } else {
+                    projects[index].title = projectData.title;
+                    projects[index].description = projectData.description;
+                    saveProjectsToLocalStorage();
+                    initializePortfolio();
+                    updatePortfolioList();
+                }
+                return true;
+            }
+        }
+
+        async function deleteProject(index) {
+            const projectId = projects[index].id || index;
+            
+            try {
+                await deleteProjectFromServer(projectId);
+                projects.splice(index, 1);
+                initializePortfolio();
+                updatePortfolioList();
+            } catch (error) {
+                // Fallback to localStorage
+                console.log('Server delete failed, using localStorage fallback');
+                projects.splice(index, 1);
+                saveProjectsToLocalStorage();
+                initializePortfolio();
+                updatePortfolioList();
+            }
+        }
 
         // Testimonial slider functionality
         let currentTestimonial = 0;
@@ -1247,8 +1832,9 @@
         // Initialize portfolio
         function initializePortfolio() {
             const portfolioContainer = document.getElementById('portfolio-container');
+            portfolioContainer.innerHTML = '';
             
-            projects.forEach(project => {
+            projects.forEach((project, index) => {
                 const portfolioItem = document.createElement('div');
                 portfolioItem.className = 'portfolio-item';
                 portfolioItem.style.backgroundImage = `url('${project.image}')`;
@@ -1264,11 +1850,95 @@
                 description.className = 'portfolio-description';
                 description.textContent = project.description;
                 
+                // Add delete button if logged in
+                if (isLoggedIn) {
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'delete-btn';
+                    deleteBtn.textContent = 'Delete';
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        deleteProject(index);
+                    });
+                    portfolioItem.appendChild(deleteBtn);
+                }
+                
                 overlay.appendChild(title);
                 overlay.appendChild(description);
                 portfolioItem.appendChild(overlay);
                 portfolioContainer.appendChild(portfolioItem);
             });
+        }
+
+        // Update portfolio list in admin panel
+        function updatePortfolioList() {
+            const portfolioList = document.getElementById('portfolio-list');
+            portfolioList.innerHTML = '';
+            
+            if (projects.length === 0) {
+                portfolioList.innerHTML = '<p>No projects yet. Add your first project above.</p>';
+                return;
+            }
+            
+            projects.forEach((project, index) => {
+                const item = document.createElement('div');
+                item.className = 'portfolio-list-item';
+                
+                const info = document.createElement('div');
+                info.className = 'portfolio-list-info';
+                
+                const thumbnail = document.createElement('img');
+                thumbnail.className = 'portfolio-list-thumbnail';
+                thumbnail.src = project.image;
+                thumbnail.alt = project.title;
+                
+                const textContent = document.createElement('div');
+                textContent.innerHTML = `
+                    <div class="portfolio-list-title">${project.title}</div>
+                    <div class="portfolio-list-description">${project.description}</div>
+                `;
+                
+                info.appendChild(thumbnail);
+                info.appendChild(textContent);
+                
+                const actions = document.createElement('div');
+                actions.className = 'portfolio-list-actions';
+                
+                const editBtn = document.createElement('button');
+                editBtn.className = 'btn';
+                editBtn.textContent = 'Edit';
+                editBtn.addEventListener('click', () => editProject(index));
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'btn';
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.addEventListener('click', () => deleteProject(index));
+                
+                actions.appendChild(editBtn);
+                actions.appendChild(deleteBtn);
+                
+                item.appendChild(info);
+                item.appendChild(actions);
+                portfolioList.appendChild(item);
+            });
+        }
+
+        // Edit project
+        function editProject(index) {
+            const project = projects[index];
+            
+            document.getElementById('edit-index').value = index;
+            document.getElementById('edit-title').value = project.title;
+            document.getElementById('edit-description').value = project.description;
+            document.getElementById('edit-current-image').value = project.image;
+            document.getElementById('edit-current-image-preview').src = project.image;
+            document.getElementById('edit-current-image-preview').style.display = 'block';
+            
+            // Reset the edit image upload
+            document.getElementById('edit-image-preview').style.display = 'none';
+            document.getElementById('edit-image-upload').value = '';
+            
+            // Show the edit modal
+            document.getElementById('edit-modal').classList.add('active');
         }
 
         // Counter animation
@@ -1297,42 +1967,355 @@
             const experienceCounter = document.getElementById('experience-counter');
             
             // Set realistic values
-            animateCounter(projectsCounter, 247, 2000);
-            animateCounter(clientsCounter, 189, 2000);
+            animateCounter(projectsCounter, +1,459, 2000);
+            animateCounter(clientsCounter, +900, 2000);
             animateCounter(experienceCounter, 12, 2000);
         }
 
-        // Admin functionality to add new projects
-        document.getElementById('project-form').addEventListener('submit', function(e) {
+        // Image upload functionality
+        function setupImageUpload() {
+            const imageUpload = document.getElementById('image-upload');
+            const imageUploadArea = document.getElementById('image-upload-area');
+            const imagePreview = document.getElementById('image-preview');
+            
+            // Click on upload area to trigger file input
+            imageUploadArea.addEventListener('click', () => {
+                imageUpload.click();
+            });
+            
+            // Handle file selection
+            imageUpload.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    // Check if file is an image
+                    if (!file.type.match('image.*')) {
+                        alert('Please select an image file (JPEG, PNG, GIF, etc.)');
+                        return;
+                    }
+                    
+                    // Check file size (5MB limit)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('Image size should be less than 5MB');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Drag and drop functionality
+            imageUploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                imageUploadArea.style.borderColor = '#2e7d32';
+                imageUploadArea.style.backgroundColor = 'rgba(46, 125, 50, 0.1)';
+            });
+            
+            imageUploadArea.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                imageUploadArea.style.borderColor = '#ddd';
+                imageUploadArea.style.backgroundColor = '';
+            });
+            
+            imageUploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                imageUploadArea.style.borderColor = '#ddd';
+                imageUploadArea.style.backgroundColor = '';
+                
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.match('image.*')) {
+                    // Check file size (5MB limit)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('Image size should be less than 5MB');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                    imageUpload.files = e.dataTransfer.files;
+                } else {
+                    alert('Please drop an image file');
+                }
+            });
+        }
+
+        // Edit image upload functionality
+        function setupEditImageUpload() {
+            const editImageUpload = document.getElementById('edit-image-upload');
+            const editImageUploadArea = document.getElementById('edit-image-upload-area');
+            const editImagePreview = document.getElementById('edit-image-preview');
+            
+            // Click on upload area to trigger file input
+            editImageUploadArea.addEventListener('click', () => {
+                editImageUpload.click();
+            });
+            
+            // Handle file selection
+            editImageUpload.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    // Check if file is an image
+                    if (!file.type.match('image.*')) {
+                        alert('Please select an image file (JPEG, PNG, GIF, etc.)');
+                        return;
+                    }
+                    
+                    // Check file size (5MB limit)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('Image size should be less than 5MB');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        editImagePreview.src = e.target.result;
+                        editImagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Drag and drop functionality
+            editImageUploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                editImageUploadArea.style.borderColor = '#2e7d32';
+                editImageUploadArea.style.backgroundColor = 'rgba(46, 125, 50, 0.1)';
+            });
+            
+            editImageUploadArea.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                editImageUploadArea.style.borderColor = '#ddd';
+                editImageUploadArea.style.backgroundColor = '';
+            });
+            
+            editImageUploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                editImageUploadArea.style.borderColor = '#ddd';
+                editImageUploadArea.style.backgroundColor = '';
+                
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.match('image.*')) {
+                    // Check file size (5MB limit)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('Image size should be less than 5MB');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        editImagePreview.src = e.target.result;
+                        editImagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                    editImageUpload.files = e.dataTransfer.files;
+                } else {
+                    alert('Please drop an image file');
+                }
+            });
+        }
+
+        // Modified form handlers
+        document.getElementById('project-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Uploading...';
+            submitBtn.disabled = true;
+            
+            const progressBar = document.getElementById('upload-progress-bar');
+            const progressContainer = document.getElementById('upload-progress');
+            const statusDiv = document.getElementById('upload-status');
             
             const title = document.getElementById('project-title').value;
             const description = document.getElementById('project-description').value;
-            const image = document.getElementById('project-image').value;
+            const imageFile = document.getElementById('image-upload').files[0];
             
-            // Add new project
-            projects.push({ title, description, image });
+            if (!imageFile) {
+                alert('Please upload an image for the project');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                return;
+            }
             
-            // Refresh portfolio
-            document.getElementById('portfolio-container').innerHTML = '';
-            initializePortfolio();
+            try {
+                // Show progress bar
+                progressContainer.style.display = 'block';
+                progressBar.style.width = '30%';
+                
+                const projectData = {
+                    title,
+                    description,
+                    imageFile
+                };
+                
+                // Simulate upload progress
+                let progress = 30;
+                const progressInterval = setInterval(() => {
+                    progress += 10;
+                    progressBar.style.width = `${progress}%`;
+                    if (progress >= 90) clearInterval(progressInterval);
+                }, 200);
+                
+                await addProject(projectData);
+                
+                // Complete progress
+                progressBar.style.width = '100%';
+                
+                // Reset form
+                this.reset();
+                document.getElementById('image-preview').style.display = 'none';
+                statusDiv.textContent = 'Project added successfully!';
+                statusDiv.className = 'upload-status success';
+                statusDiv.style.display = 'block';
+                
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                    progressContainer.style.display = 'none';
+                }, 3000);
+                
+            } catch (error) {
+                statusDiv.textContent = 'Error adding project. Please try again.';
+                statusDiv.className = 'upload-status error';
+                statusDiv.style.display = 'block';
+                progressContainer.style.display = 'none';
+            }
             
-            // Reset form
-            this.reset();
-            
-            alert('Project added successfully!');
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
         });
 
-        // Show admin panel (for demonstration - in production this would be protected)
-        // Add ?admin=true to URL to show admin panel
-        if (window.location.search.includes('admin=true')) {
-            document.getElementById('admin').style.display = 'block';
-        }
+        document.getElementById('edit-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const index = document.getElementById('edit-index').value;
+            const title = document.getElementById('edit-title').value;
+            const description = document.getElementById('edit-description').value;
+            const imageFile = document.getElementById('edit-image-upload').files[0];
+            const currentImage = document.getElementById('edit-current-image').value;
+            
+            const progressBar = document.getElementById('edit-upload-progress-bar');
+            const progressContainer = document.getElementById('edit-upload-progress');
+            const statusDiv = document.getElementById('edit-upload-status');
+            
+            try {
+                if (imageFile) {
+                    // Show progress bar for image upload
+                    progressContainer.style.display = 'block';
+                    progressBar.style.width = '30%';
+                    
+                    // Simulate upload progress
+                    let progress = 30;
+                    const progressInterval = setInterval(() => {
+                        progress += 10;
+                        progressBar.style.width = `${progress}%`;
+                        if (progress >= 90) clearInterval(progressInterval);
+                    }, 200);
+                }
+                
+                const projectData = {
+                    title,
+                    description,
+                    image: currentImage
+                };
+                
+                if (imageFile) {
+                    projectData.imageFile = imageFile;
+                }
+                
+                await updateProject(index, projectData);
+                
+                if (imageFile) {
+                    progressBar.style.width = '100%';
+                }
+                
+                document.getElementById('edit-modal').classList.remove('active');
+                alert('Project updated successfully!');
+                
+            } catch (error) {
+                alert('Error updating project. Please try again.');
+            } finally {
+                progressContainer.style.display = 'none';
+            }
+        });
+
+        // Login functionality
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === adminCredentials.username && password === adminCredentials.password) {
+                isLoggedIn = true;
+                localStorage.setItem('isLoggedIn', 'true');
+                document.getElementById('login-modal').classList.remove('active');
+                document.getElementById('admin').style.display = 'block';
+                initializePortfolio();
+                updatePortfolioList();
+                alert('Login successful!');
+            } else {
+                alert('Invalid username or password');
+            }
+        });
+
+        // Cancel login
+        document.getElementById('cancel-login').addEventListener('click', function() {
+            document.getElementById('login-modal').classList.remove('active');
+        });
+
+        // Cancel edit
+        document.getElementById('cancel-edit').addEventListener('click', function() {
+            document.getElementById('edit-modal').classList.remove('active');
+        });
+
+        // Show login modal
+        document.getElementById('admin-login-btn').addEventListener('click', function() {
+            if (isLoggedIn) {
+                document.getElementById('admin').style.display = 'block';
+                document.getElementById('admin').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                document.getElementById('login-modal').classList.add('active');
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            isLoggedIn = false;
+            localStorage.setItem('isLoggedIn', 'false');
+            document.getElementById('admin').style.display = 'none';
+            initializePortfolio();
+            alert('You have been logged out.');
+        });
+
+        // Close admin panel when clicking outside
+        document.addEventListener('click', function(e) {
+            if (isLoggedIn && !document.getElementById('admin').contains(e.target) && 
+                e.target.id !== 'admin-login-btn' && !e.target.closest('#admin-login-btn')) {
+                document.getElementById('admin').style.display = 'none';
+            }
+        });
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            initializePortfolio();
+            loadProjectsFromServer().then(() => {
+                initializePortfolio();
+                if (isLoggedIn) {
+                    updatePortfolioList();
+                }
+            });
+            
             initializeTestimonialSlider();
+            setupImageUpload();
+            setupEditImageUpload();
             
             // Initialize counters when achievements section is in view
             const observer = new IntersectionObserver((entries) => {
@@ -1346,6 +2329,67 @@
             
             observer.observe(document.querySelector('.achievements'));
         });
+
+        // Statistics management
+function loadStatistics() {
+    const stats = JSON.parse(localStorage.getItem('villageFellerStats') || '{}');
+    return {
+        projects: stats.projects || +1459,
+        clients: stats.clients || +900,
+        experience: stats.experience || 12
+    };
+}
+
+function saveStatistics(stats) {
+    localStorage.setItem('villageFellerStats', JSON.stringify(stats));
+}
+
+function updateStatisticsDisplay() {
+    const stats = loadStatistics();
+    document.getElementById('projects-counter').textContent = stats.projects;
+    document.getElementById('clients-counter').textContent = stats.clients;
+    document.getElementById('experience-counter').textContent = stats.experience;
+}
+
+function initializeStatisticsForm() {
+    const stats = loadStatistics();
+    document.getElementById('projects-count').value = stats.projects;
+    document.getElementById('clients-count').value = stats.clients;
+    document.getElementById('experience-count').value = stats.experience;
+}
+
+// Update the initializeCounters function to use saved statistics
+function initializeCounters() {
+    const stats = loadStatistics();
+    const projectsCounter = document.getElementById('projects-counter');
+    const clientsCounter = document.getElementById('clients-counter');
+    const experienceCounter = document.getElementById('experience-counter');
+    
+    animateCounter(projectsCounter, stats.projects, 2000);
+    animateCounter(clientsCounter, stats.clients, 2000);
+    animateCounter(experienceCounter, stats.experience, 2000);
+}
+
+// Handle statistics form submission
+document.getElementById('stats-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const projects = parseInt(document.getElementById('projects-count').value);
+    const clients = parseInt(document.getElementById('clients-count').value);
+    const experience = parseInt(document.getElementById('experience-count').value);
+    
+    saveStatistics({ projects, clients, experience });
+    updateStatisticsDisplay();
+    
+    alert('Statistics updated successfully!');
+});
+
+// Initialize statistics form when admin panel loads
+document.getElementById('admin-login-btn').addEventListener('click', function() {
+    if (isLoggedIn) {
+        initializeStatisticsForm();
+    }
+});
     </script>
 </body>
 </html>
