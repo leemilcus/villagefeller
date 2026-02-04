@@ -1400,51 +1400,133 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section class="contact" id="contact">
-            <div class="container">
-                <h2 class="section-title">Request A Quote</h2>
-                <div class="contact-container">
-                    <div class="contact-form">
-                        <form id="quote-form">
-                            <div class="form-group">
-                                <label for="firstName">First Name</label>
-                                <input type="text" id="firstName" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastName">Last Name</label>
-                                <input type="text" id="lastName" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="service">Service</label>
-                                <select id="service" class="form-control" required>
-                                    <option value="">Select a service</option>
-                                    <option value="tree-felling">Tree Felling / Removal</option>
-                                    <option value="stump-removal">Stump Removal</option>
-                                    <option value="tree-trimming">Tree Trimming / Pruning</option>
-                                    <option value="palm-shaving">Palm Shaving</option>
-                                    <option value="site-clearing">Plot & Site Clearing</option>
-                                    <option value="garden-cleanup">Garden Clean-ups</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" class="form-control" rows="5"></textarea>
-                            </div>
-                            <button type="submit" class="btn">Submit Request</button>
-                        </form>
+       <!-- Contact Section -->
+<section class="contact" id="contact">
+    <div class="container">
+        <h2 class="section-title">Request A Quote</h2>
+        <div class="contact-container">
+            <div class="contact-form">
+                <form id="quote-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service</label>
+                        <select id="service" class="form-control" required>
+                            <option value="">Select a service</option>
+                            <option value="tree-felling">Tree Felling / Removal</option>
+                            <option value="stump-removal">Stump Removal</option>
+                            <option value="tree-trimming">Tree Trimming / Pruning</option>
+                            <option value="palm-shaving">Palm Shaving</option>
+                            <option value="site-clearing">Plot & Site Clearing</option>
+                            <option value="garden-cleanup">Garden Clean-ups</option>
+                            <option value="other">Other Services</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" rows="5" placeholder="Please provide details about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Submit Request</button>
+                </form>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-details">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">Contact Information</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Phone Numbers</h4>
+                            <p style="margin-bottom: 5px;">📞 +27 78 936 6509</p>
+                            <p>📱 +27 66 038 7779</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Email Address</h4>
+                            <p>✉️ info@villagefeller.co.za</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Address</h4>
+                            <p>📍 5 Victoria Road, Grassy Park, Cape Town</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Business Hours</h4>
+                            <p>Monday - Friday: 7:00 AM - 6:00 PM</p>
+                            <p>Saturday: 8:00 AM - 4:00 PM</p>
+                            <p>Sunday: Emergency Services Only</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="emergency-contact" style="background-color: #e8f5e9; padding: 20px; border-radius: 8px; margin-top: 30px;">
+                    <h4 style="color: var(--primary); margin-bottom: 15px;">
+                        <i class="fas fa-exclamation-triangle"></i> Emergency Services
+                    </h4>
+                    <p style="margin-bottom: 15px;">For emergency tree removal after hours or on Sundays:</p>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <i class="fas fa-phone" style="color: #f44336;"></i>
+                        <strong>+27 78 936 6509</strong>
+                    </div>
+                    <p style="font-size: 14px; color: #666;">
+                        Available 24/7 for storm damage, fallen trees, and urgent safety concerns.
+                    </p>
+                </div>
+                
+                <div class="social-contact" style="margin-top: 30px;">
+                    <h4 style="color: var(--primary); margin-bottom: 15px;">Connect With Us</h4>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="https://www.instagram.com/villagefeller" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/villagefeller" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/villagefeller" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://wa.me/27789366509" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
         <!-- Footer -->
         <footer>
@@ -1656,21 +1738,13 @@
     
     // ========== GLOBAL DATA ==========
     let userProjects = [];
+    let manualProjects = []; // Will be loaded from server
+    
     let statistics = {
         projects: 1459,
         clients: 900,
         experience: 12
     };
-    
-    // Manual project data (pre-loaded images)
-    const manualProjects = [
-        { id: 'manual-1', title: "Project 1", description: "Tree removal project", image: "./img/5.jpeg", isManual: true },
-        { id: 'manual-2', title: "Project 2", description: "Stump grinding work", image: "./img/6.jpeg", isManual: true },
-        { id: 'manual-3', title: "Project 3", description: "Tree trimming service", image: "./img/7.jpeg", isManual: true },
-        { id: 'manual-4', title: "Project 4", description: "Site clearing project", image: "./img/8.jpeg", isManual: true },
-        { id: 'manual-5', title: "Project 5", description: "Garden cleanup work", image: "./img/9.jpeg", isManual: true },
-        { id: 'manual-6', title: "Project 6", description: "Palm tree maintenance", image: "./img/10.jpeg", isManual: true }
-    ];
     
     // Testimonial data
     const testimonials = [
@@ -1756,24 +1830,22 @@
     
     // ========== SERVER FUNCTIONS ==========
     
-    // Load projects from server
-    async function loadProjectsFromServer() {
+    // Load all projects from server (both manual and user)
+    async function loadAllProjectsFromServer() {
         try {
-            const response = await fetch('get_gallery.php');
+            const response = await fetch('get_gallery.php?all=true');
             if (response.ok) {
                 const data = await response.json();
-                if (Array.isArray(data)) {
-                    userProjects = data;
-                    console.log('Loaded projects from server:', userProjects.length);
+                if (data.manualProjects && data.userProjects) {
+                    manualProjects = data.manualProjects;
+                    userProjects = data.userProjects;
+                    console.log('Loaded manual projects:', manualProjects.length);
+                    console.log('Loaded user projects:', userProjects.length);
                     return true;
-                } else {
-                    console.error('Invalid response format from server');
-                    loadProjectsFromLocalStorage();
                 }
-            } else {
-                console.error('Failed to load projects from server');
-                loadProjectsFromLocalStorage();
             }
+            console.error('Failed to load projects from server');
+            loadProjectsFromLocalStorage();
         } catch (error) {
             console.error('Error loading projects from server:', error);
             loadProjectsFromLocalStorage();
@@ -1806,8 +1878,8 @@
         }
     }
     
-    // Delete image from server
-    async function deleteImageFromServer(imageId, imageUrl) {
+    // Delete project from server
+    async function deleteProjectFromServer(projectId, projectType) {
         try {
             const response = await fetch('delete_image.php', {
                 method: 'POST',
@@ -1815,8 +1887,8 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ 
-                    id: imageId,
-                    imageUrl: imageUrl 
+                    id: projectId,
+                    type: projectType // 'manual' or 'user'
                 })
             });
             
@@ -1827,7 +1899,7 @@
             const result = await response.json();
             return result.success;
         } catch (error) {
-            console.error('Error deleting image:', error);
+            console.error('Error deleting project:', error);
             return false;
         }
     }
@@ -1835,6 +1907,19 @@
     // ========== LOCAL STORAGE FALLBACK ==========
     
     function loadProjectsFromLocalStorage() {
+        // Load manual projects (initial ones)
+        const defaultManualProjects = [
+            { id: 'manual-1', title: "Project 1", description: "Tree removal project", image: "./img/5.jpeg", isManual: true },
+            { id: 'manual-2', title: "Project 2", description: "Stump grinding work", image: "./img/6.jpeg", isManual: true },
+            { id: 'manual-3', title: "Project 3", description: "Tree trimming service", image: "./img/7.jpeg", isManual: true },
+            { id: 'manual-4', title: "Project 4", description: "Site clearing project", image: "./img/8.jpeg", isManual: true },
+            { id: 'manual-5', title: "Project 5", description: "Garden cleanup work", image: "./img/9.jpeg", isManual: true },
+            { id: 'manual-6', title: "Project 6", description: "Palm tree maintenance", image: "./img/10.jpeg", isManual: true }
+        ];
+        
+        manualProjects = defaultManualProjects;
+        
+        // Load user projects
         const savedProjects = localStorage.getItem('villageFellerUserProjects');
         if (savedProjects) {
             try {
@@ -1890,7 +1975,7 @@
                 saveProjectsToLocalStorage();
                 initializePortfolio();
                 if (document.body.classList.contains('admin-mode')) {
-                    loadAdminGalleryImages();
+                    renderAdminGalleryList();
                 }
                 
                 return {
@@ -1922,7 +2007,7 @@
                     saveProjectsToLocalStorage();
                     initializePortfolio();
                     if (document.body.classList.contains('admin-mode')) {
-                        loadAdminGalleryImages();
+                        renderAdminGalleryList();
                     }
                     
                     resolve({
@@ -1942,11 +2027,8 @@
         }
     }
     
-    // Delete project
-    async function deleteProject(index) {
-        const project = userProjects[index];
-        if (!project) return;
-        
+    // Delete project (both manual and user)
+    async function deleteProject(projectId, projectType, index) {
         if (!confirm('Are you sure you want to delete this project?')) {
             return;
         }
@@ -1954,18 +2036,21 @@
         try {
             let deleteSuccess = false;
             
-            // Try to delete from server if it has a server ID
-            if (project.serverId || project.fileName) {
-                deleteSuccess = await deleteImageFromServer(project.serverId || project.id, project.image);
-            }
+            // Try to delete from server
+            deleteSuccess = await deleteProjectFromServer(projectId, projectType);
             
-            if (deleteSuccess || !project.serverId) {
-                // Remove from array
-                userProjects.splice(index, 1);
-                saveProjectsToLocalStorage();
+            if (deleteSuccess || projectType === 'manual') {
+                // Remove from appropriate array
+                if (projectType === 'manual') {
+                    manualProjects.splice(index, 1);
+                } else {
+                    userProjects.splice(index, 1);
+                    saveProjectsToLocalStorage();
+                }
+                
                 initializePortfolio();
                 if (document.body.classList.contains('admin-mode')) {
-                    loadAdminGalleryImages();
+                    renderAdminGalleryList();
                 }
                 
                 showMessage('Project deleted successfully!', 'success');
@@ -1988,13 +2073,14 @@
         portfolioContainer.innerHTML = '';
         
         // Add manual projects first
-        manualProjects.forEach((project) => {
+        manualProjects.forEach((project, index) => {
             const portfolioItem = document.createElement('div');
             portfolioItem.className = 'portfolio-item';
             portfolioItem.style.backgroundImage = `url('${project.image}')`;
             portfolioItem.title = `${project.title}: ${project.description}`;
             portfolioItem.dataset.id = project.id;
-            portfolioItem.dataset.isManual = 'true';
+            portfolioItem.dataset.type = 'manual';
+            portfolioItem.dataset.index = index;
             
             // Add overlay with title
             const overlay = document.createElement('div');
@@ -2019,8 +2105,8 @@
             portfolioItem.style.backgroundImage = `url('${project.image}')`;
             portfolioItem.title = `${project.title}: ${project.description || 'User uploaded project'}`;
             portfolioItem.dataset.id = project.id;
+            portfolioItem.dataset.type = 'user';
             portfolioItem.dataset.index = index;
-            portfolioItem.dataset.isManual = 'false';
             
             // Add overlay with title and "New" badge
             const overlay = document.createElement('div');
@@ -2341,18 +2427,12 @@
         if (loginSection) loginSection.style.display = 'none';
         if (adminDashboard) {
             adminDashboard.style.display = 'block';
-            loadAdminGalleryImages();
+            renderAdminGalleryList();
             loadStatisticsForm();
         }
     }
     
-    // Load admin gallery images
-    function loadAdminGalleryImages() {
-        // This function now just calls renderAdminGalleryList
-        renderAdminGalleryList();
-    }
-    
-    // Render admin gallery list - UPDATED TO SHOW ALL PROJECTS
+    // Render admin gallery list - UPDATED TO SHOW ALL PROJECTS WITH DELETE BUTTONS
     function renderAdminGalleryList() {
         const adminGalleryList = document.getElementById('galleryList');
         if (!adminGalleryList) return;
@@ -2364,7 +2444,7 @@
         
         const galleryCount = document.getElementById('galleryCount');
         if (galleryCount) {
-            galleryCount.textContent = `Total: ${totalProjects} projects (${manualProjects.length} pre-loaded + ${userProjects.length} user uploaded)`;
+            galleryCount.textContent = `Total: ${totalProjects} projects (${manualProjects.length} manual + ${userProjects.length} user uploaded)`;
             galleryCount.className = 'message info';
         }
         
@@ -2373,7 +2453,7 @@
             return;
         }
         
-        // Display manual projects first (pre-loaded images)
+        // Display manual projects first
         manualProjects.forEach((project, index) => {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
@@ -2382,16 +2462,18 @@
                 <div class="gallery-item-info">
                     <h4>${project.title}</h4>
                     <p>${project.description || 'No description'}</p>
-                    <div class="category-badge">Pre-loaded</div>
-                    <p style="font-size: 12px; color: #666; margin-top: 8px;">
-                        <i class="fas fa-info-circle"></i> This is a pre-loaded project
-                    </p>
+                    <div class="category-badge">Manual Project</div>
+                    <div class="gallery-item-actions" style="margin-top: 10px;">
+                        <button class="btn delete-btn" data-id="${project.id}" data-type="manual" data-index="${index}" style="background-color: #f44336;">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
                 </div>
             `;
             adminGalleryList.appendChild(galleryItem);
         });
         
-        // Display user projects (uploaded by admin)
+        // Display user projects
         userProjects.forEach((project, index) => {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
@@ -2402,7 +2484,7 @@
                     <p>${project.description || 'No description'}</p>
                     <div class="category-badge" style="background-color: #e3f2fd; color: #1565c0;">User Uploaded</div>
                     <div class="gallery-item-actions" style="margin-top: 10px;">
-                        <button class="btn delete-btn" data-index="${index}" style="background-color: #f44336;">
+                        <button class="btn delete-btn" data-id="${project.id}" data-type="user" data-index="${index}" style="background-color: #f44336;">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </div>
@@ -2414,8 +2496,10 @@
         // Add event listeners to delete buttons
         document.querySelectorAll('.delete-btn').forEach(btn => {
             btn.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const type = this.dataset.type;
                 const index = parseInt(this.dataset.index);
-                deleteProject(index);
+                deleteProject(id, type, index);
             });
         });
     }
@@ -2612,6 +2696,7 @@
     if (exportDataBtn) {
         exportDataBtn.addEventListener('click', () => {
             const data = {
+                manualProjects: manualProjects,
                 userProjects: userProjects,
                 statistics: statistics,
                 exportDate: new Date().toISOString()
@@ -2648,21 +2733,22 @@
                     try {
                         const importedData = JSON.parse(e.target.result);
                         
-                        if (!importedData.userProjects || !importedData.statistics) {
+                        if (!importedData.manualProjects || !importedData.userProjects || !importedData.statistics) {
                             showMessage('Invalid data format', 'error');
                             return;
                         }
                         
-                        if (confirm(`Import ${importedData.userProjects.length} projects? This will replace your current data.`)) {
+                        if (confirm(`Import ${importedData.manualProjects.length} manual projects and ${importedData.userProjects.length} user projects? This will replace your current data.`)) {
+                            manualProjects = importedData.manualProjects;
                             userProjects = importedData.userProjects;
                             statistics = importedData.statistics;
                             saveProjectsToLocalStorage();
                             saveStatisticsToLocalStorage();
                             initializePortfolio();
                             updateCounters();
-                            loadAdminGalleryImages();
+                            renderAdminGalleryList();
                             loadStatisticsForm();
-                            showMessage(`Successfully imported ${userProjects.length} projects!`, 'success');
+                            showMessage(`Successfully imported ${manualProjects.length + userProjects.length} projects!`, 'success');
                         }
                     } catch (error) {
                         showMessage('Error parsing JSON file: ' + error.message, 'error');
@@ -2679,14 +2765,24 @@
     const resetDataBtn = document.getElementById('resetDataBtn');
     if (resetDataBtn) {
         resetDataBtn.addEventListener('click', () => {
-            if (confirm('Are you sure you want to reset all data to default? This will remove all your uploaded projects and reset statistics.')) {
+            if (confirm('Are you sure you want to reset all data to default? This will remove ALL projects and reset statistics.')) {
+                // Reset to initial manual projects
+                manualProjects = [
+                    { id: 'manual-1', title: "Project 1", description: "Tree removal project", image: "./img/5.jpeg", isManual: true },
+                    { id: 'manual-2', title: "Project 2", description: "Stump grinding work", image: "./img/6.jpeg", isManual: true },
+                    { id: 'manual-3', title: "Project 3", description: "Tree trimming service", image: "./img/7.jpeg", isManual: true },
+                    { id: 'manual-4', title: "Project 4", description: "Site clearing project", image: "./img/8.jpeg", isManual: true },
+                    { id: 'manual-5', title: "Project 5", description: "Garden cleanup work", image: "./img/9.jpeg", isManual: true },
+                    { id: 'manual-6', title: "Project 6", description: "Palm tree maintenance", image: "./img/10.jpeg", isManual: true }
+                ];
+                
                 userProjects = [];
                 statistics = { projects: 1459, clients: 900, experience: 12 };
                 saveProjectsToLocalStorage();
                 saveStatisticsToLocalStorage();
                 initializePortfolio();
                 updateCounters();
-                loadAdminGalleryImages();
+                renderAdminGalleryList();
                 loadStatisticsForm();
                 showMessage('Data reset to default!', 'success');
             }
@@ -2711,7 +2807,7 @@
         loadStatistics();
         
         // Try to load projects from server first
-        const loadedFromServer = await loadProjectsFromServer();
+        const loadedFromServer = await loadAllProjectsFromServer();
         if (!loadedFromServer) {
             loadProjectsFromLocalStorage();
         }
@@ -2742,8 +2838,8 @@
         }
         
         console.log('Village Feller Website Initialized');
-        console.log('User projects:', userProjects.length);
         console.log('Manual projects:', manualProjects.length);
+        console.log('User projects:', userProjects.length);
         console.log('Server URL:', SERVER_URL);
     });
 </script>
