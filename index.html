@@ -788,7 +788,7 @@
             font-weight: bold;
         }
         
-        /* Portfolio Section */
+        /* Portfolio Section - UPDATED */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -798,11 +798,116 @@
         .portfolio-item {
             border-radius: 8px;
             overflow: hidden;
-            height: 200px;
+            height: 250px;
             background-size: cover;
             background-position: center;
             position: relative;
-            cursor: default;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .portfolio-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+        
+        /* Lightbox Gallery Styles */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        .lightbox-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+        
+        .lightbox-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+        
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 16px;
         }
         
         /* Achievements Section */
@@ -956,30 +1061,6 @@
             flex: 1;
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: inherit;
-            transition: border 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-        
         .contact-info {
             flex: 1;
         }
@@ -1004,6 +1085,7 @@
             align-items: center;
             justify-content: center;
             margin-right: 15px;
+            flex-shrink: 0;
         }
         
         /* Footer */
@@ -1070,6 +1152,12 @@
             
             .admin-content {
                 grid-template-columns: 1fr;
+            }
+            
+            .lightbox-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
             }
         }
         
@@ -1147,6 +1235,15 @@
             .file-upload-container {
                 padding: 30px 15px;
             }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .portfolio-item {
+                height: 200px;
+            }
         }
         
         /* Animation for counters */
@@ -1173,6 +1270,16 @@
         .footer-bottom .brand-name:hover {
             color: rgb(255, 255, 255);
         }
+        
+        @media (max-width: 480px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-item {
+                height: 250px;
+            }
+        }
     </style>
 </head>
 <body class="main-mode">
@@ -1185,6 +1292,25 @@
     <div class="mode-toggle">
         <button class="mode-toggle-btn active" data-mode="main">Website</button>
         <button class="mode-toggle-btn" data-mode="admin">Admin</button>
+    </div>
+    
+    <!-- Lightbox Gallery -->
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <div class="lightbox-container">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <img class="lightbox-image" id="lightboxImage" src="" alt="Gallery Image">
+            <div class="lightbox-nav">
+                <button class="lightbox-btn" id="lightboxPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="lightbox-btn" id="lightboxNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
+        </div>
     </div>
     
     <!-- Main Website -->
@@ -1400,119 +1526,133 @@
             </div>
         </section>
 
-       <!-- Contact Section -->
-<section class="contact" id="contact">
-    <div class="container">
-        <h2 class="section-title">Request A Quote</h2>
-        <div class="contact-container">
-            <div class="contact-form">
-                <form id="quote-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" class="form-control" required>
-                        </div>
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2 class="section-title">Request A Quote</h2>
+                <div class="contact-container">
+                    <div class="contact-form">
+                        <form id="quote-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Service</label>
+                                <select id="service" class="form-control" required>
+                                    <option value="">Select a service</option>
+                                    <option value="tree-felling">Tree Felling / Removal</option>
+                                    <option value="stump-removal">Stump Removal</option>
+                                    <option value="tree-trimming">Tree Trimming / Pruning</option>
+                                    <option value="palm-shaving">Palm Shaving</option>
+                                    <option value="site-clearing">Plot & Site Clearing</option>
+                                    <option value="garden-cleanup">Garden Clean-ups</option>
+                                    <option value="other">Other Services</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" class="form-control" rows="5" placeholder="Please provide details about your project..."></textarea>
+                            </div>
+                            <button type="submit" class="btn">Submit Request</button>
+                        </form>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" required>
+                    
+                    <div class="contact-info">
+                        <div class="contact-details">
+                            <h3 style="color: var(--primary); margin-bottom: 20px;">Contact Information</h3>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 style="margin-bottom: 5px;">Phone Numbers</h4>
+                                    <p style="margin-bottom: 5px;">📞 +27 78 936 6509</p>
+                                    <p>📱 +27 66 038 7779</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 style="margin-bottom: 5px;">Email Address</h4>
+                                    <p>✉️ info@villagefeller.co.za</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 style="margin-bottom: 5px;">Address</h4>
+                                    <p>📍 5 Victoria Road, Grassy Park, Cape Town</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4 style="margin-bottom: 5px;">Business Hours</h4>
+                                    <p>Monday - Friday: 7:00 AM - 6:00 PM</p>
+                                    <p>Saturday: 8:00 AM - 4:00 PM</p>
+                                    <p>Sunday: Emergency Services Only</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" required>
+                        
+                        <div class="emergency-contact" style="background-color: #e8f5e9; padding: 20px; border-radius: 8px; margin-top: 30px;">
+                            <h4 style="color: var(--primary); margin-bottom: 15px;">
+                                <i class="fas fa-exclamation-triangle"></i> Emergency Services
+                            </h4>
+                            <p style="margin-bottom: 15px;">For emergency tree removal after hours or on Sundays:</p>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <i class="fas fa-phone" style="color: #f44336;"></i>
+                                <strong>+27 78 936 6509</strong>
+                            </div>
+                            <p style="font-size: 14px; color: #666;">
+                                Available 24/7 for storm damage, fallen trees, and urgent safety concerns.
+                            </p>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Service</label>
-                        <select id="service" class="form-control" required>
-                            <option value="">Select a service</option>
-                            <option value="tree-felling">Tree Felling / Removal</option>
-                            <option value="stump-removal">Stump Removal</option>
-                            <option value="tree-trimming">Tree Trimming / Pruning</option>
-                            <option value="palm-shaving">Palm Shaving</option>
-                            <option value="site-clearing">Plot & Site Clearing</option>
-                            <option value="garden-cleanup">Garden Clean-ups</option>
-                            <option value="other">Other Services</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" class="form-control" rows="5" placeholder="Please provide details about your project..."></textarea>
-                    </div>
-                    <button type="submit" class="btn">Submit Request</button>
-                </form>
-            </div>
-            
-            <div class="contact-info">
-                <div class="contact-details">
-                    <h3 style="color: var(--primary); margin-bottom: 20px;">Contact Information</h3>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div>
-                            <h4 style="margin-bottom: 5px;">Phone Numbers</h4>
-                            <p style="margin-bottom: 5px;">📞 +27 78 936 6509</p>
-                            <p>📱 +27 66 038 7779</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h4 style="margin-bottom: 5px;">Email Address</h4>
-                            <p>✉️ info@villagefeller.co.za</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <h4 style="margin-bottom: 5px;">Address</h4>
-                            <p>📍 5 Victoria Road, Grassy Park, Cape Town</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div>
-                            <h4 style="margin-bottom: 5px;">Business Hours</h4>
-                            <p>Monday - Friday: 7:00 AM - 6:00 PM</p>
-                            <p>Saturday: 8:00 AM - 4:00 PM</p>
-                            <p>Sunday: Emergency Services Only</p>
+                        
+                        <div class="social-contact" style="margin-top: 30px;">
+                            <h4 style="color: var(--primary); margin-bottom: 15px;">Connect With Us</h4>
+                            <div style="display: flex; gap: 15px;">
+                                <a href="https://www.instagram.com/villagefeller" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.facebook.com/villagefeller" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/company/villagefeller" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="https://wa.me/27789366509" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="social-contact" style="margin-top: 30px;">
-                    <h4 style="color: var(--primary); margin-bottom: 15px;">Connect With Us</h4>
-                    <div style="display: flex; gap: 15px;">
-                        <a href="https://www.instagram.com/villagefeller" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.facebook.com/villagefeller" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/company/villagefeller" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://wa.me/27789366509" class="social-link" style="color: var(--primary); font-size: 24px;" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- Footer -->
         <footer>
@@ -1521,7 +1661,17 @@
                     <div class="footer-column">
                         <img src="./img/footer logo.png" alt="Village Feller Logo" class="footer-logo">
                         <p>Professional tree felling and landscaping services in Cape Town and surrounding areas.</p>
-                        
+                        <div class="social-icons" style="margin-top: 20px;">
+                            <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
                     </div>
                     
                     <div class="footer-column">
@@ -1707,14 +1857,21 @@
         </div>
     </div>
     
-<script>
+  <script>
     // ========== CONFIGURATION ==========
     const ADMIN_PASSWORD = "villagefeller2026!";
-    const SERVER_URL = window.location.origin; // Current domain
+    const SERVER_URL = window.location.origin;
     
     // ========== GLOBAL DATA ==========
     let userProjects = [];
-    let manualProjects = []; // Will be loaded from server
+    let manualProjects = [
+        { id: 'manual-1', title: "Tree Removal Project", description: "Professional tree removal service", image: "./img/5.jpeg", isManual: true },
+        { id: 'manual-2', title: "Stump Grinding Work", description: "Complete stump removal service", image: "./img/6.jpeg", isManual: true },
+        { id: 'manual-3', title: "Tree Trimming Service", description: "Expert tree trimming and pruning", image: "./img/7.jpeg", isManual: true },
+        { id: 'manual-4', title: "Site Clearing Project", description: "Large-scale site clearing", image: "./img/8.jpeg", isManual: true },
+        { id: 'manual-5', title: "Garden Cleanup", description: "Complete garden maintenance", image: "./img/9.jpeg", isManual: true },
+        { id: 'manual-6', title: "Palm Tree Maintenance", description: "Specialized palm tree care", image: "./img/10.jpeg", isManual: true }
+    ];
     
     let statistics = {
         projects: 1459,
@@ -1749,6 +1906,95 @@
             avatar: "https://randomuser.me/api/portraits/women/68.jpg"
         }
     ];
+    
+    // ========== LIGHTBOX GALLERY ==========
+    let currentLightboxIndex = 0;
+    let allGalleryImages = [];
+    
+    function openLightbox(index) {
+        currentLightboxIndex = index;
+        const lightboxOverlay = document.getElementById('lightboxOverlay');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCounter = document.getElementById('lightboxCounter');
+        
+        if (lightboxOverlay && lightboxImage && lightboxCounter) {
+            lightboxImage.src = allGalleryImages[index].image;
+            lightboxCounter.textContent = `${index + 1} / ${allGalleryImages.length}`;
+            lightboxOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    
+    function closeLightbox() {
+        const lightboxOverlay = document.getElementById('lightboxOverlay');
+        if (lightboxOverlay) {
+            lightboxOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    function navigateLightbox(direction) {
+        currentLightboxIndex += direction;
+        
+        if (currentLightboxIndex < 0) {
+            currentLightboxIndex = allGalleryImages.length - 1;
+        } else if (currentLightboxIndex >= allGalleryImages.length) {
+            currentLightboxIndex = 0;
+        }
+        
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCounter = document.getElementById('lightboxCounter');
+        
+        if (lightboxImage && lightboxCounter) {
+            lightboxImage.src = allGalleryImages[currentLightboxIndex].image;
+            lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${allGalleryImages.length}`;
+        }
+    }
+    
+    function initializeLightbox() {
+        const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxPrev = document.getElementById('lightboxPrev');
+        const lightboxNext = document.getElementById('lightboxNext');
+        const lightboxOverlay = document.getElementById('lightboxOverlay');
+        
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', closeLightbox);
+        }
+        
+        if (lightboxPrev) {
+            lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
+        }
+        
+        if (lightboxNext) {
+            lightboxNext.addEventListener('click', () => navigateLightbox(1));
+        }
+        
+        if (lightboxOverlay) {
+            lightboxOverlay.addEventListener('click', (e) => {
+                if (e.target === lightboxOverlay) {
+                    closeLightbox();
+                }
+            });
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightboxOverlay = document.getElementById('lightboxOverlay');
+            if (!lightboxOverlay.classList.contains('active')) return;
+            
+            switch(e.key) {
+                case 'Escape':
+                    closeLightbox();
+                    break;
+                case 'ArrowLeft':
+                    navigateLightbox(-1);
+                    break;
+                case 'ArrowRight':
+                    navigateLightbox(1);
+                    break;
+            }
+        });
+    }
     
     // ========== ADMIN PORTAL FUNCTIONALITY ==========
     
@@ -1806,17 +2052,14 @@
     
     // ========== SERVER FUNCTIONS ==========
     
-    // Load all projects from server (both manual and user)
-    async function loadAllProjectsFromServer() {
+    async function loadProjectsFromServer() {
         try {
-            const response = await fetch('get_gallery.php?all=true');
+            const response = await fetch('get_gallery.php');
             if (response.ok) {
                 const data = await response.json();
-                if (data.manualProjects && data.userProjects) {
-                    manualProjects = data.manualProjects;
-                    userProjects = data.userProjects;
-                    console.log('Loaded manual projects:', manualProjects.length);
-                    console.log('Loaded user projects:', userProjects.length);
+                if (Array.isArray(data)) {
+                    userProjects = data;
+                    console.log('Loaded projects from server:', userProjects.length);
                     return true;
                 }
             }
@@ -1829,7 +2072,6 @@
         return false;
     }
     
-    // Upload image to server
     async function uploadImageToServer(file, title, description) {
         try {
             const formData = new FormData();
@@ -1854,8 +2096,7 @@
         }
     }
     
-    // Delete project from server
-    async function deleteProjectFromServer(projectId, projectType) {
+    async function deleteImageFromServer(imageId, imageUrl) {
         try {
             const response = await fetch('delete_image.php', {
                 method: 'POST',
@@ -1863,8 +2104,8 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ 
-                    id: projectId,
-                    type: projectType // 'manual' or 'user'
+                    id: imageId,
+                    imageUrl: imageUrl 
                 })
             });
             
@@ -1875,7 +2116,7 @@
             const result = await response.json();
             return result.success;
         } catch (error) {
-            console.error('Error deleting project:', error);
+            console.error('Error deleting image:', error);
             return false;
         }
     }
@@ -1883,19 +2124,6 @@
     // ========== LOCAL STORAGE FALLBACK ==========
     
     function loadProjectsFromLocalStorage() {
-        // Load manual projects (initial ones)
-        const defaultManualProjects = [
-            { id: 'manual-1', title: "Project 1", description: "Tree removal project", image: "./img/5.jpeg", isManual: true },
-            { id: 'manual-2', title: "Project 2", description: "Stump grinding work", image: "./img/6.jpeg", isManual: true },
-            { id: 'manual-3', title: "Project 3", description: "Tree trimming service", image: "./img/7.jpeg", isManual: true },
-            { id: 'manual-4', title: "Project 4", description: "Site clearing project", image: "./img/8.jpeg", isManual: true },
-            { id: 'manual-5', title: "Project 5", description: "Garden cleanup work", image: "./img/9.jpeg", isManual: true },
-            { id: 'manual-6', title: "Project 6", description: "Palm tree maintenance", image: "./img/10.jpeg", isManual: true }
-        ];
-        
-        manualProjects = defaultManualProjects;
-        
-        // Load user projects
         const savedProjects = localStorage.getItem('villageFellerUserProjects');
         if (savedProjects) {
             try {
@@ -1911,7 +2139,6 @@
         localStorage.setItem('villageFellerUserProjects', JSON.stringify(userProjects));
     }
     
-    // Load statistics
     function loadStatistics() {
         const savedStats = localStorage.getItem('villageFellerStatistics');
         if (savedStats) {
@@ -1929,10 +2156,8 @@
     
     // ========== PROJECT MANAGEMENT ==========
     
-    // Add project (with server upload)
     async function addProject(title, description, imageFile) {
         try {
-            // Try to upload to server first
             const uploadResult = await uploadImageToServer(imageFile, title, description);
             
             if (uploadResult.success) {
@@ -1966,7 +2191,6 @@
         } catch (error) {
             console.log('Server upload failed, using localStorage fallback');
             
-            // Fallback to localStorage with data URL
             return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.onload = (e) => {
@@ -2003,8 +2227,10 @@
         }
     }
     
-    // Delete project (both manual and user)
-    async function deleteProject(projectId, projectType, index) {
+    async function deleteProject(index) {
+        const project = userProjects[index];
+        if (!project) return;
+        
         if (!confirm('Are you sure you want to delete this project?')) {
             return;
         }
@@ -2012,18 +2238,13 @@
         try {
             let deleteSuccess = false;
             
-            // Try to delete from server
-            deleteSuccess = await deleteProjectFromServer(projectId, projectType);
+            if (project.serverId || project.fileName) {
+                deleteSuccess = await deleteImageFromServer(project.serverId || project.id, project.image);
+            }
             
-            if (deleteSuccess || projectType === 'manual') {
-                // Remove from appropriate array
-                if (projectType === 'manual') {
-                    manualProjects.splice(index, 1);
-                } else {
-                    userProjects.splice(index, 1);
-                    saveProjectsToLocalStorage();
-                }
-                
+            if (deleteSuccess || !project.serverId) {
+                userProjects.splice(index, 1);
+                saveProjectsToLocalStorage();
                 initializePortfolio();
                 if (document.body.classList.contains('admin-mode')) {
                     renderAdminGalleryList();
@@ -2041,36 +2262,27 @@
     
     // ========== WEBSITE FUNCTIONALITY ==========
     
-    // Initialize portfolio display
     function initializePortfolio() {
         const portfolioContainer = document.getElementById('portfolio-container');
         if (!portfolioContainer) return;
         
         portfolioContainer.innerHTML = '';
         
-        // Add manual projects first
+        // Combine all projects for the lightbox
+        allGalleryImages = [...manualProjects, ...userProjects];
+        
+        // Add manual projects
         manualProjects.forEach((project, index) => {
             const portfolioItem = document.createElement('div');
             portfolioItem.className = 'portfolio-item';
             portfolioItem.style.backgroundImage = `url('${project.image}')`;
-            portfolioItem.title = `${project.title}: ${project.description}`;
-            portfolioItem.dataset.id = project.id;
-            portfolioItem.dataset.type = 'manual';
+            portfolioItem.style.cursor = 'pointer';
             portfolioItem.dataset.index = index;
             
-            // Add overlay with title
-            const overlay = document.createElement('div');
-            overlay.style.position = 'absolute';
-            overlay.style.bottom = '0';
-            overlay.style.left = '0';
-            overlay.style.right = '0';
-            overlay.style.backgroundColor = 'rgba(0,0,0,0.7)';
-            overlay.style.color = 'white';
-            overlay.style.padding = '8px';
-            overlay.style.fontSize = '12px';
-            overlay.innerHTML = `<strong>${project.title}</strong>`;
+            portfolioItem.addEventListener('click', () => {
+                openLightbox(index);
+            });
             
-            portfolioItem.appendChild(overlay);
             portfolioContainer.appendChild(portfolioItem);
         });
         
@@ -2079,32 +2291,17 @@
             const portfolioItem = document.createElement('div');
             portfolioItem.className = 'portfolio-item';
             portfolioItem.style.backgroundImage = `url('${project.image}')`;
-            portfolioItem.title = `${project.title}: ${project.description || 'User uploaded project'}`;
-            portfolioItem.dataset.id = project.id;
-            portfolioItem.dataset.type = 'user';
-            portfolioItem.dataset.index = index;
+            portfolioItem.style.cursor = 'pointer';
+            portfolioItem.dataset.index = manualProjects.length + index;
             
-            // Add overlay with title and "New" badge
-            const overlay = document.createElement('div');
-            overlay.style.position = 'absolute';
-            overlay.style.bottom = '0';
-            overlay.style.left = '0';
-            overlay.style.right = '0';
-            overlay.style.backgroundColor = 'rgba(46, 125, 50, 0.8)';
-            overlay.style.color = 'white';
-            overlay.style.padding = '8px';
-            overlay.style.fontSize = '12px';
-            overlay.innerHTML = `
-                <strong>${project.title}</strong>
-                <span style="float: right; background: #ff9800; padding: 2px 6px; border-radius: 10px; font-size: 10px;">NEW</span>
-            `;
+            portfolioItem.addEventListener('click', () => {
+                openLightbox(manualProjects.length + index);
+            });
             
-            portfolioItem.appendChild(overlay);
             portfolioContainer.appendChild(portfolioItem);
         });
     }
     
-    // Update counters display
     function updateCounters() {
         const projectsCounter = document.getElementById('projects-counter');
         const clientsCounter = document.getElementById('clients-counter');
@@ -2115,7 +2312,6 @@
         if (experienceCounter) experienceCounter.textContent = statistics.experience;
     }
     
-    // Animate counters
     function animateCounter(element, target, duration) {
         let start = 0;
         const increment = target / (duration / 16);
@@ -2134,7 +2330,6 @@
         updateCounter();
     }
     
-    // Initialize counters when in view
     function initializeCounters() {
         const projectsCounter = document.getElementById('projects-counter');
         const clientsCounter = document.getElementById('clients-counter');
@@ -2145,7 +2340,6 @@
         animateCounter(experienceCounter, statistics.experience, 2000);
     }
     
-    // Testimonial slider functionality
     let currentTestimonial = 0;
     
     function initializeTestimonialSlider() {
@@ -2154,7 +2348,6 @@
         
         if (!track || !dotsContainer) return;
         
-        // Create testimonial slides
         testimonials.forEach((testimonial, index) => {
             const slide = document.createElement('div');
             slide.className = 'testimonial-slide';
@@ -2174,7 +2367,6 @@
             
             track.appendChild(slide);
             
-            // Create dots
             const dot = document.createElement('div');
             dot.className = 'testimonial-dot';
             if (index === 0) dot.classList.add('active');
@@ -2182,7 +2374,6 @@
             dotsContainer.appendChild(dot);
         });
         
-        // Set up navigation
         const prevBtn = document.getElementById('prev-testimonial');
         const nextBtn = document.getElementById('next-testimonial');
         
@@ -2198,7 +2389,6 @@
             });
         }
         
-        // Auto-advance testimonials
         setInterval(() => {
             goToTestimonial(currentTestimonial + 1);
         }, 5000);
@@ -2211,20 +2401,15 @@
         
         if (!track || dots.length === 0) return;
         
-        // Handle wrap-around
         if (index >= totalTestimonials) {
             index = 0;
         } else if (index < 0) {
             index = totalTestimonials - 1;
         }
         
-        // Update current testimonial
         currentTestimonial = index;
-        
-        // Move track
         track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
         
-        // Update dots
         dots.forEach((dot, i) => {
             if (i === currentTestimonial) {
                 dot.classList.add('active');
@@ -2234,7 +2419,6 @@
         });
     }
     
-    // Mobile menu toggle
     const mobileMenuBtn = document.querySelector('.mobile-menu');
     const mainNav = document.querySelector('nav');
     
@@ -2246,7 +2430,6 @@
                 : '☰';
         });
         
-        // Close mobile menu when clicking on a link
         const navLinks = document.querySelectorAll('nav a');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -2256,7 +2439,6 @@
         });
     }
     
-    // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -2271,7 +2453,6 @@
                     behavior: 'smooth'
                 });
                 
-                // Close mobile menu if open
                 if (mainNav) {
                     mainNav.classList.remove('active');
                     if (mobileMenuBtn) mobileMenuBtn.innerHTML = '☰';
@@ -2280,7 +2461,6 @@
         });
     });
     
-    // Contact form submission
     const contactForm = document.getElementById('quote-form');
     if (contactForm) {
         contactForm.addEventListener('submit', async function(e) {
@@ -2291,7 +2471,6 @@
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
             
-            // Collect form data
             const formData = {
                 firstName: document.getElementById('firstName').value,
                 lastName: document.getElementById('lastName').value,
@@ -2303,7 +2482,6 @@
             };
             
             try {
-                // Send to PHP script
                 const response = await fetch('sendmail.php', {
                     method: 'POST',
                     headers: {
@@ -2332,7 +2510,6 @@
     
     // ========== ADMIN FUNCTIONALITY ==========
     
-    // Check login status
     function checkLoginStatus() {
         const isLoggedIn = localStorage.getItem('villageFellerAdminLoggedIn') === 'true';
         if (isLoggedIn) {
@@ -2340,7 +2517,6 @@
         }
     }
     
-    // Show message
     function showMessage(text, type, containerId = 'messageContainer') {
         const messageContainer = document.getElementById(containerId);
         if (messageContainer) {
@@ -2352,7 +2528,6 @@
         }
     }
     
-    // Format file size
     function formatFileSize(bytes) {
         if (bytes === 0) return '0 Bytes';
         const k = 1024;
@@ -2361,7 +2536,6 @@
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
     
-    // Login function
     const loginBtn = document.getElementById('loginBtn');
     if (loginBtn) {
         loginBtn.addEventListener('click', () => {
@@ -2378,7 +2552,6 @@
         });
     }
     
-    // Logout function
     const logoutAdminBtn = document.getElementById('logoutAdminBtn');
     if (logoutAdminBtn) {
         logoutAdminBtn.addEventListener('click', () => {
@@ -2395,7 +2568,6 @@
         });
     }
     
-    // Show admin dashboard
     function showAdminDashboard() {
         const loginSection = document.getElementById('loginSection');
         const adminDashboard = document.getElementById('adminDashboard');
@@ -2408,14 +2580,12 @@
         }
     }
     
-    // Render admin gallery list - UPDATED TO SHOW ALL PROJECTS WITH DELETE BUTTONS
     function renderAdminGalleryList() {
         const adminGalleryList = document.getElementById('galleryList');
         if (!adminGalleryList) return;
         
         adminGalleryList.innerHTML = '';
         
-        // Calculate total projects (manual + user)
         const totalProjects = manualProjects.length + userProjects.length;
         
         const galleryCount = document.getElementById('galleryCount');
@@ -2429,7 +2599,6 @@
             return;
         }
         
-        // Display manual projects first
         manualProjects.forEach((project, index) => {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
@@ -2440,7 +2609,7 @@
                     <p>${project.description || 'No description'}</p>
                     <div class="category-badge">Manual Project</div>
                     <div class="gallery-item-actions" style="margin-top: 10px;">
-                        <button class="btn delete-btn" data-id="${project.id}" data-type="manual" data-index="${index}" style="background-color: #f44336;">
+                        <button class="btn delete-btn" data-type="manual" data-index="${index}" style="background-color: #f44336;">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </div>
@@ -2449,7 +2618,6 @@
             adminGalleryList.appendChild(galleryItem);
         });
         
-        // Display user projects
         userProjects.forEach((project, index) => {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
@@ -2460,7 +2628,7 @@
                     <p>${project.description || 'No description'}</p>
                     <div class="category-badge" style="background-color: #e3f2fd; color: #1565c0;">User Uploaded</div>
                     <div class="gallery-item-actions" style="margin-top: 10px;">
-                        <button class="btn delete-btn" data-id="${project.id}" data-type="user" data-index="${index}" style="background-color: #f44336;">
+                        <button class="btn delete-btn" data-type="user" data-index="${index}" style="background-color: #f44336;">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </div>
@@ -2469,18 +2637,25 @@
             adminGalleryList.appendChild(galleryItem);
         });
         
-        // Add event listeners to delete buttons
         document.querySelectorAll('.delete-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                const id = this.dataset.id;
                 const type = this.dataset.type;
                 const index = parseInt(this.dataset.index);
-                deleteProject(id, type, index);
+                
+                if (type === 'manual') {
+                    if (confirm('Are you sure you want to delete this manual project?')) {
+                        manualProjects.splice(index, 1);
+                        initializePortfolio();
+                        renderAdminGalleryList();
+                        showMessage('Manual project deleted!', 'success');
+                    }
+                } else {
+                    deleteProject(index);
+                }
             });
         });
     }
     
-    // Load statistics form
     function loadStatisticsForm() {
         const statsProjects = document.getElementById('statsProjects');
         const statsClients = document.getElementById('statsClients');
@@ -2491,7 +2666,6 @@
         if (statsExperience) statsExperience.value = statistics.experience;
     }
     
-    // Update statistics
     const updateStatsBtn = document.getElementById('updateStatsBtn');
     if (updateStatsBtn) {
         updateStatsBtn.addEventListener('click', () => {
@@ -2511,10 +2685,8 @@
         });
     }
     
-    // File upload handling
     let selectedImageFile = null;
     
-    // Handle file selection for admin
     const browseBtn = document.getElementById('browseBtn');
     const imageFileInput = document.getElementById('imageFile');
     
@@ -2530,7 +2702,6 @@
         });
     }
     
-    // Handle drag and drop for admin
     const fileUploadContainer = document.getElementById('fileUploadContainer');
     if (fileUploadContainer) {
         fileUploadContainer.addEventListener('dragover', (e) => {
@@ -2552,7 +2723,6 @@
         });
     }
     
-    // Handle file selection
     function handleFileSelect(file) {
         if (!file.type.match('image.*')) {
             showMessage('Please select an image file (JPEG, PNG, etc.)', 'error', 'projectMessageContainer');
@@ -2588,7 +2758,6 @@
         showMessage('Image selected successfully!', 'success', 'projectMessageContainer');
     }
     
-    // Check if form is valid
     function checkFormValidity() {
         const projectTitle = document.getElementById('projectTitle');
         const uploadProjectBtn = document.getElementById('uploadProjectBtn');
@@ -2601,7 +2770,6 @@
         }
     }
     
-    // Listen for form input changes
     const projectTitleInput = document.getElementById('projectTitle');
     if (projectTitleInput) {
         projectTitleInput.addEventListener('input', checkFormValidity);
@@ -2612,7 +2780,6 @@
         projectDescriptionInput.addEventListener('input', checkFormValidity);
     }
     
-    // Upload project
     const uploadProjectBtn = document.getElementById('uploadProjectBtn');
     if (uploadProjectBtn) {
         uploadProjectBtn.addEventListener('click', async () => {
@@ -2637,7 +2804,6 @@
                 const result = await addProject(title, description, selectedImageFile);
                 
                 if (result.success) {
-                    // Reset form
                     resetAdminForm();
                     showMessage(result.message, 'success', 'projectMessageContainer');
                 } else {
@@ -2653,7 +2819,6 @@
         });
     }
     
-    // Reset admin form
     function resetAdminForm() {
         if (projectTitleInput) projectTitleInput.value = '';
         if (projectDescriptionInput) projectDescriptionInput.value = '';
@@ -2667,7 +2832,6 @@
         if (imageFileInput) imageFileInput.value = '';
     }
     
-    // Export data
     const exportDataBtn = document.getElementById('exportDataBtn');
     if (exportDataBtn) {
         exportDataBtn.addEventListener('click', () => {
@@ -2692,7 +2856,6 @@
         });
     }
     
-    // Import data
     const importFileInput = document.getElementById('importFile');
     if (importFileInput) {
         importFileInput.addEventListener('change', (e) => {
@@ -2709,13 +2872,12 @@
                     try {
                         const importedData = JSON.parse(e.target.result);
                         
-                        if (!importedData.manualProjects || !importedData.userProjects || !importedData.statistics) {
+                        if (!importedData.userProjects || !importedData.statistics) {
                             showMessage('Invalid data format', 'error');
                             return;
                         }
                         
-                        if (confirm(`Import ${importedData.manualProjects.length} manual projects and ${importedData.userProjects.length} user projects? This will replace your current data.`)) {
-                            manualProjects = importedData.manualProjects;
+                        if (confirm(`Import ${importedData.userProjects.length} projects? This will replace your current data.`)) {
                             userProjects = importedData.userProjects;
                             statistics = importedData.statistics;
                             saveProjectsToLocalStorage();
@@ -2724,7 +2886,7 @@
                             updateCounters();
                             renderAdminGalleryList();
                             loadStatisticsForm();
-                            showMessage(`Successfully imported ${manualProjects.length + userProjects.length} projects!`, 'success');
+                            showMessage(`Successfully imported ${userProjects.length} projects!`, 'success');
                         }
                     } catch (error) {
                         showMessage('Error parsing JSON file: ' + error.message, 'error');
@@ -2737,19 +2899,17 @@
         });
     }
     
-    // Reset data
     const resetDataBtn = document.getElementById('resetDataBtn');
     if (resetDataBtn) {
         resetDataBtn.addEventListener('click', () => {
-            if (confirm('Are you sure you want to reset all data to default? This will remove ALL projects and reset statistics.')) {
-                // Reset to initial manual projects
+            if (confirm('Are you sure you want to reset all data to default? This will remove all your uploaded projects and reset statistics.')) {
                 manualProjects = [
-                    { id: 'manual-1', title: "Project 1", description: "Tree removal project", image: "./img/5.jpeg", isManual: true },
-                    { id: 'manual-2', title: "Project 2", description: "Stump grinding work", image: "./img/6.jpeg", isManual: true },
-                    { id: 'manual-3', title: "Project 3", description: "Tree trimming service", image: "./img/7.jpeg", isManual: true },
-                    { id: 'manual-4', title: "Project 4", description: "Site clearing project", image: "./img/8.jpeg", isManual: true },
-                    { id: 'manual-5', title: "Project 5", description: "Garden cleanup work", image: "./img/9.jpeg", isManual: true },
-                    { id: 'manual-6', title: "Project 6", description: "Palm tree maintenance", image: "./img/10.jpeg", isManual: true }
+                    { id: 'manual-1', title: "Tree Removal Project", description: "Professional tree removal service", image: "./img/5.jpeg", isManual: true },
+                    { id: 'manual-2', title: "Stump Grinding Work", description: "Complete stump removal service", image: "./img/6.jpeg", isManual: true },
+                    { id: 'manual-3', title: "Tree Trimming Service", description: "Expert tree trimming and pruning", image: "./img/7.jpeg", isManual: true },
+                    { id: 'manual-4', title: "Site Clearing Project", description: "Large-scale site clearing", image: "./img/8.jpeg", isManual: true },
+                    { id: 'manual-5', title: "Garden Cleanup", description: "Complete garden maintenance", image: "./img/9.jpeg", isManual: true },
+                    { id: 'manual-6', title: "Palm Tree Maintenance", description: "Specialized palm tree care", image: "./img/10.jpeg", isManual: true }
                 ];
                 
                 userProjects = [];
@@ -2765,7 +2925,6 @@
         });
     }
     
-    // Allow Enter key to submit login form
     const adminPasswordInput = document.getElementById('adminPassword');
     if (adminPasswordInput) {
         adminPasswordInput.addEventListener('keypress', (e) => {
@@ -2777,23 +2936,19 @@
     
     // ========== INITIALIZATION ==========
     
-    // Initialize everything on page load
     document.addEventListener('DOMContentLoaded', async function() {
-        // Load data
         loadStatistics();
         
-        // Try to load projects from server first
-        const loadedFromServer = await loadAllProjectsFromServer();
+        const loadedFromServer = await loadProjectsFromServer();
         if (!loadedFromServer) {
             loadProjectsFromLocalStorage();
         }
         
-        // Initialize website components
         initializePortfolio();
         updateCounters();
         initializeTestimonialSlider();
+        initializeLightbox();
         
-        // Set up intersection observer for counters
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2808,7 +2963,6 @@
             observer.observe(achievementsSection);
         }
         
-        // Check login status if we're in admin mode
         if (document.body.classList.contains('admin-mode')) {
             checkLoginStatus();
         }
@@ -2816,8 +2970,7 @@
         console.log('Village Feller Website Initialized');
         console.log('Manual projects:', manualProjects.length);
         console.log('User projects:', userProjects.length);
-        console.log('Server URL:', SERVER_URL);
     });
 </script>
 </body>
-</html>               
+</html>
