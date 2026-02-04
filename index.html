@@ -1649,7 +1649,7 @@
         </div>
     </div>
     
-  <script>
+<script>
     // ========== CONFIGURATION ==========
     const ADMIN_PASSWORD = "villagefeller2026!";
     const SERVER_URL = window.location.origin; // Current domain
@@ -1992,8 +1992,23 @@
             const portfolioItem = document.createElement('div');
             portfolioItem.className = 'portfolio-item';
             portfolioItem.style.backgroundImage = `url('${project.image}')`;
+            portfolioItem.title = `${project.title}: ${project.description}`;
             portfolioItem.dataset.id = project.id;
             portfolioItem.dataset.isManual = 'true';
+            
+            // Add overlay with title
+            const overlay = document.createElement('div');
+            overlay.style.position = 'absolute';
+            overlay.style.bottom = '0';
+            overlay.style.left = '0';
+            overlay.style.right = '0';
+            overlay.style.backgroundColor = 'rgba(0,0,0,0.7)';
+            overlay.style.color = 'white';
+            overlay.style.padding = '8px';
+            overlay.style.fontSize = '12px';
+            overlay.innerHTML = `<strong>${project.title}</strong>`;
+            
+            portfolioItem.appendChild(overlay);
             portfolioContainer.appendChild(portfolioItem);
         });
         
@@ -2002,9 +2017,27 @@
             const portfolioItem = document.createElement('div');
             portfolioItem.className = 'portfolio-item';
             portfolioItem.style.backgroundImage = `url('${project.image}')`;
+            portfolioItem.title = `${project.title}: ${project.description || 'User uploaded project'}`;
             portfolioItem.dataset.id = project.id;
             portfolioItem.dataset.index = index;
             portfolioItem.dataset.isManual = 'false';
+            
+            // Add overlay with title and "New" badge
+            const overlay = document.createElement('div');
+            overlay.style.position = 'absolute';
+            overlay.style.bottom = '0';
+            overlay.style.left = '0';
+            overlay.style.right = '0';
+            overlay.style.backgroundColor = 'rgba(46, 125, 50, 0.8)';
+            overlay.style.color = 'white';
+            overlay.style.padding = '8px';
+            overlay.style.fontSize = '12px';
+            overlay.innerHTML = `
+                <strong>${project.title}</strong>
+                <span style="float: right; background: #ff9800; padding: 2px 6px; border-radius: 10px; font-size: 10px;">NEW</span>
+            `;
+            
+            portfolioItem.appendChild(overlay);
             portfolioContainer.appendChild(portfolioItem);
         });
     }
@@ -2196,13 +2229,42 @@
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
             
-            // Simulate form submission
-            setTimeout(() => {
-                alert('Thank you for your request! We will contact you shortly.');
-                this.reset();
+            // Collect form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                // Send to PHP script
+                const response = await fetch('sendmail.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Thank you for your request! We will contact you shortly.');
+                    this.reset();
+                } else {
+                    alert('There was an error sending your request. Please try again or call us directly.');
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                alert('Network error. Please try again or call us directly.');
+            } finally {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-            }, 1000);
+            }
         });
     }
     
@@ -2286,43 +2348,66 @@
     
     // Load admin gallery images
     function loadAdminGalleryImages() {
-        const galleryCount = document.getElementById('galleryCount');
-        if (galleryCount) {
-            galleryCount.textContent = `You have ${userProjects.length} project${userProjects.length !== 1 ? 's' : ''} in your portfolio.`;
-            galleryCount.className = 'message info';
-        }
+        // This function now just calls renderAdminGalleryList
         renderAdminGalleryList();
     }
     
-    // Render admin gallery list
+    // Render admin gallery list - UPDATED TO SHOW ALL PROJECTS
     function renderAdminGalleryList() {
         const adminGalleryList = document.getElementById('galleryList');
         if (!adminGalleryList) return;
         
         adminGalleryList.innerHTML = '';
         
-        if (userProjects.length === 0) {
-            adminGalleryList.innerHTML = '<div class="message info">No projects added yet. Add your first project above!</div>';
+        // Calculate total projects (manual + user)
+        const totalProjects = manualProjects.length + userProjects.length;
+        
+        const galleryCount = document.getElementById('galleryCount');
+        if (galleryCount) {
+            galleryCount.textContent = `Total: ${totalProjects} projects (${manualProjects.length} pre-loaded + ${userProjects.length} user uploaded)`;
+            galleryCount.className = 'message info';
+        }
+        
+        if (totalProjects === 0) {
+            adminGalleryList.innerHTML = '<div class="message info">No projects to display.</div>';
             return;
         }
         
-        userProjects.forEach((project, index) => {
+        // Display manual projects first (pre-loaded images)
+        manualProjects.forEach((project, index) => {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
-            
             galleryItem.innerHTML = `
                 <img src="${project.image}" alt="${project.title}" onerror="this.src='https://via.placeholder.com/300x200?text=Image+Not+Found'">
                 <div class="gallery-item-info">
                     <h4>${project.title}</h4>
                     <p>${project.description || 'No description'}</p>
-                    <div class="gallery-item-actions">
-                        <button class="btn delete-btn" data-index="${index}">
+                    <div class="category-badge">Pre-loaded</div>
+                    <p style="font-size: 12px; color: #666; margin-top: 8px;">
+                        <i class="fas fa-info-circle"></i> This is a pre-loaded project
+                    </p>
+                </div>
+            `;
+            adminGalleryList.appendChild(galleryItem);
+        });
+        
+        // Display user projects (uploaded by admin)
+        userProjects.forEach((project, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.innerHTML = `
+                <img src="${project.image}" alt="${project.title}" onerror="this.src='https://via.placeholder.com/300x200?text=Image+Not+Found'">
+                <div class="gallery-item-info">
+                    <h4>${project.title}</h4>
+                    <p>${project.description || 'No description'}</p>
+                    <div class="category-badge" style="background-color: #e3f2fd; color: #1565c0;">User Uploaded</div>
+                    <div class="gallery-item-actions" style="margin-top: 10px;">
+                        <button class="btn delete-btn" data-index="${index}" style="background-color: #f44336;">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </div>
                 </div>
             `;
-            
             adminGalleryList.appendChild(galleryItem);
         });
         
@@ -2658,6 +2743,7 @@
         
         console.log('Village Feller Website Initialized');
         console.log('User projects:', userProjects.length);
+        console.log('Manual projects:', manualProjects.length);
         console.log('Server URL:', SERVER_URL);
     });
 </script>
