@@ -1,56 +1,58 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get form data
-    $firstName = $_POST['firstName'] ?? '';
-    $lastName = $_POST['lastName'] ?? '';
-    $phone = $_POST['phone'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $service = $_POST['service'] ?? '';
-    $message = $_POST['message'] ?? '';
-    
-    // Basic validation
-    if (empty($firstName) || empty($lastName) || empty($phone) || empty($email) || empty($service)) {
-        echo json_encode(['success' => false, 'message' => 'Please fill in all required fields.']);
-        exit;
-    }
-    
-    // Email details (configure these for your server)
-    $to = "info@villagefeller.co.za";
-    $subject = "New Quote Request from Village Feller Website";
-    
-    $emailBody = "
-    <html>
-    <head>
-        <title>New Quote Request</title>
-    </head>
-    <body>
-        <h2>New Quote Request</h2>
-        <p><strong>Name:</strong> $firstName $lastName</p>
-        <p><strong>Phone:</strong> $phone</p>
-        <p><strong>Email:</strong> $email</p>
-        <p><strong>Service:</strong> $service</p>
-        <p><strong>Message:</strong> $message</p>
-        <p><em>This email was sent from the Village Feller website contact form.</em></p>
-    </body>
-    </html>
-    ";
-    
-    // Headers
-    $headers = "MIME-Version: 1.0" . "\r\n";
-    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    $headers .= "From: Village Feller Website <noreply@villagefeller.co.za>" . "\r\n";
-    $headers .= "Reply-To: $email" . "\r\n";
-    
-    // Try to send email
-    if (mail($to, $subject, $emailBody, $headers)) {
-        echo json_encode(['success' => true, 'message' => 'Thank you for your request! We will contact you shortly.']);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to send message. Please try again later.']);
-    }
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+    exit;
 }
+
+$response = ['success' => false, 'message' => ''];
+
+try {
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    // Validate required fields
+    $required = ['firstName', 'lastName', 'phone', 'email', 'service'];
+    foreach ($required as $field) {
+        if (empty($input[$field])) {
+            throw new Exception("Missing required field: $field");
+        }
+    }
+    
+    // Prepare email content
+    $to = "info@villagefeller.co.za"; // Your email address
+    $subject = "New Quote Request - Village Feller";
+    
+    $message = "New quote request received:\n\n";
+    $message .= "Name: " . htmlspecialchars($input['firstName'] . ' ' . $input['lastName']) . "\n";
+    $message .= "Phone: " . htmlspecialchars($input['phone']) . "\n";
+    $message .= "Email: " . htmlspecialchars($input['email']) . "\n";
+    $message .= "Service: " . htmlspecialchars($input['service']) . "\n";
+    $message .= "Message: " . htmlspecialchars($input['message'] ?? 'No message') . "\n";
+    $message .= "\nSubmitted: " . date('Y-m-d H:i:s');
+    
+    $headers = "From: website@villagefeller.co.za\r\n";
+    $headers .= "Reply-To: " . htmlspecialchars($input['email']) . "\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion();
+    
+    // Send email
+    if (mail($to, $subject, $message, $headers)) {
+        $response['success'] = true;
+        $response['message'] = 'Email sent successfully';
+        
+        // Also save to a local file for backup
+        $logData = [
+            'timestamp' => date('Y-m-d H:i:s'),
+            'data' => $input
+        ];
+        file_put_contents('quote_requests.log', json_encode($logData) . "\n", FILE_APPEND);
+    } else {
+        throw new Exception('Failed to send email');
+    }
+    
+} catch (Exception $e) {
+    $response['message'] = $e->getMessage();
+}
+
+echo json_encode($response);
 ?>
