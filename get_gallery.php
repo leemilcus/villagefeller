@@ -2,30 +2,35 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-$galleryFile = 'gallery.json';
-$response = ['success' => false, 'projects' => []];
+$jsonFile = 'gallery_data.json';
+$galleryData = [];
 
-try {
-    if (file_exists($galleryFile)) {
-        $content = file_get_contents($galleryFile);
-        $gallery = json_decode($content, true);
-        
-        if (is_array($gallery)) {
-            $response['success'] = true;
-            $response['projects'] = $gallery;
-        } else {
-            $response['projects'] = [];
+// Load existing gallery data
+if (file_exists($jsonFile)) {
+    $galleryData = json_decode(file_get_contents($jsonFile), true) ?? [];
+} else {
+    // If no JSON file exists, check img directory
+    $imgDir = 'img/';
+    if (file_exists($imgDir)) {
+        $files = scandir($imgDir);
+        foreach ($files as $file) {
+            if ($file !== '.' && $file !== '..' && preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $file)) {
+                $galleryData[] = [
+                    'id' => uniqid('proj_', true),
+                    'title' => 'Project ' . pathinfo($file, PATHINFO_FILENAME),
+                    'description' => 'Uploaded project',
+                    'image' => 'img/' . $file,
+                    'isManual' => false,
+                    'fileName' => $file,
+                    'uploaded' => date('Y-m-d H:i:s', filemtime($imgDir . $file))
+                ];
+            }
         }
-    } else {
-        // Create empty gallery file if it doesn't exist
-        file_put_contents($galleryFile, '[]');
-        $response['success'] = true;
-        $response['projects'] = [];
+        
+        // Save to JSON file
+        file_put_contents($jsonFile, json_encode($galleryData, JSON_PRETTY_PRINT));
     }
-} catch (Exception $e) {
-    $response['message'] = $e->getMessage();
-    http_response_code(500);
 }
 
-echo json_encode($response);
+echo json_encode($galleryData);
 ?>
