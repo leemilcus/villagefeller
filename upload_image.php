@@ -1,14 +1,14 @@
 <?php
 header('Content-Type: application/json');
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
-    exit;
-}
+header('Access-Control-Allow-Origin: *');
 
 $response = ['success' => false, 'message' => ''];
 
 try {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Invalid request method');
+    }
+
     if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
         throw new Exception('No image uploaded or upload error');
     }
@@ -24,6 +24,12 @@ try {
     
     // Generate unique filename
     $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    
+    if (!in_array(strtolower($fileExtension), $allowedExtensions)) {
+        throw new Exception('Invalid file type. Only JPG, PNG, GIF, and WebP are allowed.');
+    }
+    
     $fileName = uniqid('project_') . '_' . time() . '.' . $fileExtension;
     $filePath = $uploadDir . $fileName;
     
@@ -45,21 +51,21 @@ try {
     
     // Read existing gallery data
     $galleryFile = 'gallery.json';
-    $galleryData = [];
+    $userProjects = [];
     
     if (file_exists($galleryFile)) {
-        $galleryContent = file_get_contents($galleryFile);
-        $galleryData = json_decode($galleryContent, true);
-        if (!is_array($galleryData)) {
-            $galleryData = [];
+        $content = file_get_contents($galleryFile);
+        $userProjects = json_decode($content, true);
+        if (!is_array($userProjects)) {
+            $userProjects = [];
         }
     }
     
     // Add new project
-    $galleryData[] = $project;
+    $userProjects[] = $project;
     
     // Save updated gallery data
-    file_put_contents($galleryFile, json_encode($galleryData, JSON_PRETTY_PRINT));
+    file_put_contents($galleryFile, json_encode($userProjects, JSON_PRETTY_PRINT));
     
     $response = [
         'success' => true,
