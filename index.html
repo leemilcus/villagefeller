@@ -1649,7 +1649,7 @@
         </div>
     </div>
     
-   <script>
+  <script>
     // ========== CONFIGURATION ==========
     const ADMIN_PASSWORD = "villagefeller2026!";
     const SERVER_URL = window.location.origin; // Current domain
@@ -2662,88 +2662,4 @@
     });
 </script>
 </body>
-</html>                if (isLoggedIn) {
-                    updatePortfolioList();
-                }
-            });
-            
-            initializeTestimonialSlider();
-            setupImageUpload();
-            setupEditImageUpload();
-            
-            // Initialize counters when achievements section is in view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        initializeCounters();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            });
-            
-            observer.observe(document.querySelector('.achievements'));
-        });
-
-        // Statistics management
-function loadStatistics() {
-    const stats = JSON.parse(localStorage.getItem('villageFellerStats') || '{}');
-    return {
-        projects: stats.projects || +1459,
-        clients: stats.clients || +900,
-        experience: stats.experience || 12
-    };
-}
-
-function saveStatistics(stats) {
-    localStorage.setItem('villageFellerStats', JSON.stringify(stats));
-}
-
-function updateStatisticsDisplay() {
-    const stats = loadStatistics();
-    document.getElementById('projects-counter').textContent = stats.projects;
-    document.getElementById('clients-counter').textContent = stats.clients;
-    document.getElementById('experience-counter').textContent = stats.experience;
-}
-
-function initializeStatisticsForm() {
-    const stats = loadStatistics();
-    document.getElementById('projects-count').value = stats.projects;
-    document.getElementById('clients-count').value = stats.clients;
-    document.getElementById('experience-count').value = stats.experience;
-}
-
-// Update the initializeCounters function to use saved statistics
-function initializeCounters() {
-    const stats = loadStatistics();
-    const projectsCounter = document.getElementById('projects-counter');
-    const clientsCounter = document.getElementById('clients-counter');
-    const experienceCounter = document.getElementById('experience-counter');
-    
-    animateCounter(projectsCounter, stats.projects, 2000);
-    animateCounter(clientsCounter, stats.clients, 2000);
-    animateCounter(experienceCounter, stats.experience, 2000);
-}
-
-// Handle statistics form submission
-document.getElementById('stats-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const projects = parseInt(document.getElementById('projects-count').value);
-    const clients = parseInt(document.getElementById('clients-count').value);
-    const experience = parseInt(document.getElementById('experience-count').value);
-    
-    saveStatistics({ projects, clients, experience });
-    updateStatisticsDisplay();
-    
-    alert('Statistics updated successfully!');
-});
-
-// Initialize statistics form when admin panel loads
-document.getElementById('admin-login-btn').addEventListener('click', function() {
-    if (isLoggedIn) {
-        initializeStatisticsForm();
-    }
-});
-    </script>
-</body>
-</html>
+</html>               
