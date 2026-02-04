@@ -1,49 +1,63 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
 
-// Get JSON input
-$input = json_decode(file_get_contents('php://input'), true);
-$imageId = $input['id'] ?? '';
-$imageUrl = $input['imageUrl'] ?? '';
-
-if (empty($imageUrl)) {
-    echo json_encode(['success' => false, 'message' => 'No image URL provided.']);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
     exit;
 }
 
-$jsonFile = 'gallery_data.json';
-$galleryData = [];
+$response = ['success' => false, 'message' => ''];
 
-if (file_exists($jsonFile)) {
-    $galleryData = json_decode(file_get_contents($jsonFile), true) ?? [];
+try {
+    $input = json_decode(file_get_contents('php://input'), true);
+    $id = $input['id'] ?? null;
+    $imageUrl = $input['imageUrl'] ?? '';
     
-    // Find and remove the image from JSON
+    if (!$id) {
+        throw new Exception('No project ID provided');
+    }
+    
+    // Read existing gallery data
+    $galleryFile = 'gallery.json';
+    if (!file_exists($galleryFile)) {
+        throw new Exception('Gallery data not found');
+    }
+    
+    $galleryContent = file_get_contents($galleryFile);
+    $galleryData = json_decode($galleryContent, true);
+    
+    if (!is_array($galleryData)) {
+        $galleryData = [];
+    }
+    
+    // Find and remove the project
     $found = false;
-    foreach ($galleryData as $key => $project) {
-        if ($project['id'] === $imageId || $project['image'] === $imageUrl) {
-            // Try to delete the file
-            $fileName = basename($imageUrl);
-            if (file_exists('img/' . $fileName)) {
-                unlink('img/' . $fileName);
+    foreach ($galleryData as $index => $project) {
+        if ($project['id'] == $id || (isset($project['image']) && $project['image'] == $imageUrl)) {
+            // Delete the image file if it exists
+            if (isset($project['image']) && file_exists($project['image'])) {
+                unlink($project['image']);
             }
-            unset($galleryData[$key]);
+            
+            // Remove from array
+            array_splice($galleryData, $index, 1);
             $found = true;
             break;
         }
     }
     
     if ($found) {
-        // Re-index array and save
-        $galleryData = array_values($galleryData);
-        file_put_contents($jsonFile, json_encode($galleryData, JSON_PRETTY_PRINT));
-        echo json_encode(['success' => true, 'message' => 'Image deleted successfully.']);
+        // Save updated gallery data
+        file_put_contents($galleryFile, json_encode($galleryData, JSON_PRETTY_PRINT));
+        $response['success'] = true;
+        $response['message'] = 'Project deleted successfully';
     } else {
-        echo json_encode(['success' => false, 'message' => 'Image not found in gallery data.']);
+        $response['message'] = 'Project not found';
     }
-} else {
-    echo json_encode(['success' => false, 'message' => 'Gallery data file not found.']);
+    
+} catch (Exception $e) {
+    $response['message'] = $e->getMessage();
 }
+
+echo json_encode($response);
 ?>
