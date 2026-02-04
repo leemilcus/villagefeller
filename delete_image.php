@@ -1,62 +1,73 @@
 <?php
 header('Content-Type: application/json');
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
-    exit;
-}
+header('Access-Control-Allow-Origin: *');
 
 $response = ['success' => false, 'message' => ''];
 
 try {
     $input = json_decode(file_get_contents('php://input'), true);
-    $id = $input['id'] ?? null;
-    $imageUrl = $input['imageUrl'] ?? '';
+    $id = $input['id'] ?? '';
+    $type = $input['type'] ?? ''; // 'manual' or 'user'
     
-    if (!$id) {
-        throw new Exception('No project ID provided');
+    if (!$id || !$type) {
+        throw new Exception('Missing project ID or type');
     }
     
-    // Read existing gallery data
-    $galleryFile = 'gallery.json';
-    if (!file_exists($galleryFile)) {
-        throw new Exception('Gallery data not found');
-    }
-    
-    $galleryContent = file_get_contents($galleryFile);
-    $galleryData = json_decode($galleryContent, true);
-    
-    if (!is_array($galleryData)) {
-        $galleryData = [];
-    }
-    
-    // Find and remove the project
-    $found = false;
-    foreach ($galleryData as $index => $project) {
-        if ($project['id'] == $id || (isset($project['image']) && $project['image'] == $imageUrl)) {
-            // Delete the image file if it exists
-            if (isset($project['image']) && file_exists($project['image'])) {
-                unlink($project['image']);
+    if ($type === 'manual') {
+        // For manual projects, we just remove from memory (they'll reload on next request)
+        $response = [
+            'success' => true,
+            'message' => 'Manual project deleted successfully'
+        ];
+    } elseif ($type === 'user') {
+        // For user projects, remove from gallery.json
+        $galleryFile = 'gallery.json';
+        $userProjects = [];
+        
+        if (file_exists($galleryFile)) {
+            $content = file_get_contents($galleryFile);
+            $userProjects = json_decode($content, true);
+            if (!is_array($userProjects)) {
+                $userProjects = [];
             }
             
-            // Remove from array
-            array_splice($galleryData, $index, 1);
-            $found = true;
-            break;
+            // Find and remove the project
+            $found = false;
+            foreach ($userProjects as $index => $project) {
+                if ($project['id'] == $id) {
+                    // Remove image file if it exists
+                    if (isset($project['image']) && file_exists($project['image'])) {
+                        unlink($project['image']);
+                    }
+                    
+                    array_splice($userProjects, $index, 1);
+                    $found = true;
+                    break;
+                }
+            }
+            
+            if ($found) {
+                // Save updated gallery data
+                file_put_contents($galleryFile, json_encode($userProjects, JSON_PRETTY_PRINT));
+                $response = [
+                    'success' => true,
+                    'message' => 'User project deleted successfully'
+                ];
+            } else {
+                throw new Exception('Project not found');
+            }
+        } else {
+            throw new Exception('Gallery file not found');
         }
-    }
-    
-    if ($found) {
-        // Save updated gallery data
-        file_put_contents($galleryFile, json_encode($galleryData, JSON_PRETTY_PRINT));
-        $response['success'] = true;
-        $response['message'] = 'Project deleted successfully';
     } else {
-        $response['message'] = 'Project not found';
+        throw new Exception('Invalid project type');
     }
     
 } catch (Exception $e) {
-    $response['message'] = $e->getMessage();
+    $response = [
+        'success' => false,
+        'message' => $e->getMessage()
+    ];
 }
 
 echo json_encode($response);
