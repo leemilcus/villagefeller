@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,6 +28,7 @@
             line-height: 1.6;
             color: var(--dark);
             overflow-x: hidden;
+            position: relative;
         }
         
         .container {
@@ -71,8 +72,8 @@
         
         .btn-outline {
             background-color: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
+            border: 2px solid white;
+            color: white;
         }
         
         .btn-outline:hover {
@@ -97,6 +98,463 @@
             height: 3px;
             background-color: var(--primary);
             margin: 10px auto 0;
+        }
+        
+        /* ========== ADMIN PORTAL STYLES ========== */
+        
+        /* Floating Admin Button */
+        .floating-admin-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            background-color: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            font-size: 24px;
+        }
+        
+        .floating-admin-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.4);
+        }
+        
+        .floating-admin-btn.admin-active {
+            background-color: #FF9800;
+        }
+        
+        .floating-admin-btn.admin-active:hover {
+            background-color: #EF6C00;
+        }
+        
+        /* Mode Toggle */
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 8px;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #d1d1d1;
+            display: none; /* Hidden by default */
+        }
+        
+        .mode-toggle-btn {
+            padding: 6px 12px;
+            background: #f8f9fa;
+            border: 1px solid #d1d1d1;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .mode-toggle-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .mode-toggle-btn:hover:not(.active) {
+            background: #E8F5E9;
+        }
+        
+        /* Admin/Main visibility */
+        .admin-mode #main-website {
+            display: none;
+        }
+        
+        .main-mode #admin-portal {
+            display: none;
+        }
+        
+        /* Show mode toggle when in admin mode */
+        .admin-mode .mode-toggle {
+            display: flex;
+        }
+        
+        /* Main website container */
+        #main-website {
+            position: relative;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Admin portal container */
+        #admin-portal {
+            min-height: 100vh;
+            background: #f8f9fa;
+            padding-top: 80px; /* Space for mode toggle */
+        }
+        
+        /* Admin Header */
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+        }
+        
+        .admin-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .admin-header p {
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .back-to-site {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: 500;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-site:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .back-to-site i {
+            margin-right: 8px;
+        }
+        
+        /* Admin Content */
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        .admin-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            width: 100%;
+        }
+        
+        @media (max-width: 992px) {
+            .admin-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Admin Card */
+        .admin-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        
+        .admin-card h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        /* File Upload Styles */
+        .file-upload-container {
+            border: 2px dashed #d1d1d1;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background-color: #f8f9fa;
+            width: 100%;
+        }
+        
+        .file-upload-container:hover {
+            border-color: var(--primary);
+            background-color: #E8F5E9;
+        }
+        
+        .file-upload-container.drag-over {
+            border-color: #FF9800;
+            background-color: rgba(255, 152, 0, 0.1);
+        }
+        
+        .file-upload-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .file-upload-text h4 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .file-upload-text p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .file-upload-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .file-upload-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .selected-file {
+            display: flex;
+            align-items: center;
+            background-color: #E8F5E9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            width: 100%;
+        }
+        
+        .selected-file.active {
+            display: flex;
+        }
+        
+        .file-icon {
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 24px;
+        }
+        
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: none;
+            border: 1px solid #d1d1d1;
+        }
+        
+        .image-preview.active {
+            display: block;
+        }
+        
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d1d1;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        /* Gallery Management */
+        .gallery-management {
+            margin-top: 40px;
+            width: 100%;
+        }
+        
+        .gallery-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-list {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+        
+        .gallery-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .gallery-item-info {
+            padding: 15px;
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: #E8F5E9;
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Messages */
+        .message {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+            width: 100%;
+        }
+        
+        .message.success {
+            background-color: #e8f5e9;
+            color: var(--primary);
+            border: 1px solid #c8e6c9;
+        }
+        
+        .message.error {
+            background-color: #ffebee;
+            color: #e53935;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .message.info {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+        }
+        
+        /* Login Form */
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .login-form {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+        }
+        
+        .password-hint {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .storage-info {
+            background-color: #E8F5E9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--gray);
+            width: 100%;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         /* Header Styles */
@@ -344,34 +802,7 @@
             background-size: cover;
             background-position: center;
             position: relative;
-            cursor: pointer;
-        }
-        
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(46, 125, 50, 0.8);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-            padding: 15px;
-            text-align: center;
-            color: var(--white);
-        }
-        
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-        
-        .portfolio-title {
-            font-weight: bold;
-            margin-bottom: 10px;
+            cursor: default;
         }
         
         /* Achievements Section */
@@ -575,278 +1006,6 @@
             margin-right: 15px;
         }
         
-        /* Admin Panel Styles */
-        .admin-panel {
-            background-color: #f5f5f5;
-            padding: 40px 0;
-            border-top: 1px solid #ddd;
-            display: none;
-        }
-        
-        .admin-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--white);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .admin-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary);
-        }
-        
-        .admin-form .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .admin-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        /* Image Upload Styles */
-        .image-upload-container {
-            border: 2px dashed #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .image-upload-container:hover {
-            border-color: var(--primary);
-            background-color: rgba(46, 125, 50, 0.05);
-        }
-        
-        .image-upload-container i {
-            font-size: 48px;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-        
-        .image-preview {
-            max-width: 100%;
-            max-height: 200px;
-            margin-top: 15px;
-            border-radius: 4px;
-            display: none;
-        }
-        
-        .upload-status {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 4px;
-            display: none;
-        }
-        
-        .upload-status.success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .upload-status.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .upload-progress {
-            width: 100%;
-            height: 20px;
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            margin-top: 10px;
-            overflow: hidden;
-            display: none;
-        }
-        
-        .upload-progress-bar {
-            height: 100%;
-            background-color: var(--primary);
-            width: 0%;
-            transition: width 0.3s;
-        }
-        
-        /* Login Modal */
-        .login-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .login-modal.active {
-            display: flex;
-        }
-        
-        .login-container {
-            background-color: var(--white);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 400px;
-        }
-        
-        .login-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary);
-        }
-        
-        .login-form .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .login-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-        
-        .admin-login-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            transition: all 0.3s;
-        }
-        
-        .admin-login-btn:hover {
-            background-color: var(--primary-dark);
-            transform: scale(1.1);
-        }
-        
-        .admin-login-btn i {
-            font-size: 24px;
-        }
-        
-        /* Edit Project Modal */
-        .edit-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .edit-modal.active {
-            display: flex;
-        }
-        
-        .edit-container {
-            background-color: var(--white);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 500px;
-        }
-        
-        .edit-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary);
-        }
-        
-        .edit-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        
-        /* Portfolio List in Admin */
-        .portfolio-list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            transition: background-color 0.3s;
-        }
-        
-        .portfolio-list-item:hover {
-            background-color: #f9f9f9;
-        }
-        
-        .portfolio-list-info {
-            flex: 1;
-            display: flex;
-            align-items: center;
-        }
-        
-        .portfolio-list-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .portfolio-list-description {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .portfolio-list-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .portfolio-list-thumbnail {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-right: 15px;
-        }
-        
-        /* Portfolio Item Delete Button */
-        .portfolio-item .delete-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(255, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
-            cursor: pointer;
-            display: none;
-            z-index: 10;
-        }
-        
-        .portfolio-item:hover .delete-btn {
-            display: block;
-        }
-        
         /* Footer */
         footer {
             background-color: var(--primary-dark);
@@ -908,19 +1067,23 @@
             .hero h1 {
                 font-size: 2.5rem;
             }
+            
+            .admin-content {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
             .header-container {
                 flex-wrap: wrap;
             }
-    .header-cta {
-        display: none;
-    }
-    
-    .header-container {
-        justify-content: space-between;
-    }
+            .header-cta {
+                display: none;
+            }
+            
+            .header-container {
+                justify-content: space-between;
+            }
             
             nav {
                 width: 100%;
@@ -967,6 +1130,23 @@
                 height: 35px;
                 margin: 0 10px;
             }
+            
+            .gallery-list {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .admin-container {
+                padding: 10px;
+            }
+            
+            .admin-card {
+                padding: 20px;
+            }
+            
+            .file-upload-container {
+                padding: 30px 15px;
+            }
         }
         
         /* Animation for counters */
@@ -995,1300 +1175,1494 @@
         }
     </style>
 </head>
-<body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container header-container">
-            <div class="logo-container">
-                <div class="logo">
-                    <img src="img/logoo.png" alt="Village Feller Logo" style="height: 70px;">
-                </div>
-            </div>
-            
-            <div class="mobile-menu">☰</div>
-            
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Recently Work</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            
-            <a href="#contact" class="btn header-cta">Request A Quote</a>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Tree Feller for Safe and Efficient Tree Removal</h1>
-            <p>Welcome to The Village Feller, your trusted destination for top-notch tree felling and landscaping services with a bit of construction work as well.Our team of skilled professionals are dedicated to providing safe and efficient tree removal solutions to ensure the beauty and safety of your surroundings.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn">Request A Quote</a>
-                <a href="#about" class="btn btn-outline">Learn More</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <h2 class="section-title">Committed to Excellence in Tree Felling and Landscaping</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>We are a dedicated team of professionals with years of experience in the tree felling industry. Our mission is to enhance the beauty and safety of landscapes through our expert services.</p>
-                    <p>At Village Feller, we combine traditional techniques with modern equipment to deliver exceptional results for every project, big or small.</p>
-                    <a href="#contact" class="btn">Contact Us</a>
-                </div>
-                <div class="about-image">
-                    <img src="./img/30.jpeg" alt="Tree felling professional at work">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="services-grid">
-                <!-- Tree Felling -->
-                <div class="service-card">
-                    <div class="service-image" style="background-image: url('./img/Tree\ Felling\ \ Removal.jpeg ');"></div>
-                    <div class="service-content">
-                        <h3>Tree Felling / Removal</h3>
-                        <p>Safe and efficient removal of trees of all sizes, using industry best practices to ensure safety and minimal disruption.</p>
-                        <a href="#contact" class="btn">Request A Quote</a>
-                    </div>
-                </div>
-                
-                <!-- Stump Removal -->
-                <div class="service-card">
-                    <div class="service-image" style="background-image: url('./img/Stump\ Removal.jpeg');"></div>
-                    <div class="service-content">
-                        <h3>Stump Removal</h3>
-                        <p>Complete stump extraction and grinding services to remove unsightly stumps and prevent regrowth.</p>
-                        <a href="#contact" class="btn">Request A Quote</a>
-                    </div>
-                </div>
-                
-                <!-- Tree Trimming -->
-                <div class="service-card">
-                    <div class="service-image" style="background-image: url('./img/Tree\ Trimming\ \ Pruning.jpeg');"></div>
-                    <div class="service-content">
-                        <h3>Tree Trimming / Pruning</h3>
-                        <p>Expert trimming and pruning to maintain tree health, improve appearance, and ensure safety.</p>
-                        <a href="#contact" class="btn">Request A Quote</a>
-                    </div>
-                </div>
-                
-                <!-- Palm Shaving -->
-                <div class="service-card">
-                    <div class="service-image" style="background-image: url('./img/palm\ tree\ shaving.jpeg');"></div>
-                    <div class="service-content">
-                        <h3>Palm Shaving</h3>
-                        <p>Specialized palm tree maintenance to keep your palms healthy, safe, and looking their best.</p>
-                        <a href="#contact" class="btn">Request A Quote</a>
-                    </div>
-                </div>
-                
-                <!-- Plot Clearing -->
-                <div class="service-card">
-                    <div class="service-image" style="background-image: url('./img/cleanup.jpeg');"></div>
-                    <div class="service-content">
-                        <h3>Plot & Site Clearing</h3>
-                        <p>Complete vegetation removal services for land development, construction sites, or property maintenance.</p>
-                        <a href="#contact" class="btn">Request A Quote</a>
-                    </div>
-                </div>
-                
-                <!-- Garden Clean-ups -->
-                <div class="service-card">
-                    <div class="service-image" style="background-image: url('./img/garden\ clean-ups.jpeg');"></div>
-                    <div class="service-content">
-                        <h3>Garden Clean-ups</h3>
-                        <p>Comprehensive garden maintenance including weed removal, debris clearing, and general upkeep.</p>
-                        <a href="#contact" class="btn">Request A Quote</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section class="why-choose-us">
-        <div class="container">
-            <h2 class="section-title">Why Choose Us – Exceptional Tree Felling and Landscaping Services</h2>
-            <div class="why-content">
-                <div class="why-column">
-                    <h3>Professional Expertise</h3>
-                    <p>Our team consists of highly skilled professionals with extensive knowledge in tree felling and landscaping. We stay updated with the latest industry practices and safety standards.</p>
-                    <ul>
-                        <li>Highly trained and certified arborists</li>
-                        <li>State-of-the-art equipment and techniques</li>
-                        <li>Comprehensive safety protocols</li>
-                        <li>Industry best practices</li>
-                    </ul>
-                </div>
-                <div class="why-column">
-                    <h3>Customer Satisfaction</h3>
-                    <p>We prioritize our clients' needs and work closely with them to deliver personalized solutions that exceed expectations.</p>
-                    <ul>
-                        <li>Transparent communication throughout the process</li>
-                        <li>Tailored solutions for your specific needs</li>
-                        <li>Attention to detail in every project</li>
-                        <li>Follow-up services and support</li>
-                    </ul>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="#contact" class="btn">Request A Quote</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <h2 class="section-title">Recently Projects</h2>
-            <div class="portfolio-grid" id="portfolio-container">
-                <!-- Portfolio items will be dynamically added here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section class="achievements">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Setting the Standards in Tree Felling Industry</h2>
-            <div class="achievements-grid">
-                <div class="achievement-item">
-                    <div class="counter" id="projects-counter">0</div>
-                    <p>Projects Completed</p>
-                </div>
-                <div class="achievement-item">
-                    <div class="counter" id="clients-counter">0</div>
-                    <p>Satisfied Happy Clients</p>
-                </div>
-                <div class="achievement-item">
-                    <div class="counter" id="experience-counter">0</div>
-                    <p>Years of Experience</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title">What Our Clients Say</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial-track" id="testimonial-track">
-                    <!-- Testimonial slides will be dynamically added here -->
-                </div>
-                
-                <div class="testimonial-nav">
-                    <button class="testimonial-arrow" id="prev-testimonial">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    
-                    <div class="testimonial-dots" id="testimonial-dots">
-                        <!-- Dots will be dynamically added here -->
-                    </div>
-                    
-                    <button class="testimonial-arrow" id="next-testimonial">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Request A Quote</h2>
-            <div class="contact-container">
-                <div class="contact-form">
-                    <form id="quote-form">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service</label>
-                            <select id="service" class="form-control" required>
-                                <option value="">Select a service</option>
-                                <option value="tree-felling">Tree Felling / Removal</option>
-                                <option value="stump-removal">Stump Removal</option>
-                                <option value="tree-trimming">Tree Trimming / Pruning</option>
-                                <option value="palm-shaving">Palm Shaving</option>
-                                <option value="site-clearing">Plot & Site Clearing</option>
-                                <option value="garden-cleanup">Garden Clean-ups</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" class="form-control" rows="5"></textarea>
-                        </div>
-                        <button type="submit" class="btn">Submit Request</button>
-                    </form>
-                </div>
-    </section>
-
-   <!-- Admin Panel (Hidden by default) -->
-<section class="admin-panel" id="admin">
-    <div class="container admin-container">
-        <h2 class="admin-title">Admin Dashboard</h2>
-        
-        <!-- Statistics Section -->
-        <div style="margin-bottom: 40px;">
-            <h3>Update Business Statistics</h3>
-            <form class="admin-form" id="stats-form">
-                <div class="form-group">
-                    <label for="projects-count">Projects Completed</label>
-                    <input type="number" id="projects-count" class="form-control" min="0" required>
-                </div>
-                <div class="form-group">
-                    <label for="clients-count">Satisfied Clients</label>
-                    <input type="number" id="clients-count" class="form-control" min="0" required>
-                </div>
-                <div class="form-group">
-                    <label for="experience-count">Years of Experience</label>
-                    <input type="number" id="experience-count" class="form-control" min="0" required>
-                </div>
-                <button type="submit" class="btn">Update Statistics</button>
-            </form>
-        </div>
-        
-        <!-- Portfolio Management Section -->
-        <div style="margin-bottom: 40px;">
-            <h3>Add New Project</h3>
-            <form class="admin-form" id="project-form" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="project-title">Project Title</label>
-                    <input type="text" id="project-title" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="project-description">Project Description</label>
-                    <textarea id="project-description" class="form-control" rows="4" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Upload Image</label>
-                    <div class="image-upload-container" id="image-upload-area">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>Click to upload an image or drag and drop</p>
-                        <p class="small-text">PNG, JPG, GIF up to 5MB</p>
-                        <img id="image-preview" class="image-preview" alt="Image preview">
-                    </div>
-                    <input type="file" id="image-upload" name="project-image" accept="image/*" style="display: none;" required>
-                    <div class="upload-progress" id="upload-progress">
-                        <div class="upload-progress-bar" id="upload-progress-bar"></div>
-                    </div>
-                    <div id="upload-status" class="upload-status"></div>
-                </div>
-                <div class="admin-actions">
-                    <button type="submit" class="btn" id="submit-btn">Add Project</button>
-                    <button type="button" class="btn btn-outline" id="logout-btn">Logout</button>
-                </div>
-            </form>
-        </div>
-        
-        <!-- Current Projects List -->
-        <div>
-            <h3>Current Portfolio Items</h3>
-            <div id="portfolio-list" style="margin-top: 20px;">
-                <!-- Portfolio items will be listed here -->
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- Login Modal -->
-    <div class="login-modal" id="login-modal">
-        <div class="login-container">
-            <h2 class="login-title">Admin Login</h2>
-            <form class="login-form" id="login-form">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" required>
-                </div>
-                <div class="login-actions">
-                    <button type="button" class="btn btn-outline" id="cancel-login">Cancel</button>
-                    <button type="submit" class="btn">Login</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Edit Project Modal -->
-    <div class="edit-modal" id="edit-modal">
-        <div class="edit-container">
-            <h2 class="edit-title">Edit Project</h2>
-            <form class="admin-form" id="edit-form" enctype="multipart/form-data">
-                <input type="hidden" id="edit-index">
-                <input type="hidden" id="edit-current-image" name="current-image">
-                <div class="form-group">
-                    <label for="edit-title">Project Title</label>
-                    <input type="text" id="edit-title" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="edit-description">Project Description</label>
-                    <textarea id="edit-description" class="form-control" rows="4" ></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Current Image</label>
-                    <img id="edit-current-image-preview" class="image-preview" style="display: block; max-height: 150px;">
-                </div>
-                <div class="form-group">
-                    <label>Change Image (Optional)</label>
-                    <div class="image-upload-container" id="edit-image-upload-area">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>Click to upload a new image</p>
-                        <p class="small-text">PNG, JPG, GIF up to 5MB</p>
-                        <img id="edit-image-preview" class="image-preview" alt="Image preview">
-                    </div>
-                    <input type="file" id="edit-image-upload" name="edit-project-image" accept="image/*" style="display: none;">
-                    <div class="upload-progress" id="edit-upload-progress">
-                        <div class="upload-progress-bar" id="edit-upload-progress-bar"></div>
-                    </div>
-                    <div id="edit-upload-status" class="upload-status"></div>
-                </div>
-                <div class="edit-actions">
-                    <button type="button" class="btn btn-outline" id="cancel-edit">Cancel</button>
-                    <button type="submit" class="btn">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Admin Login Button -->
-    <button class="admin-login-btn" id="admin-login-btn">
-        <i class="fas fa-user-cog"></i>
+<body class="main-mode">
+    <!-- Floating Admin Button -->
+    <button class="floating-admin-btn" id="floatingAdminBtn" title="Admin Portal">
+        <i class="fas fa-cog"></i>
     </button>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-container">
-                <div class="footer-column">
-                    <img src="./img/footer logo.png" alt="Village Feller Logo" class="footer-logo">
-                    <p>Professional tree felling and landscaping services in Cape Town and surrounding areas.</p>
-                    <div class="social-icons" style="margin-top: 20px;">
-                    <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
+    
+    <!-- Mode Toggle (shown only in admin mode) -->
+    <div class="mode-toggle">
+        <button class="mode-toggle-btn active" data-mode="main">Website</button>
+        <button class="mode-toggle-btn" data-mode="admin">Admin</button>
+    </div>
+    
+    <!-- Main Website -->
+    <div id="main-website">
+        <!-- Header & Navigation -->
+        <header>
+            <div class="container header-container">
+                <div class="logo-container">
+                    <div class="logo">
+                        <img src="img/logoo.png" alt="Village Feller Logo" style="height: 70px;">
+                    </div>
                 </div>
-                </div>
-
                 
+                <div class="mobile-menu">☰</div>
                 
-                <div class="footer-column">
-                    <h3>Navigation</h3>
-                    <ul class="footer-links">
+                <nav>
+                    <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#portfolio">Recently Work</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
-                </div>
+                </nav>
                 
-                <div class="footer-column">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#services">Tree Felling</a></li>
-                        <li><a href="#services">Stump Removal</a></li>
-                        <li><a href="#services">Trimming</a></li>
-                        <li><a href="#services">Palm Shaving</a></li>
-                        <li><a href="#services">Clearing</a></li>
-                        <li><a href="#services">Garden Clean-ups</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact</h3>
-                    <ul class="footer-links">
-                        <li>📞 +27 78 936 6509</li>
-                        <li>📱 +27 66 038 7779</li>
-                        <li>✉️ info@villagefeller.co.za</li>
-                        <li>📍 5 Victoria Road, Grassy Park, Cape Town</li>
-                    </ul>
+                <a href="#contact" class="btn header-cta">Request A Quote</a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>Tree Feller for Safe and Efficient Tree Removal</h1>
+                <p>Welcome to The Village Feller, your trusted destination for top-notch tree felling and landscaping services with a bit of construction work as well.Our team of skilled professionals are dedicated to providing safe and efficient tree removal solutions to ensure the beauty and safety of your surroundings.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn">Request A Quote</a>
+                    <a href="#about" class="btn btn-outline">Learn More</a>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>Copyright © 2025 Village Feller. All rights reserved | Crafted by 
-                    <a href="https://www.shailendralm.co.za">
-                        <strong><span class="brand-name">Shailendra Visuals.</span> </strong>
-                    </a>
-                </p>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <h2 class="section-title">Committed to Excellence in Tree Felling and Landscaping</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>We are a dedicated team of professionals with years of experience in the tree felling industry. Our mission is to enhance the beauty and safety of landscapes through our expert services.</p>
+                        <p>At Village Feller, we combine traditional techniques with modern equipment to deliver exceptional results for every project, big or small.</p>
+                        <a href="#contact" class="btn">Contact Us</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="./img/30.jpeg" alt="Tree felling professional at work">
+                    </div>
+                </div>
             </div>
-        </div>
-    </footer>
+        </section>
 
-    <script>
-        // Server configuration - UPDATE THIS TO YOUR SERVER ENDPOINT
-        const SERVER_URL = 'https://villagefeller.co.za/api'; // Change to your actual server URL
-        
-        // Sample project data
-        let projects = [];
-        
-        // Testimonial data
-        const testimonials = [
-            {
-                name: "Mike T.",
-                rating: "★★★★★",
-                text: "The Village Fellers team did an excellent job removing a large tree from my backyard. They were professional, safe, and cleaned up perfectly afterwards. Highly recommended!",
-                avatar: "https://randomuser.me/api/portraits/men/32.jpg"
-            },
-            {
-                name: "Amanda K.",
-                rating: "★★★★☆",
-                text: "I needed stump removal after a storm damaged my property. The team was punctual, careful with my garden, and did a fantastic job. Will definitely use them again!",
-                avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-            },
-            {
-                name: "James T.",
-                rating: "★★★★★",
-                text: "Professional tree trimming service that transformed my overgrown yard. The team was skilled, efficient, and the final result looks amazing. Very happy with their work!",
-                avatar: "https://randomuser.me/api/portraits/men/67.jpg"
-            },
-            {
-                name: "Sarah L.",
-                rating: "★★★★★",
-                text: "The palm shaving service was excellent! My palm trees look so much better and healthier now. The team was knowledgeable and did a fantastic job cleaning up afterwards.",
-                avatar: "https://randomuser.me/api/portraits/women/68.jpg"
-            }
-        ];
-
-        // Admin credentials
-        const adminCredentials = {
-            username: "admin",
-            password: "villagefeller2024"
-        };
-
-        // Check if user is logged in
-        let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
-        // Server API functions
-        async function loadProjectsFromServer() {
-            try {
-                const response = await fetch(`${SERVER_URL}/projects`);
-                if (response.ok) {
-                    projects = await response.json();
-                } else {
-                    console.error('Failed to load projects from server');
-                    // Fallback to localStorage
-                    loadProjectsFromLocalStorage();
-                }
-            } catch (error) {
-                console.error('Error loading projects:', error);
-                loadProjectsFromLocalStorage();
-            }
-        }
-
-        async function saveProjectToServer(projectData) {
-            try {
-                const formData = new FormData();
-                formData.append('title', projectData.title);
-                formData.append('description', projectData.description);
-                
-                if (projectData.imageFile) {
-                    formData.append('image', projectData.imageFile);
-                }
-
-                const response = await fetch(`${SERVER_URL}/projects`, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    const savedProject = await response.json();
-                    return savedProject;
-                } else {
-                    throw new Error('Failed to save project to server');
-                }
-            } catch (error) {
-                console.error('Error saving project:', error);
-                throw error;
-            }
-        }
-
-        async function updateProjectOnServer(projectId, projectData) {
-            try {
-                const formData = new FormData();
-                formData.append('title', projectData.title);
-                formData.append('description', projectData.description);
-                formData.append('id', projectId);
-                
-                if (projectData.imageFile) {
-                    formData.append('image', projectData.imageFile);
-                }
-
-                const response = await fetch(`${SERVER_URL}/projects/${projectId}`, {
-                    method: 'PUT',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    const updatedProject = await response.json();
-                    return updatedProject;
-                } else {
-                    throw new Error('Failed to update project on server');
-                }
-            } catch (error) {
-                console.error('Error updating project:', error);
-                throw error;
-            }
-        }
-
-        async function deleteProjectFromServer(projectId) {
-            try {
-                const response = await fetch(`${SERVER_URL}/projects/${projectId}`, {
-                    method: 'DELETE'
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to delete project from server');
-                }
-            } catch (error) {
-                console.error('Error deleting project:', error);
-                throw error;
-            }
-        }
-
-        // Fallback to localStorage
-        function loadProjectsFromLocalStorage() {
-            const savedProjects = localStorage.getItem('villageFellerProjects');
-            if (savedProjects) {
-                projects = JSON.parse(savedProjects);
-            } else {
-                // Load default projects if none exist
-                projects = [
-                    {
-                        id: '1',
-                        title: "Tree Removal Project",
-                        description: "Safe removal of a large oak tree in a residential area",
-                        image: "./img/Stump Removal.jpeg "
-                    },
-                    {
-                        id: '2',
-                        title: "Stump Grinding",
-                        description: "Complete stump removal and site cleanup",
-                        image: "./img/PLOT AND SITE CLEARING.jpeg "
-                    }
+        <!-- Services Section -->
+        <section class="services" id="services">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="services-grid">
+                    <!-- Tree Felling -->
+                    <div class="service-card">
+                        <div class="service-image" style="background-image: url('./img/Tree\ Felling\ \ Removal.jpeg ');"></div>
+                        <div class="service-content">
+                            <h3>Tree Felling / Removal</h3>
+                            <p>Safe and efficient removal of trees of all sizes, using industry best practices to ensure safety and minimal disruption.</p>
+                            <a href="#contact" class="btn">Request A Quote</a>
+                        </div>
+                    </div>
                     
-                ];
-            }
-        }
+                    <!-- Stump Removal -->
+                    <div class="service-card">
+                        <div class="service-image" style="background-image: url('./img/Stump\ Removal.jpeg');"></div>
+                        <div class="service-content">
+                            <h3>Stump Removal</h3>
+                            <p>Complete stump extraction and grinding services to remove unsightly stumps and prevent regrowth.</p>
+                            <a href="#contact" class="btn">Request A Quote</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Tree Trimming -->
+                    <div class="service-card">
+                        <div class="service-image" style="background-image: url('./img/Tree\ Trimming\ \ Pruning.jpeg');"></div>
+                        <div class="service-content">
+                            <h3>Tree Trimming / Pruning</h3>
+                            <p>Expert trimming and pruning to maintain tree health, improve appearance, and ensure safety.</p>
+                            <a href="#contact" class="btn">Request A Quote</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Palm Shaving -->
+                    <div class="service-card">
+                        <div class="service-image" style="background-image: url('./img/palm\ tree\ shaving.jpeg');"></div>
+                        <div class="service-content">
+                            <h3>Palm Shaving</h3>
+                            <p>Specialized palm tree maintenance to keep your palms healthy, safe, and looking their best.</p>
+                            <a href="#contact" class="btn">Request A Quote</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Plot Clearing -->
+                    <div class="service-card">
+                        <div class="service-image" style="background-image: url('./img/cleanup.jpeg');"></div>
+                        <div class="service-content">
+                            <h3>Plot & Site Clearing</h3>
+                            <p>Complete vegetation removal services for land development, construction sites, or property maintenance.</p>
+                            <a href="#contact" class="btn">Request A Quote</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Garden Clean-ups -->
+                    <div class="service-card">
+                        <div class="service-image" style="background-image: url('./img/garden\ clean-ups.jpeg');"></div>
+                        <div class="service-content">
+                            <h3>Garden Clean-ups</h3>
+                            <p>Comprehensive garden maintenance including weed removal, debris clearing, and general upkeep.</p>
+                            <a href="#contact" class="btn">Request A Quote</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        function saveProjectsToLocalStorage() {
-            localStorage.setItem('villageFellerProjects', JSON.stringify(projects));
-        }
+        <!-- Why Choose Us Section -->
+        <section class="why-choose-us">
+            <div class="container">
+                <h2 class="section-title">Why Choose Us – Exceptional Tree Felling and Landscaping Services</h2>
+                <div class="why-content">
+                    <div class="why-column">
+                        <h3>Professional Expertise</h3>
+                        <p>Our team consists of highly skilled professionals with extensive knowledge in tree felling and landscaping. We stay updated with the latest industry practices and safety standards.</p>
+                        <ul>
+                            <li>Highly trained and certified arborists</li>
+                            <li>State-of-the-art equipment and techniques</li>
+                            <li>Comprehensive safety protocols</li>
+                            <li>Industry best practices</li>
+                        </ul>
+                    </div>
+                    <div class="why-column">
+                        <h3>Customer Satisfaction</h3>
+                        <p>We prioritize our clients' needs and work closely with them to deliver personalized solutions that exceed expectations.</p>
+                        <ul>
+                            <li>Transparent communication throughout the process</li>
+                            <li>Tailored solutions for your specific needs</li>
+                            <li>Attention to detail in every project</li>
+                            <li>Follow-up services and support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="#contact" class="btn">Request A Quote</a>
+                </div>
+            </div>
+        </section>
 
-        // Modified project management functions
-        async function addProject(projectData) {
-            try {
-                const savedProject = await saveProjectToServer(projectData);
-                projects.push(savedProject);
-                initializePortfolio();
-                updatePortfolioList();
-                return true;
-            } catch (error) {
-                // Fallback to localStorage
-                console.log('Server save failed, using localStorage fallback');
-                if (projectData.imageFile) {
-                    // Convert file to data URL for localStorage
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        projectData.image = e.target.result;
-                        projectData.id = Date.now().toString();
-                        projects.push(projectData);
-                        saveProjectsToLocalStorage();
-                        initializePortfolio();
-                        updatePortfolioList();
-                    };
-                    reader.readAsDataURL(projectData.imageFile);
-                } else {
-                    projectData.id = Date.now().toString();
-                    projects.push(projectData);
-                    saveProjectsToLocalStorage();
-                    initializePortfolio();
-                    updatePortfolioList();
-                }
-                return true;
-            }
-        }
+        <!-- Portfolio Section -->
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <h2 class="section-title">Recently Projects</h2>
+                <div class="portfolio-grid" id="portfolio-container">
+                    <!-- Projects will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
 
-        async function updateProject(index, projectData) {
-            const projectId = projects[index].id || index;
-            
-            try {
-                const updatedProject = await updateProjectOnServer(projectId, projectData);
-                projects[index] = updatedProject;
-                initializePortfolio();
-                updatePortfolioList();
-                return true;
-            } catch (error) {
-                // Fallback to localStorage
-                console.log('Server update failed, using localStorage fallback');
-                if (projectData.imageFile) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        projects[index].title = projectData.title;
-                        projects[index].description = projectData.description;
-                        projects[index].image = e.target.result;
-                        saveProjectsToLocalStorage();
-                        initializePortfolio();
-                        updatePortfolioList();
-                    };
-                    reader.readAsDataURL(projectData.imageFile);
-                } else {
-                    projects[index].title = projectData.title;
-                    projects[index].description = projectData.description;
-                    saveProjectsToLocalStorage();
-                    initializePortfolio();
-                    updatePortfolioList();
-                }
-                return true;
-            }
-        }
+        <!-- Achievements Section -->
+        <section class="achievements">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Setting the Standards in Tree Felling Industry</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-item">
+                        <div class="counter" id="projects-counter">0</div>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="counter" id="clients-counter">0</div>
+                        <p>Satisfied Happy Clients</p>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="counter" id="experience-counter">0</div>
+                        <p>Years of Experience</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        async function deleteProject(index) {
-            const projectId = projects[index].id || index;
-            
-            try {
-                await deleteProjectFromServer(projectId);
-                projects.splice(index, 1);
-                initializePortfolio();
-                updatePortfolioList();
-            } catch (error) {
-                // Fallback to localStorage
-                console.log('Server delete failed, using localStorage fallback');
-                projects.splice(index, 1);
-                saveProjectsToLocalStorage();
-                initializePortfolio();
-                updatePortfolioList();
-            }
-        }
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial-track" id="testimonial-track">
+                        <!-- Testimonial slides will be dynamically added here -->
+                    </div>
+                    
+                    <div class="testimonial-nav">
+                        <button class="testimonial-arrow" id="prev-testimonial">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        
+                        <div class="testimonial-dots" id="testimonial-dots">
+                            <!-- Dots will be dynamically added here -->
+                        </div>
+                        
+                        <button class="testimonial-arrow" id="next-testimonial">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        // Testimonial slider functionality
-        let currentTestimonial = 0;
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2 class="section-title">Request A Quote</h2>
+                <div class="contact-container">
+                    <div class="contact-form">
+                        <form id="quote-form">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Service</label>
+                                <select id="service" class="form-control" required>
+                                    <option value="">Select a service</option>
+                                    <option value="tree-felling">Tree Felling / Removal</option>
+                                    <option value="stump-removal">Stump Removal</option>
+                                    <option value="tree-trimming">Tree Trimming / Pruning</option>
+                                    <option value="palm-shaving">Palm Shaving</option>
+                                    <option value="site-clearing">Plot & Site Clearing</option>
+                                    <option value="garden-cleanup">Garden Clean-ups</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" class="form-control" rows="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn">Submit Request</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        function initializeTestimonialSlider() {
-            const track = document.getElementById('testimonial-track');
-            const dotsContainer = document.getElementById('testimonial-dots');
-            
-            // Create testimonial slides
-            testimonials.forEach((testimonial, index) => {
-                const slide = document.createElement('div');
-                slide.className = 'testimonial-slide';
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-column">
+                        <img src="./img/footer logo.png" alt="Village Feller Logo" class="footer-logo">
+                        <p>Professional tree felling and landscaping services in Cape Town and surrounding areas.</p>
+                        <div class="social-icons" style="margin-top: 20px;">
+                            <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="" class="social-icon" style="margin-right: 15px; color: #fff; font-size: 30px;">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Navigation</h3>
+                        <ul class="footer-links">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#portfolio">Recently Work</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Services</h3>
+                        <ul class="footer-links">
+                            <li><a href="#services">Tree Felling</a></li>
+                            <li><a href="#services">Stump Removal</a></li>
+                            <li><a href="#services">Trimming</a></li>
+                            <li><a href="#services">Palm Shaving</a></li>
+                            <li><a href="#services">Clearing</a></li>
+                            <li><a href="#services">Garden Clean-ups</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact</h3>
+                        <ul class="footer-links">
+                            <li>📞 +27 78 936 6509</li>
+                            <li>📱 +27 66 038 7779</li>
+                            <li>✉️ info@villagefeller.co.za</li>
+                            <li>📍 5 Victoria Road, Grassy Park, Cape Town</li>
+                        </ul>
+                    </div>
+                </div>
                 
-                slide.innerHTML = `
-                    <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <div class="testimonial-avatar" style="background-image: url('${testimonial.avatar}');"></div>
-                            <div class="testimonial-info">
-                                <h4>${testimonial.name}</h4>
-                                <div class="testimonial-rating">${testimonial.rating}</div>
+                <div class="footer-bottom">
+                    <p>Copyright © 2025 Village Feller. All rights reserved | Crafted by 
+                        <a href="https://www.shailendralm.co.za">
+                            <strong><span class="brand-name">Shailendra Visuals.</span> </strong>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Admin Portal -->
+    <div id="admin-portal">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1>Admin Portal</h1>
+                <p>Upload and manage your portfolio images and statistics directly from your phone or computer.</p>
+                <a href="#" class="back-to-site switch-to-main"><i class="fas fa-arrow-left"></i> Back to Website</a>
+            </div>
+            
+            <!-- Login form (initially shown) -->
+            <div id="loginSection" class="login-container">
+                <div class="login-form admin-card">
+                    <h2>Admin Login</h2>
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" class="form-control" placeholder="Enter admin password">
+                        <p class="password-hint">Use password: villagefeller2026!</p>
+                    </div>
+                    <button id="loginBtn" class="btn btn-full">Login</button>
+                </div>
+            </div>
+            
+            <!-- Admin dashboard (initially hidden) -->
+            <div id="adminDashboard" style="display: none;">
+                <div class="admin-content">
+                    <div>
+                        <!-- Statistics Management -->
+                        <div class="admin-card">
+                            <h2>Update Business Statistics</h2>
+                            <div id="messageContainer"></div>
+                            
+                            <div class="form-group">
+                                <label for="statsProjects">Projects Completed</label>
+                                <input type="number" id="statsProjects" class="form-control" min="0" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="statsClients">Satisfied Clients</label>
+                                <input type="number" id="statsClients" class="form-control" min="0" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="statsExperience">Years of Experience</label>
+                                <input type="number" id="statsExperience" class="form-control" min="0" required>
+                            </div>
+                            
+                            <button id="updateStatsBtn" class="btn btn-green btn-full">
+                                <i class="fas fa-chart-line"></i> Update Statistics
+                            </button>
+                        </div>
+                        
+                        <!-- Add New Project -->
+                        <div class="admin-card">
+                            <h2>Add New Project</h2>
+                            <div id="projectMessageContainer"></div>
+                            
+                            <!-- File Upload Area -->
+                            <div class="file-upload-container" id="fileUploadContainer">
+                                <div class="file-upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="file-upload-text">
+                                    <h4>Select or Drop Image</h4>
+                                    <p>Choose an image from your device or drag and drop it here</p>
+                                    <div class="file-upload-btn" id="browseBtn">
+                                        <i class="fas fa-folder-open"></i> Browse Files
+                                    </div>
+                                    <input type="file" id="imageFile" class="file-input" accept="image/*">
+                                </div>
+                            </div>
+                            
+                            <!-- Selected File Info -->
+                            <div class="selected-file" id="selectedFile">
+                                <div class="file-icon">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="file-info">
+                                    <h5 id="fileName">No file selected</h5>
+                                    <p id="fileSize">0 KB</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Image Preview -->
+                            <div class="image-preview" id="imagePreview">
+                                <img id="previewImage" src="" alt="Image preview">
+                            </div>
+                            
+                            <!-- Project Details -->
+                            <div class="form-group">
+                                <label for="projectTitle">Project Title</label>
+                                <input type="text" id="projectTitle" class="form-control" placeholder="Tree Removal Project" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="projectDescription">Description</label>
+                                <textarea id="projectDescription" class="form-control" placeholder="Describe the project"></textarea>
+                            </div>
+                            
+                            <button id="uploadProjectBtn" class="btn btn-green btn-full" disabled>
+                                <i class="fas fa-upload"></i> Add Project
+                            </button>
+                        </div>
+                        
+                        <!-- Admin Tools -->
+                        <div class="admin-card">
+                            <h2>Admin Tools</h2>
+                            <button id="exportDataBtn" class="btn btn-full" style="margin-bottom: 15px;">
+                                <i class="fas fa-download"></i> Export Data
+                            </button>
+                            <input type="file" id="importFile" class="file-input" accept=".json" style="display: none;">
+                            <button id="resetDataBtn" class="btn btn-full" style="margin-bottom: 15px;">
+                                <i class="fas fa-redo"></i> Reset to Default
+                            </button>
+                            <button id="logoutAdminBtn" class="btn btn-full">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <!-- Manage Projects -->
+                        <div class="gallery-management admin-card">
+                            <h2>Manage Portfolio Projects</h2>
+                            <p>Click the delete button to remove a project from the portfolio.</p>
+                            <div id="galleryCount" class="message info">
+                                Loading projects...
+                            </div>
+                            
+                            <div id="galleryList" class="gallery-list">
+                                <!-- Projects will be loaded here -->
                             </div>
                         </div>
-                        <p class="testimonial-text">${testimonial.text}</p>
                     </div>
-                `;
-                
-                track.appendChild(slide);
-                
-                // Create dots
-                const dot = document.createElement('div');
-                dot.className = 'testimonial-dot';
-                if (index === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToTestimonial(index));
-                dotsContainer.appendChild(dot);
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   <script>
+    // ========== CONFIGURATION ==========
+    const ADMIN_PASSWORD = "villagefeller2026!";
+    const SERVER_URL = window.location.origin; // Current domain
+    
+    // ========== GLOBAL DATA ==========
+    let userProjects = [];
+    let statistics = {
+        projects: 1459,
+        clients: 900,
+        experience: 12
+    };
+    
+    // Manual project data (pre-loaded images)
+    const manualProjects = [
+        { id: 'manual-1', title: "Project 1", description: "Tree removal project", image: "./img/5.jpeg", isManual: true },
+        { id: 'manual-2', title: "Project 2", description: "Stump grinding work", image: "./img/6.jpeg", isManual: true },
+        { id: 'manual-3', title: "Project 3", description: "Tree trimming service", image: "./img/7.jpeg", isManual: true },
+        { id: 'manual-4', title: "Project 4", description: "Site clearing project", image: "./img/8.jpeg", isManual: true },
+        { id: 'manual-5', title: "Project 5", description: "Garden cleanup work", image: "./img/9.jpeg", isManual: true },
+        { id: 'manual-6', title: "Project 6", description: "Palm tree maintenance", image: "./img/10.jpeg", isManual: true }
+    ];
+    
+    // Testimonial data
+    const testimonials = [
+        {
+            name: "Mike T.",
+            rating: "★★★★★",
+            text: "The Village Fellers team did an excellent job removing a large tree from my backyard. They were professional, safe, and cleaned up perfectly afterwards. Highly recommended!",
+            avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+        },
+        {
+            name: "Amanda K.",
+            rating: "★★★★☆",
+            text: "I needed stump removal after a storm damaged my property. The team was punctual, careful with my garden, and did a fantastic job. Will definitely use them again!",
+            avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+        },
+        {
+            name: "James T.",
+            rating: "★★★★★",
+            text: "Professional tree trimming service that transformed my overgrown yard. The team was skilled, efficient, and the final result looks amazing. Very happy with their work!",
+            avatar: "https://randomuser.me/api/portraits/men/67.jpg"
+        },
+        {
+            name: "Sarah L.",
+            rating: "★★★★★",
+            text: "The palm shaving service was excellent! My palm trees look so much better and healthier now. The team was knowledgeable and did a fantastic job cleaning up afterwards.",
+            avatar: "https://randomuser.me/api/portraits/women/68.jpg"
+        }
+    ];
+    
+    // ========== ADMIN PORTAL FUNCTIONALITY ==========
+    
+    // Floating admin button functionality
+    const floatingAdminBtn = document.getElementById('floatingAdminBtn');
+    
+    if (floatingAdminBtn) {
+        floatingAdminBtn.addEventListener('click', function() {
+            if (document.body.classList.contains('admin-mode')) {
+                modeToggleBtns.forEach(b => b.classList.remove('active'));
+                document.querySelector('.mode-toggle-btn[data-mode="main"]').classList.add('active');
+                document.body.className = 'main-mode';
+                this.classList.remove('admin-active');
+            } else {
+                modeToggleBtns.forEach(b => b.classList.remove('active'));
+                document.querySelector('.mode-toggle-btn[data-mode="admin"]').classList.add('active');
+                document.body.className = 'admin-mode';
+                this.classList.add('admin-active');
+                checkLoginStatus();
+            }
+        });
+    }
+    
+    // Mode switching
+    const modeToggleBtns = document.querySelectorAll('.mode-toggle-btn');
+    const switchToMainBtn = document.querySelector('.switch-to-main');
+    
+    modeToggleBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const mode = this.dataset.mode;
+            modeToggleBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            document.body.className = `${mode}-mode`;
+            
+            if (floatingAdminBtn) {
+                if (mode === 'admin') {
+                    floatingAdminBtn.classList.add('admin-active');
+                    checkLoginStatus();
+                } else {
+                    floatingAdminBtn.classList.remove('admin-active');
+                }
+            }
+        });
+    });
+    
+    if (switchToMainBtn) {
+        switchToMainBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modeToggleBtns.forEach(b => b.classList.remove('active'));
+            document.querySelector('.mode-toggle-btn[data-mode="main"]').classList.add('active');
+            document.body.className = 'main-mode';
+            if (floatingAdminBtn) floatingAdminBtn.classList.remove('admin-active');
+        });
+    }
+    
+    // ========== SERVER FUNCTIONS ==========
+    
+    // Load projects from server
+    async function loadProjectsFromServer() {
+        try {
+            const response = await fetch('get_gallery.php');
+            if (response.ok) {
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    userProjects = data;
+                    console.log('Loaded projects from server:', userProjects.length);
+                    return true;
+                } else {
+                    console.error('Invalid response format from server');
+                    loadProjectsFromLocalStorage();
+                }
+            } else {
+                console.error('Failed to load projects from server');
+                loadProjectsFromLocalStorage();
+            }
+        } catch (error) {
+            console.error('Error loading projects from server:', error);
+            loadProjectsFromLocalStorage();
+        }
+        return false;
+    }
+    
+    // Upload image to server
+    async function uploadImageToServer(file, title, description) {
+        try {
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('title', title);
+            formData.append('description', description);
+            
+            const response = await fetch('upload_image.php', {
+                method: 'POST',
+                body: formData
             });
             
-            // Set up navigation
-            document.getElementById('prev-testimonial').addEventListener('click', () => {
+            if (!response.ok) {
+                throw new Error(`Server responded with ${response.status}`);
+            }
+            
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            throw error;
+        }
+    }
+    
+    // Delete image from server
+    async function deleteImageFromServer(imageId, imageUrl) {
+        try {
+            const response = await fetch('delete_image.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    id: imageId,
+                    imageUrl: imageUrl 
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Server responded with ${response.status}`);
+            }
+            
+            const result = await response.json();
+            return result.success;
+        } catch (error) {
+            console.error('Error deleting image:', error);
+            return false;
+        }
+    }
+    
+    // ========== LOCAL STORAGE FALLBACK ==========
+    
+    function loadProjectsFromLocalStorage() {
+        const savedProjects = localStorage.getItem('villageFellerUserProjects');
+        if (savedProjects) {
+            try {
+                userProjects = JSON.parse(savedProjects);
+            } catch (error) {
+                console.error('Error parsing projects:', error);
+                userProjects = [];
+            }
+        }
+    }
+    
+    function saveProjectsToLocalStorage() {
+        localStorage.setItem('villageFellerUserProjects', JSON.stringify(userProjects));
+    }
+    
+    // Load statistics
+    function loadStatistics() {
+        const savedStats = localStorage.getItem('villageFellerStatistics');
+        if (savedStats) {
+            try {
+                statistics = JSON.parse(savedStats);
+            } catch (error) {
+                console.error('Error parsing statistics:', error);
+            }
+        }
+    }
+    
+    function saveStatisticsToLocalStorage() {
+        localStorage.setItem('villageFellerStatistics', JSON.stringify(statistics));
+    }
+    
+    // ========== PROJECT MANAGEMENT ==========
+    
+    // Add project (with server upload)
+    async function addProject(title, description, imageFile) {
+        try {
+            // Try to upload to server first
+            const uploadResult = await uploadImageToServer(imageFile, title, description);
+            
+            if (uploadResult.success) {
+                const newProject = {
+                    id: uploadResult.id || Date.now().toString(),
+                    title: title,
+                    description: description,
+                    image: uploadResult.imageUrl || `img/${uploadResult.fileName}`,
+                    isManual: false,
+                    uploaded: new Date().toISOString(),
+                    serverId: uploadResult.id,
+                    fileName: uploadResult.fileName
+                };
+                
+                userProjects.push(newProject);
+                saveProjectsToLocalStorage();
+                initializePortfolio();
+                if (document.body.classList.contains('admin-mode')) {
+                    loadAdminGalleryImages();
+                }
+                
+                return {
+                    success: true,
+                    message: 'Project uploaded to server successfully!',
+                    project: newProject
+                };
+            } else {
+                throw new Error(uploadResult.message || 'Upload failed');
+            }
+            
+        } catch (error) {
+            console.log('Server upload failed, using localStorage fallback');
+            
+            // Fallback to localStorage with data URL
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const project = {
+                        id: Date.now().toString(),
+                        title: title,
+                        description: description,
+                        image: e.target.result,
+                        isManual: false,
+                        uploaded: new Date().toISOString()
+                    };
+                    
+                    userProjects.push(project);
+                    saveProjectsToLocalStorage();
+                    initializePortfolio();
+                    if (document.body.classList.contains('admin-mode')) {
+                        loadAdminGalleryImages();
+                    }
+                    
+                    resolve({
+                        success: true,
+                        message: 'Project added (using local storage)',
+                        project: project
+                    });
+                };
+                reader.onerror = () => {
+                    resolve({
+                        success: false,
+                        message: 'Failed to read image file'
+                    });
+                };
+                reader.readAsDataURL(imageFile);
+            });
+        }
+    }
+    
+    // Delete project
+    async function deleteProject(index) {
+        const project = userProjects[index];
+        if (!project) return;
+        
+        if (!confirm('Are you sure you want to delete this project?')) {
+            return;
+        }
+        
+        try {
+            let deleteSuccess = false;
+            
+            // Try to delete from server if it has a server ID
+            if (project.serverId || project.fileName) {
+                deleteSuccess = await deleteImageFromServer(project.serverId || project.id, project.image);
+            }
+            
+            if (deleteSuccess || !project.serverId) {
+                // Remove from array
+                userProjects.splice(index, 1);
+                saveProjectsToLocalStorage();
+                initializePortfolio();
+                if (document.body.classList.contains('admin-mode')) {
+                    loadAdminGalleryImages();
+                }
+                
+                showMessage('Project deleted successfully!', 'success');
+            } else {
+                showMessage('Failed to delete from server', 'error');
+            }
+        } catch (error) {
+            console.error('Error deleting project:', error);
+            showMessage('Error deleting project', 'error');
+        }
+    }
+    
+    // ========== WEBSITE FUNCTIONALITY ==========
+    
+    // Initialize portfolio display
+    function initializePortfolio() {
+        const portfolioContainer = document.getElementById('portfolio-container');
+        if (!portfolioContainer) return;
+        
+        portfolioContainer.innerHTML = '';
+        
+        // Add manual projects first
+        manualProjects.forEach((project) => {
+            const portfolioItem = document.createElement('div');
+            portfolioItem.className = 'portfolio-item';
+            portfolioItem.style.backgroundImage = `url('${project.image}')`;
+            portfolioItem.dataset.id = project.id;
+            portfolioItem.dataset.isManual = 'true';
+            portfolioContainer.appendChild(portfolioItem);
+        });
+        
+        // Add user projects
+        userProjects.forEach((project, index) => {
+            const portfolioItem = document.createElement('div');
+            portfolioItem.className = 'portfolio-item';
+            portfolioItem.style.backgroundImage = `url('${project.image}')`;
+            portfolioItem.dataset.id = project.id;
+            portfolioItem.dataset.index = index;
+            portfolioItem.dataset.isManual = 'false';
+            portfolioContainer.appendChild(portfolioItem);
+        });
+    }
+    
+    // Update counters display
+    function updateCounters() {
+        const projectsCounter = document.getElementById('projects-counter');
+        const clientsCounter = document.getElementById('clients-counter');
+        const experienceCounter = document.getElementById('experience-counter');
+        
+        if (projectsCounter) projectsCounter.textContent = statistics.projects;
+        if (clientsCounter) clientsCounter.textContent = statistics.clients;
+        if (experienceCounter) experienceCounter.textContent = statistics.experience;
+    }
+    
+    // Animate counters
+    function animateCounter(element, target, duration) {
+        let start = 0;
+        const increment = target / (duration / 16);
+        
+        const updateCounter = () => {
+            start += increment;
+            if (start < target) {
+                element.textContent = Math.floor(start);
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target;
+                element.classList.add('counting');
+            }
+        };
+        
+        updateCounter();
+    }
+    
+    // Initialize counters when in view
+    function initializeCounters() {
+        const projectsCounter = document.getElementById('projects-counter');
+        const clientsCounter = document.getElementById('clients-counter');
+        const experienceCounter = document.getElementById('experience-counter');
+        
+        animateCounter(projectsCounter, statistics.projects, 2000);
+        animateCounter(clientsCounter, statistics.clients, 2000);
+        animateCounter(experienceCounter, statistics.experience, 2000);
+    }
+    
+    // Testimonial slider functionality
+    let currentTestimonial = 0;
+    
+    function initializeTestimonialSlider() {
+        const track = document.getElementById('testimonial-track');
+        const dotsContainer = document.getElementById('testimonial-dots');
+        
+        if (!track || !dotsContainer) return;
+        
+        // Create testimonial slides
+        testimonials.forEach((testimonial, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'testimonial-slide';
+            
+            slide.innerHTML = `
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar" style="background-image: url('${testimonial.avatar}');"></div>
+                        <div class="testimonial-info">
+                            <h4>${testimonial.name}</h4>
+                            <div class="testimonial-rating">${testimonial.rating}</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">${testimonial.text}</p>
+                </div>
+            `;
+            
+            track.appendChild(slide);
+            
+            // Create dots
+            const dot = document.createElement('div');
+            dot.className = 'testimonial-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToTestimonial(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        // Set up navigation
+        const prevBtn = document.getElementById('prev-testimonial');
+        const nextBtn = document.getElementById('next-testimonial');
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
                 goToTestimonial(currentTestimonial - 1);
             });
-            
-            document.getElementById('next-testimonial').addEventListener('click', () => {
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
                 goToTestimonial(currentTestimonial + 1);
             });
-            
-            // Auto-advance testimonials
-            setInterval(() => {
-                goToTestimonial(currentTestimonial + 1);
-            }, 5000);
         }
-
-        function goToTestimonial(index) {
-            const track = document.getElementById('testimonial-track');
-            const dots = document.querySelectorAll('.testimonial-dot');
-            const totalTestimonials = testimonials.length;
-            
-            // Handle wrap-around
-            if (index >= totalTestimonials) {
-                index = 0;
-            } else if (index < 0) {
-                index = totalTestimonials - 1;
+        
+        // Auto-advance testimonials
+        setInterval(() => {
+            goToTestimonial(currentTestimonial + 1);
+        }, 5000);
+    }
+    
+    function goToTestimonial(index) {
+        const track = document.getElementById('testimonial-track');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        const totalTestimonials = testimonials.length;
+        
+        if (!track || dots.length === 0) return;
+        
+        // Handle wrap-around
+        if (index >= totalTestimonials) {
+            index = 0;
+        } else if (index < 0) {
+            index = totalTestimonials - 1;
+        }
+        
+        // Update current testimonial
+        currentTestimonial = index;
+        
+        // Move track
+        track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+        
+        // Update dots
+        dots.forEach((dot, i) => {
+            if (i === currentTestimonial) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
             }
-            
-            // Update current testimonial
-            currentTestimonial = index;
-            
-            // Move track
-            track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
-            
-            // Update dots
-            dots.forEach((dot, i) => {
-                if (i === currentTestimonial) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
-
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav').classList.toggle('active');
+        });
+    }
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu');
+    const mainNav = document.querySelector('nav');
+    
+    if (mobileMenuBtn && mainNav) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active')
+                ? '✕'
+                : '☰';
         });
         
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    document.querySelector('nav').classList.remove('active');
-                }
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '☰';
             });
         });
-        
-        // Form submission
-        document.getElementById('quote-form').addEventListener('submit', function(e) {
+    }
+    
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            alert('Thank you for your request! We will contact you shortly.');
-            this.reset();
-        });
-
-        // Initialize portfolio
-        function initializePortfolio() {
-            const portfolioContainer = document.getElementById('portfolio-container');
-            portfolioContainer.innerHTML = '';
             
-            projects.forEach((project, index) => {
-                const portfolioItem = document.createElement('div');
-                portfolioItem.className = 'portfolio-item';
-                portfolioItem.style.backgroundImage = `url('${project.image}')`;
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
                 
-                const overlay = document.createElement('div');
-                overlay.className = 'portfolio-overlay';
-                
-                const title = document.createElement('div');
-                title.className = 'portfolio-title';
-                title.textContent = project.title;
-                
-                const description = document.createElement('div');
-                description.className = 'portfolio-description';
-                description.textContent = project.description;
-                
-                // Add delete button if logged in
-                if (isLoggedIn) {
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.className = 'delete-btn';
-                    deleteBtn.textContent = 'Delete';
-                    deleteBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        deleteProject(index);
-                    });
-                    portfolioItem.appendChild(deleteBtn);
+                // Close mobile menu if open
+                if (mainNav) {
+                    mainNav.classList.remove('active');
+                    if (mobileMenuBtn) mobileMenuBtn.innerHTML = '☰';
                 }
-                
-                overlay.appendChild(title);
-                overlay.appendChild(description);
-                portfolioItem.appendChild(overlay);
-                portfolioContainer.appendChild(portfolioItem);
-            });
-        }
-
-        // Update portfolio list in admin panel
-        function updatePortfolioList() {
-            const portfolioList = document.getElementById('portfolio-list');
-            portfolioList.innerHTML = '';
-            
-            if (projects.length === 0) {
-                portfolioList.innerHTML = '<p>No projects yet. Add your first project above.</p>';
-                return;
             }
-            
-            projects.forEach((project, index) => {
-                const item = document.createElement('div');
-                item.className = 'portfolio-list-item';
-                
-                const info = document.createElement('div');
-                info.className = 'portfolio-list-info';
-                
-                const thumbnail = document.createElement('img');
-                thumbnail.className = 'portfolio-list-thumbnail';
-                thumbnail.src = project.image;
-                thumbnail.alt = project.title;
-                
-                const textContent = document.createElement('div');
-                textContent.innerHTML = `
-                    <div class="portfolio-list-title">${project.title}</div>
-                    <div class="portfolio-list-description">${project.description}</div>
-                `;
-                
-                info.appendChild(thumbnail);
-                info.appendChild(textContent);
-                
-                const actions = document.createElement('div');
-                actions.className = 'portfolio-list-actions';
-                
-                const editBtn = document.createElement('button');
-                editBtn.className = 'btn';
-                editBtn.textContent = 'Edit';
-                editBtn.addEventListener('click', () => editProject(index));
-                
-                const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'btn';
-                deleteBtn.textContent = 'Delete';
-                deleteBtn.addEventListener('click', () => deleteProject(index));
-                
-                actions.appendChild(editBtn);
-                actions.appendChild(deleteBtn);
-                
-                item.appendChild(info);
-                item.appendChild(actions);
-                portfolioList.appendChild(item);
-            });
-        }
-
-        // Edit project
-        function editProject(index) {
-            const project = projects[index];
-            
-            document.getElementById('edit-index').value = index;
-            document.getElementById('edit-title').value = project.title;
-            document.getElementById('edit-description').value = project.description;
-            document.getElementById('edit-current-image').value = project.image;
-            document.getElementById('edit-current-image-preview').src = project.image;
-            document.getElementById('edit-current-image-preview').style.display = 'block';
-            
-            // Reset the edit image upload
-            document.getElementById('edit-image-preview').style.display = 'none';
-            document.getElementById('edit-image-upload').value = '';
-            
-            // Show the edit modal
-            document.getElementById('edit-modal').classList.add('active');
-        }
-
-        // Counter animation
-        function animateCounter(element, target, duration) {
-            let start = 0;
-            const increment = target / (duration / 16); // 60fps
-            
-            const updateCounter = () => {
-                start += increment;
-                if (start < target) {
-                    element.textContent = Math.floor(start);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = target;
-                    element.classList.add('counting');
-                }
-            };
-            
-            updateCounter();
-        }
-
-        // Initialize counters when section is in view
-        function initializeCounters() {
-            const projectsCounter = document.getElementById('projects-counter');
-            const clientsCounter = document.getElementById('clients-counter');
-            const experienceCounter = document.getElementById('experience-counter');
-            
-            // Set realistic values
-            animateCounter(projectsCounter, +1,459, 2000);
-            animateCounter(clientsCounter, +900, 2000);
-            animateCounter(experienceCounter, 12, 2000);
-        }
-
-        // Image upload functionality
-        function setupImageUpload() {
-            const imageUpload = document.getElementById('image-upload');
-            const imageUploadArea = document.getElementById('image-upload-area');
-            const imagePreview = document.getElementById('image-preview');
-            
-            // Click on upload area to trigger file input
-            imageUploadArea.addEventListener('click', () => {
-                imageUpload.click();
-            });
-            
-            // Handle file selection
-            imageUpload.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    // Check if file is an image
-                    if (!file.type.match('image.*')) {
-                        alert('Please select an image file (JPEG, PNG, GIF, etc.)');
-                        return;
-                    }
-                    
-                    // Check file size (5MB limit)
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('Image size should be less than 5MB');
-                        return;
-                    }
-                    
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        imagePreview.src = e.target.result;
-                        imagePreview.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            // Drag and drop functionality
-            imageUploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                imageUploadArea.style.borderColor = '#2e7d32';
-                imageUploadArea.style.backgroundColor = 'rgba(46, 125, 50, 0.1)';
-            });
-            
-            imageUploadArea.addEventListener('dragleave', (e) => {
-                e.preventDefault();
-                imageUploadArea.style.borderColor = '#ddd';
-                imageUploadArea.style.backgroundColor = '';
-            });
-            
-            imageUploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                imageUploadArea.style.borderColor = '#ddd';
-                imageUploadArea.style.backgroundColor = '';
-                
-                const file = e.dataTransfer.files[0];
-                if (file && file.type.match('image.*')) {
-                    // Check file size (5MB limit)
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('Image size should be less than 5MB');
-                        return;
-                    }
-                    
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        imagePreview.src = e.target.result;
-                        imagePreview.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                    imageUpload.files = e.dataTransfer.files;
-                } else {
-                    alert('Please drop an image file');
-                }
-            });
-        }
-
-        // Edit image upload functionality
-        function setupEditImageUpload() {
-            const editImageUpload = document.getElementById('edit-image-upload');
-            const editImageUploadArea = document.getElementById('edit-image-upload-area');
-            const editImagePreview = document.getElementById('edit-image-preview');
-            
-            // Click on upload area to trigger file input
-            editImageUploadArea.addEventListener('click', () => {
-                editImageUpload.click();
-            });
-            
-            // Handle file selection
-            editImageUpload.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    // Check if file is an image
-                    if (!file.type.match('image.*')) {
-                        alert('Please select an image file (JPEG, PNG, GIF, etc.)');
-                        return;
-                    }
-                    
-                    // Check file size (5MB limit)
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('Image size should be less than 5MB');
-                        return;
-                    }
-                    
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        editImagePreview.src = e.target.result;
-                        editImagePreview.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            // Drag and drop functionality
-            editImageUploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                editImageUploadArea.style.borderColor = '#2e7d32';
-                editImageUploadArea.style.backgroundColor = 'rgba(46, 125, 50, 0.1)';
-            });
-            
-            editImageUploadArea.addEventListener('dragleave', (e) => {
-                e.preventDefault();
-                editImageUploadArea.style.borderColor = '#ddd';
-                editImageUploadArea.style.backgroundColor = '';
-            });
-            
-            editImageUploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                editImageUploadArea.style.borderColor = '#ddd';
-                editImageUploadArea.style.backgroundColor = '';
-                
-                const file = e.dataTransfer.files[0];
-                if (file && file.type.match('image.*')) {
-                    // Check file size (5MB limit)
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('Image size should be less than 5MB');
-                        return;
-                    }
-                    
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        editImagePreview.src = e.target.result;
-                        editImagePreview.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                    editImageUpload.files = e.dataTransfer.files;
-                } else {
-                    alert('Please drop an image file');
-                }
-            });
-        }
-
-        // Modified form handlers
-        document.getElementById('project-form').addEventListener('submit', async function(e) {
+        });
+    });
+    
+    // Contact form submission
+    const contactForm = document.getElementById('quote-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const submitBtn = document.getElementById('submit-btn');
+            const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Uploading...';
+            submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
             
-            const progressBar = document.getElementById('upload-progress-bar');
-            const progressContainer = document.getElementById('upload-progress');
-            const statusDiv = document.getElementById('upload-status');
-            
-            const title = document.getElementById('project-title').value;
-            const description = document.getElementById('project-description').value;
-            const imageFile = document.getElementById('image-upload').files[0];
-            
-            if (!imageFile) {
-                alert('Please upload an image for the project');
+            // Simulate form submission
+            setTimeout(() => {
+                alert('Thank you for your request! We will contact you shortly.');
+                this.reset();
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
+            }, 1000);
+        });
+    }
+    
+    // ========== ADMIN FUNCTIONALITY ==========
+    
+    // Check login status
+    function checkLoginStatus() {
+        const isLoggedIn = localStorage.getItem('villageFellerAdminLoggedIn') === 'true';
+        if (isLoggedIn) {
+            showAdminDashboard();
+        }
+    }
+    
+    // Show message
+    function showMessage(text, type, containerId = 'messageContainer') {
+        const messageContainer = document.getElementById(containerId);
+        if (messageContainer) {
+            messageContainer.innerHTML = `<div class="message ${type}">${text}</div>`;
+            
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 5000);
+        }
+    }
+    
+    // Format file size
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    // Login function
+    const loginBtn = document.getElementById('loginBtn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            const passwordInput = document.getElementById('adminPassword');
+            const password = passwordInput ? passwordInput.value : '';
+            
+            if (password === ADMIN_PASSWORD) {
+                localStorage.setItem('villageFellerAdminLoggedIn', 'true');
+                showAdminDashboard();
+                showMessage('Login successful!', 'success');
+            } else {
+                showMessage('Incorrect password. Please try again.', 'error');
+            }
+        });
+    }
+    
+    // Logout function
+    const logoutAdminBtn = document.getElementById('logoutAdminBtn');
+    if (logoutAdminBtn) {
+        logoutAdminBtn.addEventListener('click', () => {
+            localStorage.removeItem('villageFellerAdminLoggedIn');
+            const adminDashboard = document.getElementById('adminDashboard');
+            const loginSection = document.getElementById('loginSection');
+            const adminPasswordInput = document.getElementById('adminPassword');
+            
+            if (adminDashboard) adminDashboard.style.display = 'none';
+            if (loginSection) loginSection.style.display = 'block';
+            if (adminPasswordInput) adminPasswordInput.value = '';
+            
+            showMessage('Logged out successfully!', 'success');
+        });
+    }
+    
+    // Show admin dashboard
+    function showAdminDashboard() {
+        const loginSection = document.getElementById('loginSection');
+        const adminDashboard = document.getElementById('adminDashboard');
+        
+        if (loginSection) loginSection.style.display = 'none';
+        if (adminDashboard) {
+            adminDashboard.style.display = 'block';
+            loadAdminGalleryImages();
+            loadStatisticsForm();
+        }
+    }
+    
+    // Load admin gallery images
+    function loadAdminGalleryImages() {
+        const galleryCount = document.getElementById('galleryCount');
+        if (galleryCount) {
+            galleryCount.textContent = `You have ${userProjects.length} project${userProjects.length !== 1 ? 's' : ''} in your portfolio.`;
+            galleryCount.className = 'message info';
+        }
+        renderAdminGalleryList();
+    }
+    
+    // Render admin gallery list
+    function renderAdminGalleryList() {
+        const adminGalleryList = document.getElementById('galleryList');
+        if (!adminGalleryList) return;
+        
+        adminGalleryList.innerHTML = '';
+        
+        if (userProjects.length === 0) {
+            adminGalleryList.innerHTML = '<div class="message info">No projects added yet. Add your first project above!</div>';
+            return;
+        }
+        
+        userProjects.forEach((project, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            
+            galleryItem.innerHTML = `
+                <img src="${project.image}" alt="${project.title}" onerror="this.src='https://via.placeholder.com/300x200?text=Image+Not+Found'">
+                <div class="gallery-item-info">
+                    <h4>${project.title}</h4>
+                    <p>${project.description || 'No description'}</p>
+                    <div class="gallery-item-actions">
+                        <button class="btn delete-btn" data-index="${index}">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            adminGalleryList.appendChild(galleryItem);
+        });
+        
+        // Add event listeners to delete buttons
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const index = parseInt(this.dataset.index);
+                deleteProject(index);
+            });
+        });
+    }
+    
+    // Load statistics form
+    function loadStatisticsForm() {
+        const statsProjects = document.getElementById('statsProjects');
+        const statsClients = document.getElementById('statsClients');
+        const statsExperience = document.getElementById('statsExperience');
+        
+        if (statsProjects) statsProjects.value = statistics.projects;
+        if (statsClients) statsClients.value = statistics.clients;
+        if (statsExperience) statsExperience.value = statistics.experience;
+    }
+    
+    // Update statistics
+    const updateStatsBtn = document.getElementById('updateStatsBtn');
+    if (updateStatsBtn) {
+        updateStatsBtn.addEventListener('click', () => {
+            const statsProjects = document.getElementById('statsProjects');
+            const statsClients = document.getElementById('statsClients');
+            const statsExperience = document.getElementById('statsExperience');
+            
+            if (!statsProjects || !statsClients || !statsExperience) return;
+            
+            statistics.projects = parseInt(statsProjects.value) || 0;
+            statistics.clients = parseInt(statsClients.value) || 0;
+            statistics.experience = parseInt(statsExperience.value) || 0;
+            
+            saveStatisticsToLocalStorage();
+            updateCounters();
+            showMessage('Statistics updated successfully!', 'success');
+        });
+    }
+    
+    // File upload handling
+    let selectedImageFile = null;
+    
+    // Handle file selection for admin
+    const browseBtn = document.getElementById('browseBtn');
+    const imageFileInput = document.getElementById('imageFile');
+    
+    if (browseBtn && imageFileInput) {
+        browseBtn.addEventListener('click', () => {
+            imageFileInput.click();
+        });
+        
+        imageFileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+    }
+    
+    // Handle drag and drop for admin
+    const fileUploadContainer = document.getElementById('fileUploadContainer');
+    if (fileUploadContainer) {
+        fileUploadContainer.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadContainer.classList.add('drag-over');
+        });
+        
+        fileUploadContainer.addEventListener('dragleave', () => {
+            fileUploadContainer.classList.remove('drag-over');
+        });
+        
+        fileUploadContainer.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadContainer.classList.remove('drag-over');
+            
+            if (e.dataTransfer.files.length > 0) {
+                handleFileSelect(e.dataTransfer.files[0]);
+            }
+        });
+    }
+    
+    // Handle file selection
+    function handleFileSelect(file) {
+        if (!file.type.match('image.*')) {
+            showMessage('Please select an image file (JPEG, PNG, etc.)', 'error', 'projectMessageContainer');
+            return;
+        }
+        
+        const maxSize = 5 * 1024 * 1024;
+        if (file.size > maxSize) {
+            showMessage('Image size should be less than 5MB', 'error', 'projectMessageContainer');
+            return;
+        }
+        
+        selectedImageFile = file;
+        
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const selectedFile = document.getElementById('selectedFile');
+        
+        if (fileName) fileName.textContent = file.name;
+        if (fileSize) fileSize.textContent = formatFileSize(file.size);
+        if (selectedFile) selectedFile.classList.add('active');
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const previewImage = document.getElementById('previewImage');
+            const imagePreview = document.getElementById('imagePreview');
+            if (previewImage) previewImage.src = e.target.result;
+            if (imagePreview) imagePreview.classList.add('active');
+        };
+        reader.readAsDataURL(file);
+        
+        checkFormValidity();
+        showMessage('Image selected successfully!', 'success', 'projectMessageContainer');
+    }
+    
+    // Check if form is valid
+    function checkFormValidity() {
+        const projectTitle = document.getElementById('projectTitle');
+        const uploadProjectBtn = document.getElementById('uploadProjectBtn');
+        
+        const isTitleValid = projectTitle && projectTitle.value.trim().length > 0;
+        const hasImage = selectedImageFile !== null;
+        
+        if (uploadProjectBtn) {
+            uploadProjectBtn.disabled = !(isTitleValid && hasImage);
+        }
+    }
+    
+    // Listen for form input changes
+    const projectTitleInput = document.getElementById('projectTitle');
+    if (projectTitleInput) {
+        projectTitleInput.addEventListener('input', checkFormValidity);
+    }
+    
+    const projectDescriptionInput = document.getElementById('projectDescription');
+    if (projectDescriptionInput) {
+        projectDescriptionInput.addEventListener('input', checkFormValidity);
+    }
+    
+    // Upload project
+    const uploadProjectBtn = document.getElementById('uploadProjectBtn');
+    if (uploadProjectBtn) {
+        uploadProjectBtn.addEventListener('click', async () => {
+            if (!selectedImageFile) {
+                showMessage('Please select an image first', 'error', 'projectMessageContainer');
                 return;
             }
             
-            try {
-                // Show progress bar
-                progressContainer.style.display = 'block';
-                progressBar.style.width = '30%';
-                
-                const projectData = {
-                    title,
-                    description,
-                    imageFile
-                };
-                
-                // Simulate upload progress
-                let progress = 30;
-                const progressInterval = setInterval(() => {
-                    progress += 10;
-                    progressBar.style.width = `${progress}%`;
-                    if (progress >= 90) clearInterval(progressInterval);
-                }, 200);
-                
-                await addProject(projectData);
-                
-                // Complete progress
-                progressBar.style.width = '100%';
-                
-                // Reset form
-                this.reset();
-                document.getElementById('image-preview').style.display = 'none';
-                statusDiv.textContent = 'Project added successfully!';
-                statusDiv.className = 'upload-status success';
-                statusDiv.style.display = 'block';
-                
-                setTimeout(() => {
-                    statusDiv.style.display = 'none';
-                    progressContainer.style.display = 'none';
-                }, 3000);
-                
-            } catch (error) {
-                statusDiv.textContent = 'Error adding project. Please try again.';
-                statusDiv.className = 'upload-status error';
-                statusDiv.style.display = 'block';
-                progressContainer.style.display = 'none';
+            const title = projectTitleInput ? projectTitleInput.value.trim() : '';
+            const description = projectDescriptionInput ? projectDescriptionInput.value.trim() : '';
+            
+            if (!title) {
+                showMessage('Please enter a project title', 'error', 'projectMessageContainer');
+                return;
             }
             
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        });
-
-        document.getElementById('edit-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const index = document.getElementById('edit-index').value;
-            const title = document.getElementById('edit-title').value;
-            const description = document.getElementById('edit-description').value;
-            const imageFile = document.getElementById('edit-image-upload').files[0];
-            const currentImage = document.getElementById('edit-current-image').value;
-            
-            const progressBar = document.getElementById('edit-upload-progress-bar');
-            const progressContainer = document.getElementById('edit-upload-progress');
-            const statusDiv = document.getElementById('edit-upload-status');
+            const originalText = uploadProjectBtn.innerHTML;
+            uploadProjectBtn.innerHTML = '<span class="spinner"></span> Uploading...';
+            uploadProjectBtn.disabled = true;
             
             try {
-                if (imageFile) {
-                    // Show progress bar for image upload
-                    progressContainer.style.display = 'block';
-                    progressBar.style.width = '30%';
-                    
-                    // Simulate upload progress
-                    let progress = 30;
-                    const progressInterval = setInterval(() => {
-                        progress += 10;
-                        progressBar.style.width = `${progress}%`;
-                        if (progress >= 90) clearInterval(progressInterval);
-                    }, 200);
+                const result = await addProject(title, description, selectedImageFile);
+                
+                if (result.success) {
+                    // Reset form
+                    resetAdminForm();
+                    showMessage(result.message, 'success', 'projectMessageContainer');
+                } else {
+                    showMessage(result.message || 'Failed to add project', 'error', 'projectMessageContainer');
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                showMessage('Error uploading project: ' + error.message, 'error', 'projectMessageContainer');
+            }
+            
+            uploadProjectBtn.innerHTML = originalText;
+            uploadProjectBtn.disabled = false;
+        });
+    }
+    
+    // Reset admin form
+    function resetAdminForm() {
+        if (projectTitleInput) projectTitleInput.value = '';
+        if (projectDescriptionInput) projectDescriptionInput.value = '';
+        selectedImageFile = null;
+        const selectedFile = document.getElementById('selectedFile');
+        if (selectedFile) selectedFile.classList.remove('active');
+        const imagePreview = document.getElementById('imagePreview');
+        if (imagePreview) imagePreview.classList.remove('active');
+        const previewImage = document.getElementById('previewImage');
+        if (previewImage) previewImage.src = '';
+        if (imageFileInput) imageFileInput.value = '';
+    }
+    
+    // Export data
+    const exportDataBtn = document.getElementById('exportDataBtn');
+    if (exportDataBtn) {
+        exportDataBtn.addEventListener('click', () => {
+            const data = {
+                userProjects: userProjects,
+                statistics: statistics,
+                exportDate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'village-feller-data-backup.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showMessage('Data exported successfully!', 'success');
+        });
+    }
+    
+    // Import data
+    const importFileInput = document.getElementById('importFile');
+    if (importFileInput) {
+        importFileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                
+                if (!file.name.endsWith('.json')) {
+                    showMessage('Please select a JSON file', 'error');
+                    return;
                 }
                 
-                const projectData = {
-                    title,
-                    description,
-                    image: currentImage
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const importedData = JSON.parse(e.target.result);
+                        
+                        if (!importedData.userProjects || !importedData.statistics) {
+                            showMessage('Invalid data format', 'error');
+                            return;
+                        }
+                        
+                        if (confirm(`Import ${importedData.userProjects.length} projects? This will replace your current data.`)) {
+                            userProjects = importedData.userProjects;
+                            statistics = importedData.statistics;
+                            saveProjectsToLocalStorage();
+                            saveStatisticsToLocalStorage();
+                            initializePortfolio();
+                            updateCounters();
+                            loadAdminGalleryImages();
+                            loadStatisticsForm();
+                            showMessage(`Successfully imported ${userProjects.length} projects!`, 'success');
+                        }
+                    } catch (error) {
+                        showMessage('Error parsing JSON file: ' + error.message, 'error');
+                    }
                 };
                 
-                if (imageFile) {
-                    projectData.imageFile = imageFile;
-                }
-                
-                await updateProject(index, projectData);
-                
-                if (imageFile) {
-                    progressBar.style.width = '100%';
-                }
-                
-                document.getElementById('edit-modal').classList.remove('active');
-                alert('Project updated successfully!');
-                
-            } catch (error) {
-                alert('Error updating project. Please try again.');
-            } finally {
-                progressContainer.style.display = 'none';
+                reader.readAsText(file);
+                importFileInput.value = '';
             }
         });
-
-        // Login functionality
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (username === adminCredentials.username && password === adminCredentials.password) {
-                isLoggedIn = true;
-                localStorage.setItem('isLoggedIn', 'true');
-                document.getElementById('login-modal').classList.remove('active');
-                document.getElementById('admin').style.display = 'block';
+    }
+    
+    // Reset data
+    const resetDataBtn = document.getElementById('resetDataBtn');
+    if (resetDataBtn) {
+        resetDataBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to reset all data to default? This will remove all your uploaded projects and reset statistics.')) {
+                userProjects = [];
+                statistics = { projects: 1459, clients: 900, experience: 12 };
+                saveProjectsToLocalStorage();
+                saveStatisticsToLocalStorage();
                 initializePortfolio();
-                updatePortfolioList();
-                alert('Login successful!');
-            } else {
-                alert('Invalid username or password');
+                updateCounters();
+                loadAdminGalleryImages();
+                loadStatisticsForm();
+                showMessage('Data reset to default!', 'success');
             }
         });
-
-        // Cancel login
-        document.getElementById('cancel-login').addEventListener('click', function() {
-            document.getElementById('login-modal').classList.remove('active');
-        });
-
-        // Cancel edit
-        document.getElementById('cancel-edit').addEventListener('click', function() {
-            document.getElementById('edit-modal').classList.remove('active');
-        });
-
-        // Show login modal
-        document.getElementById('admin-login-btn').addEventListener('click', function() {
-            if (isLoggedIn) {
-                document.getElementById('admin').style.display = 'block';
-                document.getElementById('admin').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                document.getElementById('login-modal').classList.add('active');
+    }
+    
+    // Allow Enter key to submit login form
+    const adminPasswordInput = document.getElementById('adminPassword');
+    if (adminPasswordInput) {
+        adminPasswordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && loginBtn) {
+                loginBtn.click();
             }
         });
-
-        // Logout functionality
-        document.getElementById('logout-btn').addEventListener('click', function() {
-            isLoggedIn = false;
-            localStorage.setItem('isLoggedIn', 'false');
-            document.getElementById('admin').style.display = 'none';
-            initializePortfolio();
-            alert('You have been logged out.');
+    }
+    
+    // ========== INITIALIZATION ==========
+    
+    // Initialize everything on page load
+    document.addEventListener('DOMContentLoaded', async function() {
+        // Load data
+        loadStatistics();
+        
+        // Try to load projects from server first
+        const loadedFromServer = await loadProjectsFromServer();
+        if (!loadedFromServer) {
+            loadProjectsFromLocalStorage();
+        }
+        
+        // Initialize website components
+        initializePortfolio();
+        updateCounters();
+        initializeTestimonialSlider();
+        
+        // Set up intersection observer for counters
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    initializeCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
         });
-
-        // Close admin panel when clicking outside
-        document.addEventListener('click', function(e) {
-            if (isLoggedIn && !document.getElementById('admin').contains(e.target) && 
-                e.target.id !== 'admin-login-btn' && !e.target.closest('#admin-login-btn')) {
-                document.getElementById('admin').style.display = 'none';
-            }
-        });
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadProjectsFromServer().then(() => {
-                initializePortfolio();
-                if (isLoggedIn) {
+        
+        const achievementsSection = document.querySelector('.achievements');
+        if (achievementsSection) {
+            observer.observe(achievementsSection);
+        }
+        
+        // Check login status if we're in admin mode
+        if (document.body.classList.contains('admin-mode')) {
+            checkLoginStatus();
+        }
+        
+        console.log('Village Feller Website Initialized');
+        console.log('User projects:', userProjects.length);
+        console.log('Server URL:', SERVER_URL);
+    });
+</script>
+</body>
+</html>                if (isLoggedIn) {
                     updatePortfolioList();
                 }
             });
